@@ -5,10 +5,15 @@
      <input type="radio" name="sort" <?php if(get_option('collapsPageSort')=='pageName') echo 'checked'; ?> id="sortPageName" value='pageName'></input> <label for="sortPageName">Page name</label>
      <input type="radio" name="sort" <?php if(get_option('collapsPageSort')=='pageId') echo 'checked'; ?> id="sortPageId" value='pageId'></input> <label for="sortPageId">Page id</label>
      <input type="radio" name="sort" <?php if(get_option('collapsPageSort')=='pageSlug') echo 'checked'; ?> id="sortPageSlug" value='pageSlug'></input> <label for="sortPageSlug">Page Slug</label>
+     <input type="radio" name="sort" <?php if(get_option('collapsPageSort')=='menuOrder') echo 'checked'; ?> id="sortMenuOrder" value='menuOrder'></input> <label for="sortMenuOrder">Menu Order</label>
     </li>
     <li>Sort order:<br />
      <input type="radio" name="sortOrder" <?php if(get_option('collapsPageSortOrder')=='ASC') echo 'checked'; ?> id="sortASC" value='ASC'></input> <label for="sortASC">Ascending</label>
      <input type="radio" name="sortOrder" <?php if(get_option('collapsPageSortOrder')=='DESC') echo 'checked'; ?> id="sortDESC" value='DESC'></input> <label for="sortDESC">Descending</label>
+    </li>
+    <li>Display as:<br />
+     <input type="radio" name="dropDown" <?php if(get_option('collapsPageDropDown')=='yes') echo 'checked'; ?> id="dropDown" value='yes'></input> <label for="dropDown">Drop down menu</label>
+     <input type="radio" name="dropDown" <?php if(get_option('collapsPageDropDown')=='no') echo 'checked'; ?> id="nestedList" value='no'></input> <label for="nestedList">Nested list</label>
     </li>
     <li>Exclude these pages (use slugs, separated by commas):<br />
      <input type="text" name="exclude" value="<?php echo get_option('collapsPageExclude') ?>" id="exclude"</input> 

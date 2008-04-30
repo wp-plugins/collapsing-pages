@@ -4,7 +4,7 @@ Plugin Name: Collapsing Pages
 Plugin URI: http://blog.robfelty.com/plugins
 Description: Uses javascript to expand and collapse pages to show the posts that belong to the page 
 Author: Robert Felty
-Version: 0.1.1
+Version: 0.2
 Author URI: http://robfelty.com
 Tags: sidebar, widget, pages, pages
 
@@ -47,6 +47,7 @@ class collapsPage {
 			add_option( 'collapsPageSortOrder', 'ASC' );
 			add_option( 'collapsPageShowPosts', 'yes' );
 			add_option( 'collapsPageExclude', '' );
+			add_option( 'collapsPageDropDown', 'no' );
 		}
 	}
 
@@ -68,7 +69,7 @@ class collapsPage {
     </style>\n";
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Pages Plugin version: 0.1.1\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+		echo "// These variables are part of the Collapsing Pages Plugin version: 0.2\n// Copyright 2007 Robert Felty (robfelty.com)\n";
     echo "function expandPage( e ) {
     if( e.target ) {
       src = e.target;
@@ -107,6 +108,63 @@ class collapsPage {
   }\n";
 
 		echo "// ]]>\n</script>\n";
+    if (get_option('collapsPageDropDown')==TRUE) {
+      $url = get_settings('siteurl');
+      echo "
+      <style type='text/css' media='screen'>
+      @import '$url/wp-content/plugins/collapsing-pages/cssmenu.css';
+      </style>
+      <!--[if IE]>
+      <style type='text/css' media='screen'>
+      /* #collapsPageDiv ul li {float: left; width: 100%;}*/
+      </style>
+      <![endif]-->
+      <!--[if lt IE 7]>
+      <style type='text/css' media='screen'>
+      body {
+      behavior: url($url/wp-content/plugins/collapsing-pages/csshover.htc);
+      font-size: 100%;
+      }
+      #collapsPageDiv ul li a {height: 1%;
+       width:100%;} 
+
+      #collapsPageDiv a, #collapsPageDiv h2 {
+      font: bold 1.0em/1.4em arial, helvetica, sans-serif;
+      }
+      #collapsPageDiv ul ul {
+      background:transparent;
+      width:6em;
+      position: absolute;
+      top:1.1em;
+      z-index: 500;
+      text-align:left;
+      }
+
+      #collapsPageDiv li li {
+      position:relative;
+      text-align:left;
+      /*padding-right:50em;*/
+      width:10em;
+      z-index: 1000;
+      }
+      #collapsPageDiv li li li {z-index:500;
+/*      background:white;*/
+}
+
+      #collapsPageDiv ul ul ul {
+      position: absolute;
+      width:6em;
+      background:blue;
+      top: 0em;
+      /*position: absolute;
+      top: 0;
+      left: 100%;*/
+      }
+
+      </style>
+      <![endif]-->";
+    }
+
 	}
 }
 

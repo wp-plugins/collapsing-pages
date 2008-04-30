@@ -29,6 +29,8 @@
     update_option( 'collapsPageSort', 'pageId' );
   } elseif ($_POST['sort'] == 'pageSlug') {
     update_option( 'collapsPageSort', 'pageSlug' );
+  } elseif ($_POST['sort'] == 'menuOrder') {
+    update_option( 'collapsPageSort', 'menuOrder' );
   } elseif ($_POST['sort'] == '') {
     update_option( 'collapsPageSort', '' );
     update_option( 'collapsPageSortOrder', '' );
@@ -38,9 +40,12 @@
   } elseif ($_POST['showPosts'] == 'no') {
     update_option( 'collapsPageShowPosts', 'no' );
   }
-  if($_POST['exclude']) {
+  if($_POST['dropDown'] == 'yes') {
+    update_option( 'collapsPageDropDown', 'yes' );
+  } else {
+    update_option( 'collapsPageDropDown', 'no' );
+  }
     $excludeSafe=addslashes($_POST['exclude']);
     //$excludeSafe=wp_texturize($_POST['exclude']);
     update_option( 'collapsPageExclude', $excludeSafe);
-  }
 ?>

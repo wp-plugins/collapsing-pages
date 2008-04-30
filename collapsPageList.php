@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.1.1
+Collapsing Pages version: 0.2
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -26,21 +26,36 @@ This file is part of Collapsing Pages
 */
 
 // Helper functions
-function getSubPage($page, $pages, $parents,$subPageCount) {
+function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
   $subPagePosts=array();
   if (in_array($page->id, $parents)) {
-						$subPageLinks.= "\n     <ul style='display:none;'>\n";
+    if ($dropDown==TRUE) {
+      $subPageLinks.= "\n     <ul>\n";
+    } else {
+      $subPageLinks.= "\n     <ul style='display:none;'>\n";
+    }
     foreach ($pages as $page2) {
       //$subPageLinks.= "page2 =". $page2->term_id;
         $subPageLink2=''; // clear info from subPageLink2
       if ($page->id==$page2->post_parent) {
         if (!in_array($page2->id, $parents)) {
-          // check to see if there are more subpages under this one
+          /* check to see if there are more subpages under this one. If the
+           * page id is not in the parents array, then there should be more
+           * subpages, and we do not print a triangle dropdown, otherwise we do
+           * */
           $subPageCount++;
+          if ($dropDown=TRUE) {
+            $subPageLinks.=( "<li>" );
+          } else {
             $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
+          }
         } else {
-          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount);
-          $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>&#9658;&nbsp;</span>" );
+          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown);
+          if ($dropDown==TRUE) {
+            $subPageLinks.=( "<li>" );
+          } else {
+            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>&#9658;&nbsp;</span>" );
+          }
         }
           $link2 = "<a href='".get_page_link($page2->id)."' ";
         if ( empty($page2->page_description) ) {
@@ -57,9 +72,9 @@ function getSubPage($page, $pages, $parents,$subPageCount) {
         // add in additional subpage information
         $subPageLinks.="$subPageLink2";
         // close <ul> and <li> before starting a new page
-        $subPageLinks.= "      </ul>\n           </li> <!-- ending subpage -->\n";
       }
     }
+    $subPageLinks.= "      </ul>\n           </li> <!-- ending subpage -->\n";
   }
   return array($subPageLinks,$subPageCount,$subPagePosts);
 }
@@ -74,6 +89,10 @@ function list_pages() {
     $archives='index.php/';
   } elseif (get_option('collapsPageLinkToArchives')=='root') {
     $archives='';
+  }
+  $dropDown=FALSE;
+  if (get_option('collapsPageDropDown')=='yes') {
+    $dropDown=TRUE;
   }
   $exclude=get_option('collapsPageExclude');
 	$exclusions = '';
@@ -103,11 +122,17 @@ function list_pages() {
       $sortColumn="ORDER BY $wpdb->posts.id";
     } elseif (get_option('collapsPageSort')=='pageSlug') {
       $sortColumn="ORDER BY $wpdb->posts.post_name";
+    } elseif (get_option('collapsPageSort')=='menuOrder') {
+      $sortColumn="ORDER BY $wpdb->posts.menu_order";
     }
     $sortOrder = get_option('collapsPageSortOrder');
   } 
 
-  echo "\n    <ul id='collapsPageList'>\n";
+  if ($dropDown==TRUE) {
+    //echo "\n    <div id='collapsPageDiv'>\n";
+  } else {
+    echo "\n    <ul id='collapsPageList'>\n";
+  }
 
       //$categoryquery = "SELECT $wpdb->terms.term_id, $wpdb->terms.name, $wpdb->terms.slug, $wpdb->term_taxonomy.parent FROM $wpdb->terms, $wpdb->term_taxonomy WHERE $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id AND $wpdb->term_taxonomy.count >0 AND $wpdb->terms.name != 'Blogroll' AND $wpdb->term_taxonomy.taxonomy = 'category' $exclusions $sortColumn $sortOrder";
       //$postquery = "SELECT $wpdb->terms.term_id, $wpdb->terms.name, $wpdb->terms.slug, $wpdb->term_taxonomy.count, $wpdb->posts.id, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts, $wpdb->terms, $wpdb->term_taxonomy, $wpdb->term_relationships  WHERE $wpdb->posts.id = $wpdb->term_relationships.object_id AND $wpdb->posts.post_status='publish' AND $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id AND $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id AND $wpdb->term_taxonomy.taxonomy = 'category' $isPage";
@@ -129,7 +154,12 @@ function list_pages() {
       $home=$url;
       $lastPage= $page->id;
       // print out page name 
+      if ($dropDown==TRUE) {
+        //$link = "<a  class='dropDownPage show' onhover='dropDownPage(event); return false' href='".get_page_link($page->id)."' ";
         $link = "<a href='".get_page_link($page->id)."' ";
+      } else {
+        $link = "<a href='".get_page_link($page->id)."' ";
+      }
       if ( empty($page->page_description) ) {
         if( get_option('collapsPageShowPostCount')=='yes') {
           $link .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page->post_title)) . '"';
@@ -140,15 +170,27 @@ function list_pages() {
         $link .= 'title="' . wp_specialchars(apply_filters('page_description',$page->page_description,$page)) . '"';
       }
       $link .= '>';
+      if ($dropDown==TRUE) {
+        $link .= $page->post_title.'</a></h2>';
+      } else {
         $link .= $page->post_title.'</a>';
+      }
 
       // TODO not sure why we are checking for this at all TODO
       $subPageCount=0;
-      list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount);
+      list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount,$dropDown);
         if ($subPageCount>0) {
+          if ($dropDown==TRUE) {
+          print( "      <ul><li><h2>" );
+          } else {
           print( "      <li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>&#9658;&nbsp;</span>" );
+          }
         } else {
-          print( "      <li class='collapsPage collapsItem'>" );
+          if ($dropDown==TRUE) {
+            print( "      <ul><li><h2>" );
+          } else {
+            print( "      <li class='collapsPage collapsItem'>" );
+          }
         } 
       // don't include the triangles if posts are not shown and there are no
       // more subpages
@@ -158,12 +200,21 @@ function list_pages() {
       }
       echo $subPageLinks;
       // close <ul> and <li> before starting a new page
-      if ($subPageCount>0 ) {
-        echo "        </ul>\n";
+      if ($dropDown==TRUE) {
+        if ($subPageCount>0 ) {
+          echo "        </ul>\n";
+        } else {
+          echo "      </li></ul> <!-- ending page -->\n";
+        }
+      } else {
+        echo "            </ul>      </li> <!-- ending page -->\n";
       }
-      echo "      </li> <!-- ending page -->\n";
-      }
+    }
   }
-  echo "    </ul> <!-- ending collapsPage -->\n";
+  if ($dropDown==TRUE) {
+    echo "    <!-- ending collapsPage -->\n";
+  } else {
+    echo "    </ul> <!-- ending collapsPage -->\n";
+  }
 }
 ?>
