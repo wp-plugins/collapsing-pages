@@ -1,5 +1,8 @@
 Collapsing Pages Changelog
 
+0.2.1 (2008.05.01)
+  * Link now spans the whole dropdown
+
 0.2 (2008.04.30)
   * Now includes the possibility of providing a drop-down menu of pages and
     sub-pages, instead of a nested list. Only useful for a header navigation 

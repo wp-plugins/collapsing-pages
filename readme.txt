@@ -36,7 +36,9 @@ To something of the following:
 `
 	<?php
 	  if( function_exists('collapsPage') ) {
+    echo "<div id='collapsPageDiv'>\n";
 	  collapsPage();
+    echo "</div>\n";
 	} else {
 	  echo "<ul>\n";
 	  wp_list_pages(...);
