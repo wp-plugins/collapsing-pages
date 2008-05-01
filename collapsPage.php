@@ -66,6 +66,11 @@ class collapsPage {
 		$url = get_settings('siteurl');
     echo "<style type='text/css'>
 		@import '$url/wp-content/plugins/collapsing-pages/collapsPage.css';
+    /*
+    #collapsPageDiv ul ul li.submenu {
+      background: url($url/wp-content/plugins/collapsing-pages/submenu.png) no-repeat top right;
+    }
+    */
     </style>\n";
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";

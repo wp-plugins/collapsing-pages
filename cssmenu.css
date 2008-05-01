@@ -38,10 +38,6 @@ background: #efefef;
 text-decoration: none;
 }
 
-#collapsPageDiv a:hover {
-background: #fff;
-}
-
 #collapsPageDiv li {position: relative;
 display: inline;}
 
@@ -95,5 +91,13 @@ div#collapsPageDiv ul ul li:hover ul,
 div#collapsPageDiv ul ul ul li:hover ul
 {display: block;width:100%;
 white-space:nowrap;
+}
+
+/* indicate if there is another submenu or not */
+#collapsPageDiv li.submenu a:after {
+ content: "\0020 \0020 \00BB";
+}
+#collapsPageDiv li.collapsPage a:after {
+ content: "";
 }
 

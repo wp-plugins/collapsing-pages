@@ -40,28 +40,29 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
       if ($page->id==$page2->post_parent) {
         if (!in_array($page2->id, $parents)) {
           /* check to see if there are more subpages under this one. If the
-           * page id is not in the parents array, then there should be more
+           * page id is not in the parents array, then there should be no more
            * subpages, and we do not print a triangle dropdown, otherwise we do
            * */
           $subPageCount++;
           if ($dropDown=TRUE) {
-            $subPageLinks.=( "<li>" );
+            $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
+            //$subPageLinks.=( "<li>" );
           } else {
             $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
           }
         } else {
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown);
           if ($dropDown==TRUE) {
-            $subPageLinks.=( "<li>" );
+            $subPageLinks.=( "<li class='submenu'>" );
           } else {
             $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>&#9658;&nbsp;</span>" );
           }
         }
           $link2 = "<a href='".get_page_link($page2->id)."' ";
         if ( empty($page2->page_description) ) {
-          $link2 .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page2->name)) . '"';
+          //$link2 .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page2->name)) . '"';
         } else {
-          $link2 .= 'title="' . wp_specialchars(apply_filters('page_description',$page2->page_description,$page2)) . '"';
+          //$link2 .= 'title="' . wp_specialchars(apply_filters('page_description',$page2->page_description,$page2)) . '"';
         }
         $link2 .= '>';
         $link2 .= $page2->post_title. "</a>";

@@ -33,6 +33,8 @@ change the following where appropriate	(most likely sidebar.php):
 	</ul>
 
 To something of the following:
+(use a div for the dropdown menu option, or ul for the sidebar nested list
+option)
 `
 	<?php
 	  if( function_exists('collapsPage') ) {
@@ -61,11 +63,31 @@ Widget.
 
 == Frequently Asked Questions ==
 
-None yet.
+= How do I provide custom styling? =
+
+Everything in the dropdown menu is contained in a div called collapsPageDiv,
+so you can use that id to style things. For example, say you want the
+background to change when you hover over a link: You could add this rule in
+your stylesheet (or in your header.php file for your theme)
+
+#collapsPageDiv a:hover {
+  background: blue;
+  color: white;
+}
+
+This will make all the links white text with a blue background when you hover
+the mouse over them. If you only want this in the dropdown, and not in the
+main links, you could do:
+
+#collapsPageDiv ul ul li a:hover {
+  background: blue;
+  color: white;
+}
 
 == Screenshots ==
 
 1. a few expanded pages with default theme, showing nested pages
+2. a few expanded pages with default theme, showing drop down version 
 
 == Demo ==
 
