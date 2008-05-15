@@ -4,6 +4,7 @@ Collapsing Pages Changelog
   * Link now spans the whole dropdown
   * Now indicates the presence of an additional submenu (doesn't work in IE 6
     or less)
+  * fixed html so that it validates correctly
 
 0.2 (2008.04.30)
   * Now includes the possibility of providing a drop-down menu of pages and

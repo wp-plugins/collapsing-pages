@@ -5,7 +5,7 @@ Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget
 Requires at least: 2.3
 Tested up to: 2.5
-Stable tag: 0.2
+Stable tag: 0.2.1
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -107,5 +107,19 @@ posts, but the links to the pages will still work (which is the default
 behavior in wordpress anyways)
 
 == HISTORY ==
+
+0.2.1 (2008.05.01)
+  * Link now spans the whole dropdown
+  * Now indicates the presence of an additional submenu (doesn't work in IE 6
+    or less)
+  * fixed html so that it validates correctly
+
+0.2 (2008.04.30)
+  * Now includes the possibility of providing a drop-down menu of pages and
+    sub-pages, instead of a nested list. Only useful for a header navigation 
+
+0.1.1 (2008.04.25)
+  * Can exclude pages (and sub-pages of those pages)
+
 0.1 (2008.04.23):
 	Initial Release
