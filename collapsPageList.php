@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.2.1
+Collapsing Pages version: 0.2.2
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -27,6 +27,7 @@ This file is part of Collapsing Pages
 
 // Helper functions
 function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
+  global $expand, $collapse;
   $subPagePosts=array();
   if (in_array($page->id, $parents)) {
     if ($dropDown==TRUE) {
@@ -45,7 +46,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
            * */
           $subPageCount++;
           if ($dropDown=TRUE) {
-            $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
+            $subPageLinks.=( "        <li class='collapsPage collapsItem'>" );
             //$subPageLinks.=( "<li>" );
           } else {
             $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
@@ -55,7 +56,11 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
           if ($dropDown==TRUE) {
             $subPageLinks.=( "<li class='submenu'>" );
           } else {
-            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>&#9658;&nbsp;</span>" );
+            if (in_array($page2->title, $autoExpand)) {
+              $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>foo$collapse&nbsp;</span>" );
+            } else {
+              $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
+            }
           }
         }
           $link2 = "<a href='".get_page_link($page2->id)."' ";
@@ -75,7 +80,11 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
         // close <ul> and <li> before starting a new page
       }
     }
-    $subPageLinks.= "      </ul>\n           </li> <!-- ending subpage -->\n";
+    if ($subPageCount>0 ) {
+      //$subPageLinks.= "      </ul>\n           </li> <!-- ending subpage -->\n";
+      $subPageLinks.= "      </ul><!-- subpagecount = $subPageCount ending subpage -->\n";
+    }
+      $subPageLinks.= "      </li><!-- subpagecount = $subPageCount ending subpage -->\n";
   }
   return array($subPageLinks,$subPageCount,$subPagePosts);
 }
@@ -83,7 +92,15 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
 /* the page and tagging database structures changed drastically between wordpress 2.1 and 2.3. We will use different queries for page based vs. term_taxonomy based database structures */
 //$taxonomy=false;
 function list_pages() {
-  global $wpdb;
+  global $wpdb, $expand, $collapse;
+  // option for what sort of icon to display for expanding and collapsing
+  $expand='&#9658;';
+  $collapse='&#9660;';
+
+  if (get_option('collapsPageExpand')==1) {
+    $expand='+';
+    $collapse='&mdash;';
+  }
   if (get_option('collapsPageLinkToArchives')=='archives') {
     $archives='archives.php/';
   } elseif (get_option('collapsPageLinkToArchives')=='index') {
@@ -111,6 +128,8 @@ function list_pages() {
 	if ( !empty($exclusions) ) {
 		$exclusions .= ')';
   }
+
+  $autoExpand=array('Wordpress plugins', 'about');
 
   $isPage='';
   //if (get_option('collapsPageIncludePosts'=='yes')) {
@@ -184,7 +203,7 @@ function list_pages() {
           if ($dropDown==TRUE) {
           print( "      <ul><li><h2>" );
           } else {
-          print( "      <li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>&#9658;&nbsp;</span>" );
+          print( "      <li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
           }
         } else {
           if ($dropDown==TRUE) {
@@ -197,6 +216,8 @@ function list_pages() {
       // more subpages
       print( $link );
       if (($subPageCount>0)) {
+      //$subPageLinks.= "      </ul>\n           </li> <!-- ending subpage -->\n";
+      //$subPageLinks.= "           </li> <!-- ending subpage -->\n";
       //  print( "\n     <ul style=\"display:none;\">\n" );
       }
       echo $subPageLinks;
@@ -208,7 +229,10 @@ function list_pages() {
           echo "      </li></ul> <!-- ending page -->\n";
         }
       } else {
-        echo "            </ul>      </li> <!-- ending page -->\n";
+        if ($subPageCount==0 ) {
+          echo "                  </li> <!-- ending page subcat count = $subPageCount-->\n";
+        }
+        //echo "            </ul>      </li> <!-- ending page -->\n";
       }
     }
   }

@@ -45,6 +45,11 @@
   } else {
     update_option( 'collapsPageDropDown', 'no' );
   }
+  if($_POST['collapsPageExpand'] == '0') {
+    update_option( 'collapsPageExpand', 0 );
+  } elseif ($_POST['collapsPageExpand'] == '1') {
+    update_option( 'collapsPageExpand', 1 );
+  }
     $excludeSafe=addslashes($_POST['exclude']);
     //$excludeSafe=wp_texturize($_POST['exclude']);
     update_option( 'collapsPageExclude', $excludeSafe);
