@@ -4,7 +4,7 @@ Plugin Name: Collapsing Pages
 Plugin URI: http://blog.robfelty.com/plugins
 Description: Uses javascript to expand and collapse pages to show the posts that belong to the page 
 Author: Robert Felty
-Version: 0.2.1
+Version: 0.2.2
 Author URI: http://robfelty.com
 Tags: sidebar, widget, pages, pages
 
@@ -46,6 +46,7 @@ class collapsPage {
 			add_option( 'collapsPageSort', 'pageName' );
 			add_option( 'collapsPageSortOrder', 'ASC' );
 			add_option( 'collapsPageShowPosts', 'yes' );
+			add_option( 'collapsPageExpand', '0' );
 			add_option( 'collapsPageExclude', '' );
 			add_option( 'collapsPageDropDown', 'no' );
 		}
@@ -74,7 +75,14 @@ class collapsPage {
     </style>\n";
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Pages Plugin version: 0.2.1\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+		echo "// These variables are part of the Collapsing Pages Plugin version: 0.2.2\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+    $expand='&#9658;';
+    $collapse='&#9660;';
+
+    if (get_option('collapsPageExpand')==1) {
+      $expand='+';
+      $collapse='&mdash;';
+    }
     echo "function expandPage( e ) {
     if( e.target ) {
       src = e.target;
@@ -96,13 +104,13 @@ class collapsPage {
       childList.style.display = 'none';
       src.setAttribute('class','collapsArch show');
       src.setAttribute('title','click to expand');
-      src.innerHTML='&#9658&nbsp;';
+      src.innerHTML='$expand&nbsp;';
     }
     else {
       childList.style.display = '';
       src.setAttribute('class','collapsArch hide');
       src.setAttribute('title','click to collapse');
-      src.innerHTML='&#9660&nbsp;';
+      src.innerHTML='$collapse&nbsp;';
     }
 
     if( e.preventDefault ) {

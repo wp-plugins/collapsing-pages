@@ -1,5 +1,9 @@
 Collapsing Pages Changelog
 
+0.2.2 (2008.05.23)
+  * Re-fixed code so that xhtml validates
+  * Added option for different expand and collapse icons
+
 0.2.1 (2008.05.01)
   * Link now spans the whole dropdown
   * Now indicates the presence of an additional submenu (doesn't work in IE 6
