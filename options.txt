@@ -15,6 +15,10 @@
      <input type="radio" name="dropDown" <?php if(get_option('collapsPageDropDown')=='yes') echo 'checked'; ?> id="dropDown" value='yes'></input> <label for="dropDown">Drop down menu</label>
      <input type="radio" name="dropDown" <?php if(get_option('collapsPageDropDown')=='no') echo 'checked'; ?> id="nestedList" value='no'></input> <label for="nestedList">Nested list</label>
     </li>
+    <li>Expanding and collapse characters:<br />
+     <input type="radio" name="collapsPageExpand" <?php if(get_option('collapsPageExpand')==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
+     <input type="radio" name="collapsPageExpand" <?php if(get_option('collapsPageExpand')==1) echo 'checked'; ?> id="expand1" value='1'></input> <label for="expand1">+&nbsp;&mdash;</label>
+    </li>
     <li>Exclude these pages (use slugs, separated by commas):<br />
      <input type="text" name="exclude" value="<?php echo get_option('collapsPageExclude') ?>" id="exclude"</input> 
     </li>
