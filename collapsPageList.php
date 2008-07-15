@@ -213,9 +213,9 @@ function list_pages() {
       if ($dropDown==TRUE) {
         $link .= $page->post_title.'</a></h2>';
       } else {
-        $link .= "<img src='" . get_bloginfo('template_directory') . 
-          "/images/" . $page->post_name. "-nav48.gif' alt='" . 
-          $page->post_name . "navigation icon' />";
+        //$link .= "<img src='" . get_bloginfo('template_directory') . 
+        //  "/images/" . $page->post_name. "-nav48.gif' alt='" . 
+         // $page->post_name . "navigation icon' />";
         $link .= $page->post_title.'</a>';
       }
 
