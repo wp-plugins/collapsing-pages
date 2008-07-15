@@ -20,5 +20,17 @@
      <input type="radio" name="collapsPageExpand" <?php if(get_option('collapsPageExpand')==1) echo 'checked'; ?> id="expand1" value='1'></input> <label for="expand1">+&nbsp;&mdash;</label>
     </li>
     <li>Exclude these pages (use slugs, separated by commas):<br />
-     <input type="text" name="exclude" value="<?php echo get_option('collapsPageExclude') ?>" id="exclude"</input> 
+     <input type="text" name="collapsPageExclude" value="<?php echo get_option('collapsPageExclude') ?>" id="collapsPageExclude"</input> 
+    </li>
+    <li>Expand these pages by default (use slugs, separated by commas):<br />
+     <input type="text" name="collapsPageDefaultExpand" value="<?php echo get_option('collapsPageDefaultExpand') ?>" id="collapsPageDefaultExpand"</input> 
+    </li>
+    <li>Include pages at this depth<br />
+     <select name="collapsPageDepth"  id="collapsPageDepth">
+        <option <?php if (get_option('collapsPageDepth')==-1) echo "selected='selected'" ?> value="-1">All levels (default)</option>
+        <option <?php if (get_option('collapsPageDepth')==0) echo "selected='selected'" ?> value="0">Only main pages</option>
+        <option <?php if (get_option('collapsPageDepth')==1) echo "selected='selected'" ?> value="1">Sub-pages</option>
+        <option <?php if (get_option('collapsPageDepth')==2) echo "selected='selected'" ?> value="2">Sub-sub-pages</option>
+        <option <?php if (get_option('collapsPageDepth')==3) echo "selected='selected'" ?>value="3">Sub-sub-sub-pages</option>
+    </select> 
     </li>

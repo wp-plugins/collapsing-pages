@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.2.2
+Collapsing Pages version: 0.2.3
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -26,14 +26,18 @@ This file is part of Collapsing Pages
 */
 
 // Helper functions
-function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
+function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $depth, $expanded) {
   global $expand, $collapse;
+  if ($depth>=get_option('collapsPageDepth') && get_option('collapsPageDepth')!=-1) {
+    return;
+  }
+  $depth++;
   $subPagePosts=array();
   if (in_array($page->id, $parents)) {
     if ($dropDown==TRUE) {
       $subPageLinks.= "\n     <ul>\n";
     } else {
-      $subPageLinks.= "\n     <ul style='display:none;'>\n";
+      $subPageLinks.= "\n     <ul style='display:$expanded;'>\n";
     }
     foreach ($pages as $page2) {
       //$subPageLinks.= "page2 =". $page2->term_id;
@@ -52,11 +56,12 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown) {
             $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
           }
         } else {
-          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown);
+          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $depth);
           if ($dropDown==TRUE) {
             $subPageLinks.=( "<li class='submenu'>" );
           } else {
-            if (in_array($page2->title, $autoExpand)) {
+            if (in_array($page2->post_name, $autoExpand) ||
+              in_array($page2->title, $autoExpand)) {
               $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>foo$collapse&nbsp;</span>" );
             } else {
               $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
@@ -129,7 +134,13 @@ function list_pages() {
 		$exclusions .= ')';
   }
 
-  $autoExpand=array('Wordpress plugins', 'about');
+	if (get_option('collapsPageDefaultExpand')!='') {
+		$autoExpand = preg_split('/[,]+/',get_option('collapsPageDefaultExpand'));
+  } else {
+	  $autoExpand = array();
+  }
+
+  //$autoExpand=array('plugins', 'about');
 
   $isPage='';
   //if (get_option('collapsPageIncludePosts'=='yes')) {
@@ -169,6 +180,15 @@ function list_pages() {
     }
   }
   foreach( $pages as $page ) {
+    $thisPage= preg_replace('/\//', '', $_SERVER['REQUEST_URI']);  
+      if ($thisPage=='') {
+				$thisPage=$wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE
+					option_name = 'page_on_front'");
+      }
+		$self='';
+    if ($page->id == $thisPage || $page->post_name == $thisPage) {
+      $self='self';
+    }
     if ($page->post_parent==0) {
       $url = get_settings('siteurl');
       $home=$url;
@@ -193,23 +213,43 @@ function list_pages() {
       if ($dropDown==TRUE) {
         $link .= $page->post_title.'</a></h2>';
       } else {
+        $link .= "<img src='" . get_bloginfo('template_directory') . 
+          "/images/" . $page->post_name. "-nav48.gif' alt='" . 
+          $page->post_name . "navigation icon' />";
         $link .= $page->post_title.'</a>';
       }
 
       // TODO not sure why we are checking for this at all TODO
       $subPageCount=0;
-      list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount,$dropDown);
+      $depth=0;
+      $expanded='none';
+      if (in_array($page->post_name, $autoExpand) ||
+          in_array($page->title, $autoExpand)) {
+        $expanded='inline';
+      }
+      if (get_option('collapsPageDepth')!=0) {
+        list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $depth, $expanded);
+      }
         if ($subPageCount>0) {
           if ($dropDown==TRUE) {
-          print( "      <ul><li><h2>" );
+            print( "      <ul><li class='$self'><h2>" );
           } else {
-          print( "      <li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
+            if ($expanded=='inline') {
+              print ("<li class='collapsPage $self'><span class='collapsPage hide' onclick='expandPage(event); return false'>$collapse&nbsp;</span>" );
+            } else {
+              print ( "<li class='collapsPage $self'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
+            }
+          //print( "      <li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
           }
         } else {
+            //  print $page->title . "is NOT in the array\n";
           if ($dropDown==TRUE) {
-            print( "      <ul><li><h2>" );
+            print( "      <ul><li class='$self'><h2>" );
           } else {
-            print( "      <li class='collapsPage collapsItem'>" );
+            print( "<li id='" . $page->post_name . "-nav'" . 
+              " class='collapsPage collapsItem $self'>" );
+            //print("<li id='" . $page->post_name . "-nav' " .
+              //"class='collapsPage collapsItem'>" );
           }
         } 
       // don't include the triangles if posts are not shown and there are no

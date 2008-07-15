@@ -1,5 +1,5 @@
 /*
-collapsPage Pages version: 0.2.2
+collapsPage Pages version: 0.2.3
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Pages plugin by Andrew Rader
@@ -32,4 +32,4 @@ font-size:1.3em;
 
 #sidebar li.collapsPage {list-style-type:none}
 #sidebar li.collapsPage:before {content:'';} 
-#sidebar li.collapsItem:before {content: "\00BB \00A0" !important;} 
+/*#sidebar li.collapsItem:before {content: "\00BB \00A0" !important;} */

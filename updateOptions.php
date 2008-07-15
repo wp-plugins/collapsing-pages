@@ -50,7 +50,9 @@
   } elseif ($_POST['collapsPageExpand'] == '1') {
     update_option( 'collapsPageExpand', 1 );
   }
-    $excludeSafe=addslashes($_POST['exclude']);
-    //$excludeSafe=wp_texturize($_POST['exclude']);
+    $excludeSafe=addslashes($_POST['collapsPageExclude']);
     update_option( 'collapsPageExclude', $excludeSafe);
+    $autoExpandSafe=addslashes($_POST['collapsPageDefaultExpand']);
+    update_option( 'collapsPageDefaultExpand', $autoExpandSafe);
+    update_option( 'collapsPageDepth', $_POST['collapsPageDepth']);
 ?>
