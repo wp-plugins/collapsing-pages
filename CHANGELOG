@@ -1,5 +1,8 @@
 Collapsing Pages Changelog
 
+0.2.4 (2008.08.26)
+  * Minor change to css to add some bullets
+
 0.2.3 (2008.07.14)
   * Added option to automatically expand some pages
   * Added option to control the number of levels of pages which are expanded
