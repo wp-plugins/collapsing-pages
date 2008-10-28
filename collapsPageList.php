@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.2.3
+Collapsing Pages version: 0.2.4
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -56,7 +56,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $depth, $ex
             $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
           }
         } else {
-          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $depth);
+          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $depth,$expanded);
           if ($dropDown==TRUE) {
             $subPageLinks.=( "<li class='submenu'>" );
           } else {

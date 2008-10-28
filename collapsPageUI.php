@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.2.3
+Collapsing Pages version: 0.2.4
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
