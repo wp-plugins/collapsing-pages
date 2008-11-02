@@ -1,7 +1,10 @@
 Collapsing Pages Changelog
 
+0.2.5 (2008.11.01)
+  * fixed bug in that autoExpand was not available to getSubPage
+
 0.2.4 (2008.10.28)
-  * fixed bug with mixing seventh argument to getSubPage when called recursively
+  * fixed bug with missing seventh argument to getSubPage when used recursively
 
 0.2.3 (2008.07.14)
   * Added option to automatically expand some pages

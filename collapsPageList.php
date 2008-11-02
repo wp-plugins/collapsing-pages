@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.2.4
+Collapsing Pages version: 0.2.5
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -27,7 +27,7 @@ This file is part of Collapsing Pages
 
 // Helper functions
 function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $depth, $expanded) {
-  global $expand, $collapse;
+  global $expand, $collapse, $autoExpand;
   if ($depth>=get_option('collapsPageDepth') && get_option('collapsPageDepth')!=-1) {
     return;
   }
@@ -134,6 +134,7 @@ function list_pages() {
 		$exclusions .= ')';
   }
 
+  global $autoExpand;
 	if (get_option('collapsPageDefaultExpand')!='') {
 		$autoExpand = preg_split('/[,]+/',get_option('collapsPageDefaultExpand'));
   } else {
