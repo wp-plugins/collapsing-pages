@@ -1,36 +1,58 @@
-    <li>
-     <input type="checkbox" name="includePosts" <?php if(get_option('collapsPageIncludePosts')=='yes') echo 'checked'; ?> id="includePosts"></input> <label for="showPosts">Show posts as well as pages</label>
-    </li>
-    <li>Sort by:<br />
-     <input type="radio" name="sort" <?php if(get_option('collapsPageSort')=='pageName') echo 'checked'; ?> id="sortPageName" value='pageName'></input> <label for="sortPageName">Page name</label>
-     <input type="radio" name="sort" <?php if(get_option('collapsPageSort')=='pageId') echo 'checked'; ?> id="sortPageId" value='pageId'></input> <label for="sortPageId">Page id</label>
-     <input type="radio" name="sort" <?php if(get_option('collapsPageSort')=='pageSlug') echo 'checked'; ?> id="sortPageSlug" value='pageSlug'></input> <label for="sortPageSlug">Page Slug</label>
-     <input type="radio" name="sort" <?php if(get_option('collapsPageSort')=='menuOrder') echo 'checked'; ?> id="sortMenuOrder" value='menuOrder'></input> <label for="sortMenuOrder">Menu Order</label>
-    </li>
-    <li>Sort order:<br />
-     <input type="radio" name="sortOrder" <?php if(get_option('collapsPageSortOrder')=='ASC') echo 'checked'; ?> id="sortASC" value='ASC'></input> <label for="sortASC">Ascending</label>
-     <input type="radio" name="sortOrder" <?php if(get_option('collapsPageSortOrder')=='DESC') echo 'checked'; ?> id="sortDESC" value='DESC'></input> <label for="sortDESC">Descending</label>
-    </li>
-    <li>Display as:<br />
-     <input type="radio" name="dropDown" <?php if(get_option('collapsPageDropDown')=='yes') echo 'checked'; ?> id="dropDown" value='yes'></input> <label for="dropDown">Drop down menu</label>
-     <input type="radio" name="dropDown" <?php if(get_option('collapsPageDropDown')=='no') echo 'checked'; ?> id="nestedList" value='no'></input> <label for="nestedList">Nested list</label>
-    </li>
-    <li>Expanding and collapse characters:<br />
-     <input type="radio" name="collapsPageExpand" <?php if(get_option('collapsPageExpand')==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
-     <input type="radio" name="collapsPageExpand" <?php if(get_option('collapsPageExpand')==1) echo 'checked'; ?> id="expand1" value='1'></input> <label for="expand1">+&nbsp;&mdash;</label>
-    </li>
-    <li>Exclude these pages (use slugs, separated by commas):<br />
-     <input type="text" name="collapsPageExclude" value="<?php echo get_option('collapsPageExclude') ?>" id="collapsPageExclude"</input> 
-    </li>
-    <li>Expand these pages by default (use slugs, separated by commas):<br />
-     <input type="text" name="collapsPageDefaultExpand" value="<?php echo get_option('collapsPageDefaultExpand') ?>" id="collapsPageDefaultExpand"</input> 
-    </li>
-    <li>Include pages at this depth<br />
-     <select name="collapsPageDepth"  id="collapsPageDepth">
-        <option <?php if (get_option('collapsPageDepth')==-1) echo "selected='selected'" ?> value="-1">All levels (default)</option>
-        <option <?php if (get_option('collapsPageDepth')==0) echo "selected='selected'" ?> value="0">Only main pages</option>
-        <option <?php if (get_option('collapsPageDepth')==1) echo "selected='selected'" ?> value="1">Sub-pages</option>
-        <option <?php if (get_option('collapsPageDepth')==2) echo "selected='selected'" ?> value="2">Sub-sub-pages</option>
-        <option <?php if (get_option('collapsPageDepth')==3) echo "selected='selected'" ?>value="3">Sub-sub-sub-pages</option>
+    <p>
+     <input type="checkbox" name="collapsPage[<?php echo $number ?>][includePosts]" <?php if($includePosts=='yes') echo 'checked'; ?> id="collapsPage-includePosts-<?php echo $number ?>"></input> <label for="showPosts">Show posts as well as pages</label>
+    </p>
+    <p>Sort by:<br />
+     <input type="radio" name="collapsPage[<?php echo $number ?>][sort]" <?php if($sort=='pageName') echo 'checked'; ?> id="collapsPage-sortPageName-<?php echo $number ?>" value='pageName'></input> <label for="sortPageName">Page name</label>
+     <input type="radio" name="collapsPage[<?php echo $number ?>][sort]" <?php if($sort=='pageId') echo 'checked'; ?> id="collapsPage-sortPageId-<?php echo $number ?>" value='pageId'></input> <label for="sortPageId">Page id</label>
+     <input type="radio" name="collapsPage[<?php echo $number ?>][sort]" <?php if($sort=='pageSlug') echo 'checked'; ?> id="collapsPage-sortPageSlug-<?php echo $number ?>" value='pageSlug'></input> <label for="sortPageSlug">Page Slug</label>
+     <input type="radio" name="collapsPage[<?php echo $number ?>][sort]" <?php if($sort=='menuOrder') echo 'checked'; ?> id="collapsPage-sortMenuOrder-<?php echo $number ?>" value='menuOrder'></input> <label for="sortMenuOrder">Menu Order</label>
+    </p>
+    <p>Sort order:<br />
+     <input type="radio" name="collapsPage[<?php echo $number ?>][sortOrder]" <?php if($sortOrder=='ASC') echo 'checked'; ?> id="collapsPage-sortASC-<?php echo $number ?>" value='ASC'></input> <label for="sortASC">Ascending</label>
+     <input type="radio" name="collapsPage[<?php echo $number ?>][sortOrder]" <?php if($sortOrder=='DESC') echo 'checked'; ?> id="collapsPage-sortDESC-<?php echo $number ?>" value='DESC'></input> <label for="sortDESC">Descending</label>
+    </p>
+    <p>Expanding and collapse characters:<br />
+     html: <input type="radio" name="collapsPage[<?php echo $number ?>][expand]" <?php if($expand==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
+     <input type="radio" name="collapsPage[<?php echo $number ?>][expand]" <?php if($expand==1) echo 'checked'; ?> id="expand1" value='1'></input> <label for="expand1">+&nbsp;&mdash;</label>
+     <input type="radio" name="collapsPage[<?php echo $number ?>][expand]"
+     <?php if($expand==2) echo 'checked'; ?> id="expand2" value='2'></input>
+     <label for="expand2">[+]&nbsp;[&mdash;]</label><br />
+     images:
+     <input type="radio" name="collapsPage[<?php echo $number ?>][expand]"
+     <?php if($expand==3) echo 'checked'; ?> id="expand0" value='3'></input>
+     <label for="expand3"><img src='<?php echo get_settings('siteurl') .
+     "/wp-content/plugins/collapsing-pages/" ?>img/collapse.gif' />&nbsp;<img
+     src='<?php echo get_settings('siteurl') .
+     "/wp-content/plugins/collapsing-pages/" ?>img/expand.gif' /></label>
+    </p>
+    <p>Exclude these pages (use slugs, separated by commas):<br />
+     <input type="text" name="collapsPage[<?php echo $number ?>][exclude]" value="<?php echo $exclude ?>" id="collapsPage-exclude-<?php echo $number ?>"</input> 
+    </p>
+    <p>Expand these pages by default (use slugs, separated by commas):<br />
+     <input type="text" name="collapsPage[<?php echo $number ?>][defaultExpand]" value="<?php echo $defaultExpand ?>" id="collapsPage-defaultExpand-<?php echo $number ?>"</input> 
+    </p>
+    <p>Include pages at this depth<br />
+     <select name="collapsPage[<?php echo $number ?>][depth]"  id="collapsPage-depth-<?php echo $number ?>">
+        <option <?php if ($depth==-1) echo "selected='selected'" ?> value="-1">All levels (default)</option>
+        <option <?php if ($depth==0) echo "selected='selected'" ?> value="0">Only main pages</option>
+        <option <?php if ($depth==1) echo "selected='selected'" ?> value="1">Sub-pages</option>
+        <option <?php if ($depth==2) echo "selected='selected'" ?> value="2">Sub-sub-pages</option>
+        <option <?php if ($depth==3) echo "selected='selected'" ?>value="3">Sub-sub-sub-pages</option>
     </select> 
-    </li>
+    </p>
+    <p>
+     <select name="collapsPage[<?php echo $number ?>][inExcludePage]">
+     <option  <?php if($inExcludePage=='include') echo 'selected'; ?> id="inExcludePageInclude-<?php echo $number ?>" value='include'>Include</option>
+     <option  <?php if($inExcludePage=='exclude') echo 'selected'; ?> id="inExcludePageExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
+     </select>
+     these years separated by commas):<br />
+    <input type="text" name="collapsPage[<?php echo $number
+    ?>][inExcludePages]" value="<?php echo $inExcludePages ?>"  
+    id="collapsPage-inExcludePages-<?php echo $number ?>"></input> 
+    </p>
+   <p>
+   <input type="checkbox" name="collapsPage[<?php echo $number
+   ?>][animate]" <?php if ($animate==1) echo
+   'checked'; ?> id="animate-<?php echo $number ?>"></input> <label
+   for="animate">Animate collapsing and expanding</label>
+   </p>

@@ -1,58 +1,36 @@
 <?php
-  if( isset($_POST['showPageCount']) ) {
-    update_option( 'collapsPageShowPageCount', 'yes' );
+foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage ) {
+  if (!isset($widget_collapsPage['title']) && isset($options[$widget_number]) ) { // user clicked cancel
+    continue;
   }
-  else {
-    update_option( 'collapsPageShowPageCount', 'no' );
+      $title = strip_tags(stripslashes($widget_collapsPage['title']));
+  $showPageCount='no';
+  if( isset($widget_collapsPage['showPageCount']) ) {
+    $showPageCount='yes';
   }
-  if( isset($_POST['includePosts']) ) {
-    update_option( 'collapsPageIncludePosts', 'yes' );
+  $includePosts='no';
+  if( isset($widget_collapsPage['includePosts']) ) {
+    $includePosts='yes';
   }
-  else {
-    update_option( 'collapsPageIncludePosts', 'no' );
+  $sortOrder=$widget_collapsPage['sortOrder'];
+  $sortBy=$widget_collapsPage['sortBy'];
+  $showPosts='no';
+  if($widget_collapsPage['showPosts'] == 'yes') {
+    $showPosts='yes';
   }
-  if($_POST['archives'] == 'root') {
-    update_option( 'collapsPageLinkToArchives', 'root' );
-  } elseif ($_POST['archives'] == 'archives') {
-    update_option( 'collapsPageLinkToArchives', 'archives' );
-  } elseif ($_POST['archives'] == 'index') {
-    update_option( 'collapsPageLinkToArchives', 'index' );
+  $inExcludePage= 'include' ;
+  if($widget_collapsPage['inExcludePage'] == 'exclude') {
+    $inExcludePage= 'exclude' ;
   }
-  if($_POST['sortOrder'] == 'ASC') {
-    update_option( 'collapsPageSortOrder', 'ASC' );
-  } elseif ($_POST['sortOrder'] == 'DESC') {
-    update_option( 'collapsPageSortOrder', 'DESC' );
-  }
-  if($_POST['sort'] == 'pageName') {
-    update_option( 'collapsPageSort', 'pageName' );
-  } elseif ($_POST['sort'] == 'pageId') {
-    update_option( 'collapsPageSort', 'pageId' );
-  } elseif ($_POST['sort'] == 'pageSlug') {
-    update_option( 'collapsPageSort', 'pageSlug' );
-  } elseif ($_POST['sort'] == 'menuOrder') {
-    update_option( 'collapsPageSort', 'menuOrder' );
-  } elseif ($_POST['sort'] == '') {
-    update_option( 'collapsPageSort', '' );
-    update_option( 'collapsPageSortOrder', '' );
-  }
-  if($_POST['showPosts'] == 'yes') {
-    update_option( 'collapsPageShowPosts', 'yes' );
-  } elseif ($_POST['showPosts'] == 'no') {
-    update_option( 'collapsPageShowPosts', 'no' );
-  }
-  if($_POST['dropDown'] == 'yes') {
-    update_option( 'collapsPageDropDown', 'yes' );
-  } else {
-    update_option( 'collapsPageDropDown', 'no' );
-  }
-  if($_POST['collapsPageExpand'] == '0') {
-    update_option( 'collapsPageExpand', 0 );
-  } elseif ($_POST['collapsPageExpand'] == '1') {
-    update_option( 'collapsPageExpand', 1 );
-  }
-    $excludeSafe=addslashes($_POST['collapsPageExclude']);
-    update_option( 'collapsPageExclude', $excludeSafe);
-    $autoExpandSafe=addslashes($_POST['collapsPageDefaultExpand']);
-    update_option( 'collapsPageDefaultExpand', $autoExpandSafe);
-    update_option( 'collapsPageDepth', $_POST['collapsPageDepth']);
+  $inExcludePages=addslashes($widget_collapsPage['inExcludePages']);
+  
+  $expand= $widget_collapsPage['expand'];
+    $exclude=addslashes($widget_collapsPage['collapsPageExclude']);
+    $defaultExpand=addslashes($widget_collapsPage['collapsPageDefaultExpand']);
+  $options[$widget_number] = compact( 'title','showPageCount',
+      'includePosts', 'sortOrder', 'sortBy', 'expand',
+      'exclude', 'defaultExpand','animate', 'inExcludePage', 'inExcludePages');
+}
+update_option('collapsPageOptions', $options);
+$updated = true;
 ?>

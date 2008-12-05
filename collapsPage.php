@@ -1,19 +1,14 @@
 <?php
 /*
 Plugin Name: Collapsing Pages
-Plugin URI: http://blog.robfelty.com/plugins
-Description: Uses javascript to expand and collapse pages to show the posts that belong to the page 
+Plugin URI: http://blog.robfelty.com/plugins/collapsing-pages
+Description: Uses javascript to expand and collapse pages to show the posts that belong to the link category 
 Author: Robert Felty
-Version: 0.2.5
+Version: 0.3
 Author URI: http://robfelty.com
-Tags: sidebar, widget, pages, pages
+Tags: sidebar, widget, pages
 
 Copyright 2007 Robert Felty
-
-This work is largely based on the Fancy Pages plugin by Andrew Rader
-(http://nymb.us), which was also distributed under the GPLv2. I have tried
-contacting him, but his website has been down for quite some time now. See the
-CHANGELOG file for more information.
 
 This file is part of Collapsing Pages
 
@@ -32,6 +27,7 @@ This file is part of Collapsing Pages
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */ 
 
+add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
 add_action( 'wp_head', array('collapsPage','get_head'));
 add_action('activate_collapsing-pages/collapsPage.php', array('collapsPage','init'));
 add_action('admin_menu', array('collapsPage','setup'));
@@ -39,53 +35,53 @@ add_action('admin_menu', array('collapsPage','setup'));
 class collapsPage {
 
 	function init() {
+    $options=array(
+			'showPageCount'=> 'yes' ,
+			'catSort'=> 'catName' ,
+			'catSortOrder'=> 'ASC' ,
+			'sort'=> 'linkName' ,
+			'sortOrder'=> 'ASC' ,
+			'exclude'=> '' ,
+			'expand'=> 0 ,
+			'defaultExpand'=> ''
+    );
+    $collapsPageOptions=$options;
 		if( function_exists('add_option') ) {
-			add_option( 'collapsPageShowPostCount', 'yes' );
-			add_option( 'collapsPageIncludePosts', 'no' );
-			add_option( 'collapsPageLinkToArchives', 'root' );
-			add_option( 'collapsPageSort', 'pageName' );
-			add_option( 'collapsPageSortOrder', 'ASC' );
-			add_option( 'collapsPageShowPosts', 'yes' );
-			add_option( 'collapsPageExpand', '0' );
-			add_option( 'collapsPageExclude', '' );
-			add_option( 'collapsPageDropDown', 'no' );
-			add_option( 'collapsPageDepth', '-1' );
-			add_option( 'collapsPageDefaultExpand', '' );
+//      add_option( 'collapsPageOptions', $collapsPageOptions);
 		}
 	}
 
 	function setup() {
-		if( function_exists('add_options_page') ) {
-			add_options_page(__('Collapsing Pages'),__('Collapsing Pages'),1,basename(__FILE__),array('collapsPage','ui'));
-		}
 	}
-
-	function ui() {
-		include_once( 'collapsPageUI.php' );
-	}
-
 
 	function get_head() {
 		$url = get_settings('siteurl');
     echo "<style type='text/css'>
 		@import '$url/wp-content/plugins/collapsing-pages/collapsPage.css';
-    /*
-    #collapsPageDiv ul ul li.submenu {
-      background: url($url/wp-content/plugins/collapsing-pages/submenu.png) no-repeat top right;
-    }
-    */
     </style>\n";
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Pages Plugin version: 0.2.5\n// Copyright 2007 Robert Felty (robfelty.com)\n";
-    $expand='&#9658;';
-    $collapse='&#9660;';
-
-    if (get_option('collapsPageExpand')==1) {
-      $expand='+';
-      $collapse='&mdash;';
+		echo "// These variables are part of the Collapsing Pages Plugin version: 0.1.4\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+    $expandSym="<img src='". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/expand.gif' alt='expand' />";
+    $collapseSym="<img src='". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/collapse.gif' alt='collapse' />";
+    echo "function expandPage( e, expand,animate ) {
+    if (expand==1) {
+      expand='+';
+      collapse='—';
+    } else if (expand==2) {
+      expand='[+]';
+      collapse='[—]';
+    } else if (expand==3) {
+      expand=\"$expandSym\";
+      collapse=\"$collapseSym\";
+    } else {
+      expand='►';
+      collapse='▼';
     }
-    echo "function expandPage( e ) {
     if( e.target ) {
       src = e.target;
     }
@@ -93,7 +89,16 @@ class collapsPage {
       src = window.event.srcElement;
     }
 
+    if (src.nodeName.toLowerCase() == 'img') {
+      src=src.parentNode;
+      //alert('it is an image');
+    }
     srcList = src.parentNode;
+    //alert(srcList)
+    if (srcList.nodeName.toLowerCase() == 'span') {
+      srcList= srcList.parentNode;
+      src= src.parentNode;
+    }
     childList = null;
 
     for( i = 0; i < srcList.childNodes.length; i++ ) {
@@ -103,16 +108,24 @@ class collapsPage {
     }
 
     if( src.getAttribute( 'class' ) == 'collapsPage hide' ) {
-      childList.style.display = 'none';
+      if (animate==1) {
+        Effect.BlindUp(childList, {duration: 0.5});
+      } else {
+        childList.style.display = 'none';
+      }
       src.setAttribute('class','collapsPage show');
       src.setAttribute('title','click to expand');
-      src.innerHTML='$expand&nbsp;';
+      src.innerHTML=expand;
     }
     else {
-      childList.style.display = '';
+      if (animate==1) {
+        Effect.BlindDown(childList, {duration: 0.5});
+      } else {
+        childList.style.display = 'block';
+      }
       src.setAttribute('class','collapsPage hide');
       src.setAttribute('title','click to collapse');
-      src.innerHTML='$collapse&nbsp;';
+      src.innerHTML=collapse;
     }
 
     if( e.preventDefault ) {
@@ -123,70 +136,13 @@ class collapsPage {
   }\n";
 
 		echo "// ]]>\n</script>\n";
-    if (get_option('collapsPageDropDown')==TRUE) {
-      $url = get_settings('siteurl');
-      echo "
-      <style type='text/css' media='screen'>
-      @import '$url/wp-content/plugins/collapsing-pages/cssmenu.css';
-      </style>
-      <!--[if IE]>
-      <style type='text/css' media='screen'>
-      /* #collapsPageDiv ul li {float: left; width: 100%;}*/
-      </style>
-      <![endif]-->
-      <!--[if lt IE 7]>
-      <style type='text/css' media='screen'>
-      body {
-      behavior: url($url/wp-content/plugins/collapsing-pages/csshover.htc);
-      font-size: 100%;
-      }
-      #collapsPageDiv ul li a {height: 1%;
-       width:100%;} 
-
-      #collapsPageDiv a, #collapsPageDiv h2 {
-      font: bold 1.0em/1.4em arial, helvetica, sans-serif;
-      }
-      #collapsPageDiv ul ul {
-      background:transparent;
-      width:6em;
-      position: absolute;
-      top:1.1em;
-      z-index: 500;
-      text-align:left;
-      }
-
-      #collapsPageDiv li li {
-      position:relative;
-      text-align:left;
-      /*padding-right:50em;*/
-      width:10em;
-      z-index: 1000;
-      }
-      #collapsPageDiv li li li {z-index:500;
-/*      background:white;*/
-}
-
-      #collapsPageDiv ul ul ul {
-      position: absolute;
-      width:6em;
-      background:blue;
-      top: 0em;
-      /*position: absolute;
-      top: 0;
-      left: 100%;*/
-      }
-
-      </style>
-      <![endif]-->";
-    }
-
 	}
 }
 
 
 		include( 'collapsPageList.php' );
-function collapsPage() {
-	list_pages();
+function collapsPage($number) {
+	list_pages($number);
 }
 include('collapsPageWidget.php');
 ?>

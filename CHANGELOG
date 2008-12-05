@@ -1,5 +1,11 @@
 Collapsing Pages Changelog
 
+0.3 (2008.12.04)
+  * can now use multiple instance of the widget
+  * can also use manually
+  * added option to animate expanding
+  * added more options for expanding characters
+
 0.2.5 (2008.11.01)
   * fixed bug in that autoExpand was not available to getSubPage
 
