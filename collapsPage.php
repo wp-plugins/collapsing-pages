@@ -28,6 +28,7 @@ This file is part of Collapsing Pages
 */ 
 
 add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
+add_action('wp_head', wp_enqueue_script('collapsFunctions', "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js"));
 add_action( 'wp_head', array('collapsPage','get_head'));
 add_action('activate_collapsing-pages/collapsPage.php', array('collapsPage','init'));
 add_action('admin_menu', array('collapsPage','setup'));
@@ -56,6 +57,7 @@ class collapsPage {
 
 	function get_head() {
 		$url = get_settings('siteurl');
+		echo "<script type ='text/javascript' src='$url/wp-content/plugins/collapsing-pages/collapsPage.js'></script>";
     echo "<style type='text/css'>
 		@import '$url/wp-content/plugins/collapsing-pages/collapsPage.css';
     </style>\n";

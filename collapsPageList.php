@@ -37,7 +37,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
     if ($dropDown==TRUE) {
       $subPageLinks.= "\n     <ul>\n";
     } else {
-      $subPageLinks.= "\n     <ul style='display:$expanded;'>\n";
+      $subPageLinks.= "\n     <ul id='collapsPage-" . $page->id ."' style='display:$expanded;'>\n";
     }
     foreach ($pages as $page2) {
       //$subPageLinks.= "page2 =". $page2->term_id;
@@ -45,44 +45,44 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
       if ($page->id==$page2->post_parent) {
         if (!in_array($page2->id, $parents)) {
           /* check to see if there are more subpages under this one. If the
-           * page id is not in the parents array, then there should be no more
-           * subpages, and we do not print a triangle dropdown, otherwise we do
-           * */
-          $subPageCount++;
-          if ($dropDown=TRUE) {
-            $subPageLinks.=( "        <li class='collapsPage collapsItem'>" );
-            //$subPageLinks.=( "<li>" );
-          } else {
-            $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
-          }
+         * page id is not in the parents array, then there should be no more
+         * subpages, and we do not print a triangle dropdown, otherwise we do
+         * */
+        $subPageCount++;
+        if ($dropDown=TRUE) {
+          $subPageLinks.=( "        <li class='collapsPage collapsItem'>" );
+          //$subPageLinks.=( "<li>" );
         } else {
-          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
-          if ($dropDown==TRUE) {
-            $subPageLinks.=( "<li class='submenu'>" );
+          $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
+        }
+      } else {
+        list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
+        if ($dropDown==TRUE) {
+          $subPageLinks.=( "<li class='submenu'>" );
+        } else {
+          if (in_array($page2->post_name, $autoExpand) ||
+            in_array($page2->title, $autoExpand)) {
+            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'>foo$collapseSym</span>" );
           } else {
-            if (in_array($page2->post_name, $autoExpand) ||
-              in_array($page2->title, $autoExpand)) {
-              $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'>foo$collapseSym</span>" );
-            } else {
-              $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$expandSym</span></span>" );
-            }
+            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$expandSym</span></span>" );
           }
         }
-          $link2 = "<a href='".get_page_link($page2->id)."' ";
-        if ( empty($page2->page_description) ) {
-          //$link2 .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page2->name)) . '"';
-        } else {
-          //$link2 .= 'title="' . wp_specialchars(apply_filters('page_description',$page2->page_description,$page2)) . '"';
-        }
-        $link2 .= '>';
-        $link2 .= $page2->post_title. "</a>";
-        $subPageLinks.= $link2 ;
-        if (!in_array($page2->id, $parents)) {
-          $subPageLinks.="</li>\n";
-        }
-        // add in additional subpage information
-        $subPageLinks.="$subPageLink2";
-        // close <ul> and <li> before starting a new page
+      }
+        $link2 = "<a href='".get_page_link($page2->id)."' ";
+      if ( empty($page2->page_description) ) {
+        //$link2 .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page2->name)) . '"';
+      } else {
+        //$link2 .= 'title="' . wp_specialchars(apply_filters('page_description',$page2->page_description,$page2)) . '"';
+      }
+      $link2 .= '>';
+      $link2 .= $page2->post_title. "</a>";
+      $subPageLinks.= $link2 ;
+      if (!in_array($page2->id, $parents)) {
+        $subPageLinks.="</li>\n";
+      }
+      // add in additional subpage information
+      $subPageLinks.="$subPageLink2";
+      // close <ul> and <li> before starting a new page
       }
     }
     if ($subPageCount>0 ) {
@@ -241,7 +241,7 @@ function list_pages($number) {
       }
         if ($subPageCount>0) {
           if ($dropDown==TRUE) {
-            print( "      <ul><li class='$self'><h2>" );
+            print( "      <ul id='collapsPage-" . $page->id ."'><li class='$self'><h2>" );
           } else {
             if ($expanded=='inline') {
               print ("<li class='collapsPage $self'><span class='collapsPage hide' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$collapseSym</span></span>" );
