@@ -4,9 +4,11 @@ if ( -1 == $number ) {
   $number = '%i%';
   $title = 'Pages';
   $showPostCount = 'yes';
-  $archSortOrder = 'DESC';
+  $sortOrder = 'DESC';
+  $sort='pageName';
   $defaultExpand='';
   $expand='1';
+  $depth='-1';
   $inExcludePage='include';
   $inExcludePages='';
   $showPosts='yes';
@@ -16,6 +18,9 @@ if ( -1 == $number ) {
   $title = attribute_escape($options[$number]['title']);
   $showPostCount = $options[$number]['showPostCount'];
   $expand = $options[$number]['expand'];
+  $depth = $options[$number]['depth'];
+  $sort = $options[$number]['sort'];
+  $sortOrder = $options[$number]['sortOrder'];
   $inExcludePages = $options[$number]['inExcludePages'];
   $inExcludePage = $options[$number]['inExcludePage'];
   $defaultExpand = $options[$number]['defaultExpand'];

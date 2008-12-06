@@ -3,8 +3,8 @@ Contributors: robfelty
 Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget
-Requires at least: 2.3
-Tested up to: 2.5
+Requires at least: 2.6
+Tested up to: 2.6.5
 Stable tag: 0.2.5
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
@@ -39,7 +39,7 @@ option)
 	<?php
 	  if( function_exists('collapsPage') ) {
     echo "<div id='collapsPageDiv'>\n";
-	  collapsPage();
+	  collapsPage('%i%');
     echo "</div>\n";
 	} else {
 	  echo "<ul>\n";
@@ -108,6 +108,18 @@ posts, but the links to the pages will still work (which is the default
 behavior in wordpress anyways)
 
 == HISTORY ==
+
+0.3 (2008.12.04)
+  * can now use multiple instance of the widget
+  * can also use manually
+  * added option to animate expanding
+  * added more options for expanding characters
+
+0.2.5 (2008.11.01)
+  * fixed bug in that autoExpand was not available to getSubPage
+
+0.2.4 (2008.10.28)
+  * fixed bug with missing seventh argument to getSubPage when used recursively
 
 0.2.3 (2008.07.14)
   * Added option to automatically expand some pages

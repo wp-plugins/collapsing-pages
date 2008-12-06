@@ -12,8 +12,13 @@ foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage
   if( isset($widget_collapsPage['includePosts']) ) {
     $includePosts='yes';
   }
+  $animate=0;
+  if( isset($widget_collapsPage['animate']) ) {
+    $animate=1;
+  }
   $sortOrder=$widget_collapsPage['sortOrder'];
-  $sortBy=$widget_collapsPage['sortBy'];
+  $sort=$widget_collapsPage['sort'];
+  $depth=$widget_collapsPage['depth'];
   $showPosts='no';
   if($widget_collapsPage['showPosts'] == 'yes') {
     $showPosts='yes';
@@ -25,11 +30,10 @@ foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage
   $inExcludePages=addslashes($widget_collapsPage['inExcludePages']);
   
   $expand= $widget_collapsPage['expand'];
-    $exclude=addslashes($widget_collapsPage['collapsPageExclude']);
-    $defaultExpand=addslashes($widget_collapsPage['collapsPageDefaultExpand']);
+  $defaultExpand=addslashes($widget_collapsPage['defaultExpand']);
   $options[$widget_number] = compact( 'title','showPageCount',
-      'includePosts', 'sortOrder', 'sortBy', 'expand',
-      'exclude', 'defaultExpand','animate', 'inExcludePage', 'inExcludePages');
+      'includePosts', 'sortOrder', 'sort', 'expand', 'depth',
+      'defaultExpand','animate', 'inExcludePage', 'inExcludePages');
 }
 update_option('collapsPageOptions', $options);
 $updated = true;

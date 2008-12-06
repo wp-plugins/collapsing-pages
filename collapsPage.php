@@ -61,7 +61,7 @@ class collapsPage {
     </style>\n";
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Pages Plugin version: 0.1.4\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+		echo "// These variables are part of the Collapsing Pages Plugin version: 0.3\n// Copyright 2007 Robert Felty (robfelty.com)\n";
     $expandSym="<img src='". get_settings('siteurl') .
          "/wp-content/plugins/collapsing-archives/" . 
          "img/expand.gif' alt='expand' />";
@@ -84,9 +84,13 @@ class collapsPage {
     }
     if( e.target ) {
       src = e.target;
-    }
-    else {
-      src = window.event.srcElement;
+    } else if (e.className && e.className.match(/^collapsPage/)) {
+      src=e;
+    } else {
+      try {
+        src = window.event.srcElement;
+      } catch (err) {
+      }
     }
 
     if (src.nodeName.toLowerCase() == 'img') {
@@ -113,19 +117,24 @@ class collapsPage {
       } else {
         childList.style.display = 'none';
       }
+      var theSpan = src.childNodes[0];
+      var theId= childList.getAttribute('id');
+      createCookie(theId,0,7);
       src.setAttribute('class','collapsPage show');
       src.setAttribute('title','click to expand');
-      src.innerHTML=expand;
-    }
-    else {
+      theSpan.innerHTML=expand;
+    } else {
       if (animate==1) {
         Effect.BlindDown(childList, {duration: 0.5});
       } else {
         childList.style.display = 'block';
       }
+      var theSpan = src.childNodes[0];
+      var theId= childList.getAttribute('id');
+      createCookie(theId,1,7);
       src.setAttribute('class','collapsPage hide');
       src.setAttribute('title','click to collapse');
-      src.innerHTML=collapse;
+      theSpan.innerHTML=collapse;
     }
 
     if( e.preventDefault ) {
@@ -134,8 +143,8 @@ class collapsPage {
 
     return false;
   }\n";
+		echo ";\n// ]]>\n</script>\n";
 
-		echo "// ]]>\n</script>\n";
 	}
 }
 

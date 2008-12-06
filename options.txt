@@ -25,12 +25,6 @@
      src='<?php echo get_settings('siteurl') .
      "/wp-content/plugins/collapsing-pages/" ?>img/expand.gif' /></label>
     </p>
-    <p>Exclude these pages (use slugs, separated by commas):<br />
-     <input type="text" name="collapsPage[<?php echo $number ?>][exclude]" value="<?php echo $exclude ?>" id="collapsPage-exclude-<?php echo $number ?>"</input> 
-    </p>
-    <p>Expand these pages by default (use slugs, separated by commas):<br />
-     <input type="text" name="collapsPage[<?php echo $number ?>][defaultExpand]" value="<?php echo $defaultExpand ?>" id="collapsPage-defaultExpand-<?php echo $number ?>"</input> 
-    </p>
     <p>Include pages at this depth<br />
      <select name="collapsPage[<?php echo $number ?>][depth]"  id="collapsPage-depth-<?php echo $number ?>">
         <option <?php if ($depth==-1) echo "selected='selected'" ?> value="-1">All levels (default)</option>
@@ -45,7 +39,7 @@
      <option  <?php if($inExcludePage=='include') echo 'selected'; ?> id="inExcludePageInclude-<?php echo $number ?>" value='include'>Include</option>
      <option  <?php if($inExcludePage=='exclude') echo 'selected'; ?> id="inExcludePageExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
      </select>
-     these years separated by commas):<br />
+     these pages (separated by commas):<br />
     <input type="text" name="collapsPage[<?php echo $number
     ?>][inExcludePages]" value="<?php echo $inExcludePages ?>"  
     id="collapsPage-inExcludePages-<?php echo $number ?>"></input> 

@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.2.5
+Collapsing Pages version: 0.3
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -26,12 +26,12 @@ This file is part of Collapsing Pages
 */
 
 // Helper functions
-function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $depth, $expanded) {
-  global $expand, $collapse, $autoExpand;
-  if ($depth>=get_option('collapsPageDepth') && get_option('collapsPageDepth')!=-1) {
+function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number) {
+  global $expand, $expandSym, $collapseSym, $autoExpand, $animate, $depth;
+  if ($curDepth>=$depth && $depth!=-1) {
     return;
   }
-  $depth++;
+  $curDepth++;
   $subPagePosts=array();
   if (in_array($page->id, $parents)) {
     if ($dropDown==TRUE) {
@@ -56,15 +56,15 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $depth, $ex
             $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
           }
         } else {
-          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $depth,$expanded);
+          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
           if ($dropDown==TRUE) {
             $subPageLinks.=( "<li class='submenu'>" );
           } else {
             if (in_array($page2->post_name, $autoExpand) ||
               in_array($page2->title, $autoExpand)) {
-              $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>foo$collapse&nbsp;</span>" );
+              $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'>foo$collapseSym</span>" );
             } else {
-              $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
+              $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$expandSym</span></span>" );
             }
           }
         }
@@ -96,68 +96,79 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $depth, $ex
 
 /* the page and tagging database structures changed drastically between wordpress 2.1 and 2.3. We will use different queries for page based vs. term_taxonomy based database structures */
 //$taxonomy=false;
-function list_pages() {
-  global $wpdb, $expand, $collapse;
-  // option for what sort of icon to display for expanding and collapsing
-  $expand='&#9658;';
-  $collapse='&#9660;';
+function list_pages($number) {
+  global $wpdb, $expand, $expandSym, $collapseSym, $animate, $depth;
+  $options=get_option('collapsPageOptions');
+  //print_r($options[$number]);
+  extract($options[$number]);
 
-  if (get_option('collapsPageExpand')==1) {
-    $expand='+';
-    $collapse='&mdash;';
+  if ($expand==1) {
+    $expandSym='+';
+    $collapseSym='—';
+  } elseif ($expand==2) {
+    $expandSym='[+]';
+    $collapseSym='[—]';
+  } elseif ($expand==3) {
+    $expandSym="<img src='". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/expand.gif' alt='expand' />";
+    $collapseSym="<img src='". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/collapse.gif' alt='collapse' />";
+  } else {
+    $expand=0;
+    $expandSym='►';
+    $collapseSym='▼';
   }
-  if (get_option('collapsPageLinkToArchives')=='archives') {
-    $archives='archives.php/';
-  } elseif (get_option('collapsPageLinkToArchives')=='index') {
-    $archives='index.php/';
-  } elseif (get_option('collapsPageLinkToArchives')=='root') {
-    $archives='';
-  }
-  $dropDown=FALSE;
-  if (get_option('collapsPageDropDown')=='yes') {
-    $dropDown=TRUE;
-  }
-  $exclude=get_option('collapsPageExclude');
-	$exclusions = '';
-	if ( !empty($exclude) ) {
-		$exterms = preg_split('/[,]+/',$exclude);
+	$inExclusionsPage = array();
+	if ( !empty($inExcludePage) && !empty($inExcludePages) ) {
+		$exterms = preg_split('/[,]+/',$inExcludePages);
+    if ($inExcludePage=='include') {
+      $in='IN';
+    } else {
+      $in='NOT IN';
+    }
 		if ( count($exterms) ) {
 			foreach ( $exterms as $exterm ) {
-				if (empty($exclusions))
-					$exclusions = " AND ( $wpdb->posts.post_name <> '" . sanitize_title($exterm) . "' ";
+				if (empty($inExclusionsPage))
+					$inExclusionsPage = "'" . sanitize_title($exterm) . "'";
 				else
-					$exclusions .= " AND $wpdb->posts.post_name <> '" . sanitize_title($exterm) . "' ";
+					$inExclusionsPage .= ", '" . sanitize_title($exterm) . "' ";
 			}
 		}
 	}
+	if ( empty($inExclusionsPage) ) {
+		$inExcludePageQuery = "AND post_name NOT IN ('')";
+  } else {
+    $inExcludePageQuery ="AND post_name $in ($inExclusionsPage)";
+  }
+  $exclude=$exclude;
 	if ( !empty($exclusions) ) {
 		$exclusions .= ')';
   }
 
   global $autoExpand;
-	if (get_option('collapsPageDefaultExpand')!='') {
-		$autoExpand = preg_split('/[,]+/',get_option('collapsPageDefaultExpand'));
+	if ($defaultExpand!='') {
+		$autoExpand = preg_split('/[,]+/',$defaultExpand);
   } else {
 	  $autoExpand = array();
   }
-
-  //$autoExpand=array('plugins', 'about');
 
   $isPage='';
   //if (get_option('collapsPageIncludePosts'=='yes')) {
     $isPage="AND $wpdb->posts.post_type='page'";
   //}
-  if (get_option('collapsPageSort')!='') {
-    if (get_option('collapsPageSort')=='pageName') {
+  if ($sort!='') {
+    if ($sort=='pageName') {
       $sortColumn="ORDER BY $wpdb->posts.post_title";
-    } elseif (get_option('collapsPageSort')=='pageId') {
+    } elseif ($sort=='pageId') {
       $sortColumn="ORDER BY $wpdb->posts.id";
-    } elseif (get_option('collapsPageSort')=='pageSlug') {
+    } elseif ($sort=='pageSlug') {
       $sortColumn="ORDER BY $wpdb->posts.post_name";
-    } elseif (get_option('collapsPageSort')=='menuOrder') {
+    } elseif ($sort=='menuOrder') {
       $sortColumn="ORDER BY $wpdb->posts.menu_order";
     }
-    $sortOrder = get_option('collapsPageSortOrder');
+    $sortOrder = $sortOrder;
   } 
 
   if ($dropDown==TRUE) {
@@ -166,10 +177,7 @@ function list_pages() {
     echo "\n    <ul id='collapsPageList'>\n";
   }
 
-      //$categoryquery = "SELECT $wpdb->terms.term_id, $wpdb->terms.name, $wpdb->terms.slug, $wpdb->term_taxonomy.parent FROM $wpdb->terms, $wpdb->term_taxonomy WHERE $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id AND $wpdb->term_taxonomy.count >0 AND $wpdb->terms.name != 'Blogroll' AND $wpdb->term_taxonomy.taxonomy = 'category' $exclusions $sortColumn $sortOrder";
-      //$postquery = "SELECT $wpdb->terms.term_id, $wpdb->terms.name, $wpdb->terms.slug, $wpdb->term_taxonomy.count, $wpdb->posts.id, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts, $wpdb->terms, $wpdb->term_taxonomy, $wpdb->term_relationships  WHERE $wpdb->posts.id = $wpdb->term_relationships.object_id AND $wpdb->posts.post_status='publish' AND $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id AND $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id AND $wpdb->term_taxonomy.taxonomy = 'category' $isPage";
-      $pagequery = "SELECT $wpdb->posts.id, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $exclusions $isPage $sortColumn $sortOrder";
-
+      $pagequery = "SELECT $wpdb->posts.id, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
     /* changing to use only one query 
      * don't forget to exclude pages if so desired
      */
@@ -202,7 +210,7 @@ function list_pages() {
         $link = "<a href='".get_page_link($page->id)."' ";
       }
       if ( empty($page->page_description) ) {
-        if( get_option('collapsPageShowPostCount')=='yes') {
+        if( $showPostCount=='yes') {
           $link .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page->post_title)) . '"';
         } else {
           $link .= "title='View all subpages'";
@@ -222,25 +230,25 @@ function list_pages() {
 
       // TODO not sure why we are checking for this at all TODO
       $subPageCount=0;
-      $depth=0;
       $expanded='none';
       if (in_array($page->post_name, $autoExpand) ||
           in_array($page->title, $autoExpand)) {
         $expanded='inline';
       }
-      if (get_option('collapsPageDepth')!=0) {
-        list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $depth, $expanded);
+      $curDepth=0;
+      if ($depth!=0) {
+        list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number);
       }
         if ($subPageCount>0) {
           if ($dropDown==TRUE) {
             print( "      <ul><li class='$self'><h2>" );
           } else {
             if ($expanded=='inline') {
-              print ("<li class='collapsPage $self'><span class='collapsPage hide' onclick='expandPage(event); return false'>$collapse&nbsp;</span>" );
+              print ("<li class='collapsPage $self'><span class='collapsPage hide' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$collapseSym</span></span>" );
             } else {
-              print ( "<li class='collapsPage $self'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
+              print ( "<li class='collapsPage $self'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$expandSym</span></span>" );
             }
-          //print( "      <li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event); return false'>$expand&nbsp;</span>" );
+          //print( "      <li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$expandSym</span></span>" );
           }
         } else {
             //  print $page->title . "is NOT in the array\n";
