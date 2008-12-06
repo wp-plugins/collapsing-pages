@@ -44,6 +44,9 @@
     ?>][inExcludePages]" value="<?php echo $inExcludePages ?>"  
     id="collapsPage-inExcludePages-<?php echo $number ?>"></input> 
     </p>
+    <p>Auto-expand these categories (separated by commas):<br />
+     <input type="text" name="collapsPage[<?php echo $number ?>][defaultExpand]" value="<?php echo $defaultExpand ?>" id="collapsPage-defaultExpand-<?php echo $number ?>"></input> 
+    </p>
    <p>
    <input type="checkbox" name="collapsPage[<?php echo $number
    ?>][animate]" <?php if ($animate==1) echo
