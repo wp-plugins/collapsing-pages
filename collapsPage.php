@@ -70,13 +70,13 @@ class collapsPage {
 		echo "// <![CDATA[\n";
 		echo "// These variables are part of the Collapsing Pages Plugin version: 0.3\n// Copyright 2007 Robert Felty (robfelty.com)\n";
     $expandSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-archives/" . 
+         "/wp-content/plugins/collapsing-pages/" . 
          "img/expand.gif' alt='expand' />";
     $collapseSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-archives/" . 
+         "/wp-content/plugins/collapsing-pages/" . 
          "img/collapse.gif' alt='collapse' />";
-    echo "var expandSym=$expandSym;";
-    echo "var collapseSym=$collapseSym;";
+    echo "var expandSym=\"$expandSym\";";
+    echo "var collapseSym=\"$collapseSym\";";
     echo"
     addLoadEvent(function() {
       autoExpandCollapse('collapsPage');
