@@ -4,7 +4,7 @@ if ( -1 == $number ) {
   $number = '%i%';
   $title = 'Pages';
   $showPostCount = 'yes';
-  $sortOrder = 'DESC';
+  $sortOrder = 'ASC';
   $sort='pageName';
   $defaultExpand='';
   $expand='1';

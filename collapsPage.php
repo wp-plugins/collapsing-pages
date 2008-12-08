@@ -36,20 +36,25 @@ add_action('admin_menu', array('collapsPage','setup'));
 class collapsPage {
 
 	function init() {
-    $options=array(
-			'showPageCount'=> 'yes' ,
-			'catSort'=> 'catName' ,
-			'catSortOrder'=> 'ASC' ,
-			'sort'=> 'linkName' ,
-			'sortOrder'=> 'ASC' ,
-			'exclude'=> '' ,
-			'expand'=> 0 ,
-			'defaultExpand'=> ''
-    );
-    $collapsPageOptions=$options;
-		if( function_exists('add_option') ) {
-//      add_option( 'collapsPageOptions', $collapsPageOptions);
-		}
+    if (!get_option('collapsPage')) {
+      $options=array('%i%' => array(
+        'title' => 'Pages', 
+        'showPostCount'=> 'yes' ,
+        'sortOrder'=> 'ASC' ,
+        'sort'=> 'pageName' ,
+        'defaultExpand'=> '',
+        'expand' => '1',
+        'depth' =>'-1',
+        'inExcludePage' => 'include',
+        'inExcludePages' => '',
+        'showPosts' => 'yes',
+        'showPages' => 'no',
+        'animate' => 1,
+      ));
+      if( function_exists('add_option') ) {
+        add_option( 'collapsPageOptions', $options);
+      }
+    }
 	}
 
 	function setup() {
@@ -57,7 +62,7 @@ class collapsPage {
 
 	function get_head() {
 		$url = get_settings('siteurl');
-		echo "<script type ='text/javascript' src='$url/wp-content/plugins/collapsing-pages/collapsPage.js'></script>";
+		//echo "<script type ='text/javascript' src='$url/wp-content/plugins/collapsing-pages/collapsPage.js'></script>";
     echo "<style type='text/css'>
 		@import '$url/wp-content/plugins/collapsing-pages/collapsPage.css';
     </style>\n";
@@ -70,81 +75,13 @@ class collapsPage {
     $collapseSym="<img src='". get_settings('siteurl') .
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
-    echo "function expandPage( e, expand,animate ) {
-    if (expand==1) {
-      expand='+';
-      collapse='—';
-    } else if (expand==2) {
-      expand='[+]';
-      collapse='[—]';
-    } else if (expand==3) {
-      expand=\"$expandSym\";
-      collapse=\"$collapseSym\";
-    } else {
-      expand='►';
-      collapse='▼';
-    }
-    if( e.target ) {
-      src = e.target;
-    } else if (e.className && e.className.match(/^collapsPage/)) {
-      src=e;
-    } else {
-      try {
-        src = window.event.srcElement;
-      } catch (err) {
-      }
-    }
-
-    if (src.nodeName.toLowerCase() == 'img') {
-      src=src.parentNode;
-      //alert('it is an image');
-    }
-    srcList = src.parentNode;
-    //alert(srcList)
-    if (srcList.nodeName.toLowerCase() == 'span') {
-      srcList= srcList.parentNode;
-      src= src.parentNode;
-    }
-    childList = null;
-
-    for( i = 0; i < srcList.childNodes.length; i++ ) {
-      if( srcList.childNodes[i].nodeName.toLowerCase() == 'ul' ) {
-        childList = srcList.childNodes[i];
-      }
-    }
-
-    if( src.getAttribute( 'class' ) == 'collapsPage hide' ) {
-      if (animate==1) {
-        Effect.BlindUp(childList, {duration: 0.5});
-      } else {
-        childList.style.display = 'none';
-      }
-      var theSpan = src.childNodes[0];
-      var theId= childList.getAttribute('id');
-      createCookie(theId,0,7);
-      src.setAttribute('class','collapsPage show');
-      src.setAttribute('title','click to expand');
-      theSpan.innerHTML=expand;
-    } else {
-      if (animate==1) {
-        Effect.BlindDown(childList, {duration: 0.5});
-      } else {
-        childList.style.display = 'block';
-      }
-      var theSpan = src.childNodes[0];
-      var theId= childList.getAttribute('id');
-      createCookie(theId,1,7);
-      src.setAttribute('class','collapsPage hide');
-      src.setAttribute('title','click to collapse');
-      theSpan.innerHTML=collapse;
-    }
-
-    if( e.preventDefault ) {
-      e.preventDefault();
-    }
-
-    return false;
-  }\n";
+    echo "var expandSym=$expandSym;";
+    echo "var collapseSym=$collapseSym;";
+    echo"
+    addLoadEvent(function() {
+      autoExpandCollapse('collapsPage');
+    });
+    ";
 		echo ";\n// ]]>\n</script>\n";
 
 	}

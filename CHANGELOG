@@ -5,6 +5,7 @@ Collapsing Pages Changelog
   * can also use manually
   * added option to animate expanding
   * added more options for expanding characters
+  * consolidated javascript to share code with other collapsing plugins
 
 0.2.5 (2008.11.01)
   * fixed bug in that autoExpand was not available to getSubPage

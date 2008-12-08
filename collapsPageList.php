@@ -62,9 +62,9 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
         } else {
           if (in_array($page2->post_name, $autoExpand) ||
             in_array($page2->title, $autoExpand)) {
-            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'>foo$collapseSym</span>" );
+            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'>foo$collapseSym</span>" );
           } else {
-            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$expandSym</span></span>" );
+            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$expandSym</span></span>" );
           }
         }
       }
@@ -171,11 +171,7 @@ function list_pages($number) {
     $sortOrder = $sortOrder;
   } 
 
-  if ($dropDown==TRUE) {
-    //echo "\n    <div id='collapsPageDiv'>\n";
-  } else {
-    echo "\n    <ul id='collapsPageList'>\n";
-  }
+  echo "\n    <ul id='collapsPageList'>\n";
 
       $pagequery = "SELECT $wpdb->posts.id, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
     /* changing to use only one query 
@@ -203,12 +199,7 @@ function list_pages($number) {
       $home=$url;
       $lastPage= $page->id;
       // print out page name 
-      if ($dropDown==TRUE) {
-        //$link = "<a  class='dropDownPage show' onhover='dropDownPage(event); return false' href='".get_page_link($page->id)."' ";
-        $link = "<a href='".get_page_link($page->id)."' ";
-      } else {
-        $link = "<a href='".get_page_link($page->id)."' ";
-      }
+      $link = "<a href='".get_page_link($page->id)."' ";
       if ( empty($page->page_description) ) {
         if( $showPostCount=='yes') {
           $link .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page->post_title)) . '"';
@@ -219,14 +210,7 @@ function list_pages($number) {
         $link .= 'title="' . wp_specialchars(apply_filters('page_description',$page->page_description,$page)) . '"';
       }
       $link .= '>';
-      if ($dropDown==TRUE) {
-        $link .= $page->post_title.'</a></h2>';
-      } else {
-        //$link .= "<img src='" . get_bloginfo('template_directory') . 
-        //  "/images/" . $page->post_name. "-nav48.gif' alt='" . 
-         // $page->post_name . "navigation icon' />";
-        $link .= $page->post_title.'</a>';
-      }
+      $link .= $page->post_title.'</a>';
 
       // TODO not sure why we are checking for this at all TODO
       $subPageCount=0;
@@ -240,55 +224,26 @@ function list_pages($number) {
         list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number);
       }
         if ($subPageCount>0) {
-          if ($dropDown==TRUE) {
-            print( "      <ul id='collapsPage-" . $page->id ."'><li class='$self'><h2>" );
+          if ($expanded=='inline') {
+            print ("<li class='collapsPage $self'><span class='collapsPage hide' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$collapseSym</span></span>" );
           } else {
-            if ($expanded=='inline') {
-              print ("<li class='collapsPage $self'><span class='collapsPage hide' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$collapseSym</span></span>" );
-            } else {
-              print ( "<li class='collapsPage $self'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$expandSym</span></span>" );
-            }
-          //print( "      <li class='collapsPage'><span class='collapsPage show' onclick='expandPage(event,$expand,$animate); return false'><span class='sym'>$expandSym</span></span>" );
+            print ( "<li class='collapsPage $self'><span class='collapsPage show' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$expandSym</span></span>" );
           }
         } else {
-            //  print $page->title . "is NOT in the array\n";
-          if ($dropDown==TRUE) {
-            print( "      <ul><li class='$self'><h2>" );
-          } else {
-            print( "<li id='" . $page->post_name . "-nav'" . 
-              " class='collapsPage collapsItem $self'>" );
-            //print("<li id='" . $page->post_name . "-nav' " .
-              //"class='collapsPage collapsItem'>" );
-          }
+          //  print $page->title . "is NOT in the array\n";
+          print( "<li id='" . $page->post_name . "-nav'" . 
+            " class='collapsPage collapsItem $self'>" );
         } 
       // don't include the triangles if posts are not shown and there are no
       // more subpages
       print( $link );
-      if (($subPageCount>0)) {
-      //$subPageLinks.= "      </ul>\n           </li> <!-- ending subpage -->\n";
-      //$subPageLinks.= "           </li> <!-- ending subpage -->\n";
-      //  print( "\n     <ul style=\"display:none;\">\n" );
-      }
       echo $subPageLinks;
       // close <ul> and <li> before starting a new page
-      if ($dropDown==TRUE) {
-        if ($subPageCount>0 ) {
-          echo "        </ul>\n";
-        } else {
-          echo "      </li></ul> <!-- ending page -->\n";
-        }
-      } else {
-        if ($subPageCount==0 ) {
-          echo "                  </li> <!-- ending page subcat count = $subPageCount-->\n";
-        }
-        //echo "            </ul>      </li> <!-- ending page -->\n";
+      if ($subPageCount==0 ) {
+        echo "                  </li> <!-- ending page subcat count = $subPageCount-->\n";
       }
     }
   }
-  if ($dropDown==TRUE) {
-    echo "    <!-- ending collapsPage -->\n";
-  } else {
-    echo "    </ul> <!-- ending collapsPage -->\n";
-  }
+  echo "    </ul> <!-- ending collapsPage -->\n";
 }
 ?>
