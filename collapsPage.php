@@ -84,7 +84,7 @@ li.widget.collapsPage ul {margin-left:.5em;}
 
 	function get_head() {
 		$url = get_settings('siteurl');
-    $style=stripslashes(get_option('collapsPageStyle'));
+    $style=get_option('collapsPageStyle');
     echo "<style type='text/css'>
     $style
     </style>\n";
