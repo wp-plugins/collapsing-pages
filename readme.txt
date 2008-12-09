@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget
 Requires at least: 2.6
-Tested up to: 2.6.5
+Tested up to: 2.7beta
 Stable tag: 0.2.5
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
@@ -20,6 +20,12 @@ It is largely based off of my Collapsing Categories and Collapsing Archives
 plugins. 
 
 == Installation ==
+
+IMPORTANT!
+Please deactivate before upgrading, then re-activate the plugin. Also, note
+that in 2.7, adding the widget does not seem to work if you have "show all
+widgets" selected, but it does if you select "show unused widgets" from the
+widget editing menu. Hopefully this will be corrected eventually
 
 MANUAL INSTALLATION
 (the only option for pre 2.3 wordpress, unless you have the widget plugin installed)
@@ -65,24 +71,8 @@ Widget.
 
 = How do I provide custom styling? =
 
-Everything in the dropdown menu is contained in a div called collapsPageDiv,
-so you can use that id to style things. For example, say you want the
-background to change when you hover over a link: You could add this rule in
-your stylesheet (or in your header.php file for your theme)
-
-#collapsPageDiv a:hover {
-  background: blue;
-  color: white;
-}
-
-This will make all the links white text with a blue background when you hover
-the mouse over them. If you only want this in the dropdown, and not in the
-main links, you could do:
-
-#collapsPageDiv ul ul li a:hover {
-  background: blue;
-  color: white;
-}
+The default style information is now contained in an option. You can edit this
+option from the widget options, or from the settings page. 
 
 
 == Screenshots ==
@@ -114,6 +104,10 @@ behavior in wordpress anyways)
   * can also use manually
   * added option to animate expanding
   * added more options for expanding characters
+  * consolidated javascript to share code with other collapsing plugins
+  * moved inline javascript to footer to speed page load time
+  * made styling an option (better flexibility and reduce number of http
+    requests)
 
 0.2.5 (2008.11.01)
   * fixed bug in that autoExpand was not available to getSubPage

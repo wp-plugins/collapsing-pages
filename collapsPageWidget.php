@@ -29,7 +29,7 @@ function collapsPageWidget($args, $widget_args=1) {
 function collapsPageWidgetInit() {
 if ( !$options = get_option('collapsPageOptions') )
     $options = array();
-  $control_ops = array('width' => 400, 'height' => 350, 'id_base' => 'collapsPage');
+  $control_ops = array('width' => 500, 'height' => 350, 'id_base' => 'collapsPage');
 	$widget_ops = array('classname' => 'collapsPage', 'description' => __('Pages expand and collapse to show subpages and/or posts'));
   $name = __('Collapsing Pages');
 

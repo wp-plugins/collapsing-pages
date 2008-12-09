@@ -6,6 +6,10 @@ Collapsing Pages Changelog
   * added option to animate expanding
   * added more options for expanding characters
   * consolidated javascript to share code with other collapsing plugins
+  * moved inline javascript to footer to speed page load time
+  * made styling an option (better flexibility and reduce number of http
+    requests)
+  * made widget option box larger, and condensed options into fewer lines
 
 0.2.5 (2008.11.01)
   * fixed bug in that autoExpand was not available to getSubPage

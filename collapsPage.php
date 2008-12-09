@@ -30,6 +30,7 @@ This file is part of Collapsing Pages
 add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
 add_action('wp_head', wp_enqueue_script('collapsFunctions', "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js"));
 add_action( 'wp_head', array('collapsPage','get_head'));
+add_action( 'wp_footer', array('collapsPage','get_foot'));
 add_action('activate_collapsing-pages/collapsPage.php', array('collapsPage','init'));
 add_action('admin_menu', array('collapsPage','setup'));
 
@@ -55,6 +56,30 @@ class collapsPage {
         add_option( 'collapsPageOptions', $options);
       }
     }
+    $style="
+
+    span.collapsPage {border:0;
+    padding:0; 
+    margin:0; 
+    cursor:pointer;
+    /* font-family: Monaco, 'Andale Mono', Courier, monospace;*/
+    }
+
+    #sidebar li.collapsPage:before {content:'';} 
+    #sidebar li.collapsPage {list-style-type:none}
+    #sidebar li.collapsPagePost {
+               text-indent:-1em;
+               margin:0 0 0 1em;}
+    li.widget.collapsPage ul {margin-left:.5em;}
+    #sidebar li.collapsItem :before {content: '\00BB \00A0' !important;} 
+    #sidebar li.collapsPage .sym {
+                 font-size:1.2em;
+                 font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+        padding-right:5px;}
+    ";
+    if( function_exists('add_option') ) {
+      add_option( 'collapsPageStyle', $style);
+    }
 	}
 
 	function setup() {
@@ -62,10 +87,13 @@ class collapsPage {
 
 	function get_head() {
 		$url = get_settings('siteurl');
-		//echo "<script type ='text/javascript' src='$url/wp-content/plugins/collapsing-pages/collapsPage.js'></script>";
+    $style=stripslashes(get_option('collapsPageStyle'));
     echo "<style type='text/css'>
-		@import '$url/wp-content/plugins/collapsing-pages/collapsPage.css';
+    $style
     </style>\n";
+
+	}
+  function get_foot() {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo "// These variables are part of the Collapsing Pages Plugin version: 0.3\n// Copyright 2007 Robert Felty (robfelty.com)\n";
@@ -83,8 +111,7 @@ class collapsPage {
     });
     ";
 		echo ";\n// ]]>\n</script>\n";
-
-	}
+  }
 }
 
 
