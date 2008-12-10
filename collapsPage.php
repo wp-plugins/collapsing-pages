@@ -83,21 +83,21 @@ li.widget.collapsPage ul {margin-left:.5em;}
 	}
 
 	function get_head() {
-		$url = get_settings('siteurl');
-    $style=get_option('collapsPageStyle');
+    $style=stripslashes(get_option('collapsPageStyle'));
     echo "<style type='text/css'>
     $style
     </style>\n";
 
 	}
   function get_foot() {
+		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo "// These variables are part of the Collapsing Pages Plugin version: 0.3\n// Copyright 2007 Robert Felty (robfelty.com)\n";
-    $expandSym="<img src='". get_settings('siteurl') .
+    $expandSym="<img src='". $url .
          "/wp-content/plugins/collapsing-pages/" . 
          "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". get_settings('siteurl') .
+    $collapseSym="<img src='". $url .
          "/wp-content/plugins/collapsing-pages/" . 
          "img/collapse.gif' alt='collapse' />";
     echo "var expandSym=\"$expandSym\";";
