@@ -69,7 +69,7 @@ cursor:pointer;
        text-indent:-1em;
        margin:0 0 0 1em;}
 li.widget.collapsPage ul {margin-left:.5em;}
-#sidebar li.collapsItem :before {content: \"\\00BB \\00A0\" !important;} 
+#sidebar li.collapsItem :before {content: \"\\\\00BB \\\\00A0\" !important;} 
 #sidebar li.collapsPage .sym {
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
