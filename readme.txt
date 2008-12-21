@@ -4,8 +4,8 @@ Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget
 Requires at least: 2.6
-Tested up to: 2.7beta
-Stable tag: 0.2.5
+Tested up to: 2.7
+Stable tag: 0.3
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -23,7 +23,7 @@ plugins.
 
 IMPORTANT!
 Please deactivate before upgrading, then re-activate the plugin. Also, note
-that in 2.7, adding the widget does not seem to work if you have "show all
+that in WP 2.7, adding the widget does not seem to work if you have "show all
 widgets" selected, but it does if you select "show unused widgets" from the
 widget editing menu. Hopefully this will be corrected eventually
 
