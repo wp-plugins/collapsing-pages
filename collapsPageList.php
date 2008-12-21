@@ -150,6 +150,9 @@ function list_pages($number) {
   global $autoExpand;
 	if ($defaultExpand!='') {
 		$autoExpand = preg_split('/[,]+/',$defaultExpand);
+		for ($i =0; $i<count($autoExpand); $i++) {
+			$autoExpand[$i]= sanitize_title($autoExpand[$i]);
+		} 
   } else {
 	  $autoExpand = array();
   }
