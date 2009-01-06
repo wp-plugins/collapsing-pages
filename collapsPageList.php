@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.3
+Collapsing Pages version: 0.3.1
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -50,10 +50,10 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
          * */
         $subPageCount++;
         if ($dropDown=TRUE) {
-          $subPageLinks.=( "        <li class='collapsPage collapsItem'>" );
+          $subPageLinks.=( "        <li class='collapsItem'>" );
           //$subPageLinks.=( "<li>" );
         } else {
-          $subPageLinks.=( "<li class='collapsPage collapsItem'>" );
+          $subPageLinks.=( "<li class='collapsItem'>" );
         }
       } else {
         list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
@@ -174,7 +174,7 @@ function list_pages($number) {
     $sortOrder = $sortOrder;
   } 
 
-  echo "\n    <ul id='collapsPageList'>\n";
+  echo "\n    <ul class='collapsPageList'>\n";
 
       $pagequery = "SELECT $wpdb->posts.id, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
   $pages = $wpdb->get_results($pagequery);
@@ -241,7 +241,7 @@ function list_pages($number) {
         } else {
           //  print $page->title . "is NOT in the array\n";
           print( "<li id='" . $page->post_name . "-nav'" . 
-            " class='collapsPage collapsItem $self'>" );
+            " class='collapsItem $self'>" );
         } 
       // don't include the triangles if posts are not shown and there are no
       // more subpages

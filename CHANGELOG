@@ -4,6 +4,7 @@ Collapsing Pages Changelog
     * Finally fixed disappearing widget problem when trying to add to sidebar
     * Added debugging option to show the query used and the output
     * Moved style option to options page
+    * tweaked default style some
 
 * 0.3 (2008.12.04)
   * can now use multiple instance of the widget

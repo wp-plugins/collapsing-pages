@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.8.1
+Collapsing Pages version: 0.3.1
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Pages plugin by Andrew Rader
@@ -32,7 +32,6 @@ if( isset($_POST['resetOptions']) ) {
     delete_option('collapsPageOptions');   
   }
 } elseif( isset($_POST['infoUpdate']) ) {
-  echo 'updating';
   $style=$_POST['collapsPageStyle'];
   update_option('collapsPageStyle', $style);
 }

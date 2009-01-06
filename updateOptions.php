@@ -40,7 +40,5 @@ foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage
       'defaultExpand','animate', 'inExcludePage', 'inExcludePages');
 }
 update_option('collapsPageOptions', $options);
-$style=$_POST['collapsPageStyle'];
-update_option('collapsPageStyle', $style);
 $updated = true;
 ?>

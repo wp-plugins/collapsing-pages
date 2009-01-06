@@ -5,7 +5,7 @@ Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget
 Requires at least: 2.6
 Tested up to: 2.7
-Stable tag: 0.3
+Stable tag: 0.3.1
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -94,6 +94,7 @@ behavior in wordpress anyways)
     * Finally fixed disappearing widget problem when trying to add to sidebar
     * Added debugging option to show the query used and the output
     * Moved style option to options page
+    * tweaked default style some
 
 * 0.3 (2008.12.04)
   * can now use multiple instance of the widget

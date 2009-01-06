@@ -4,7 +4,7 @@ Plugin Name: Collapsing Pages
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-pages
 Description: Uses javascript to expand and collapse pages to show the posts that belong to the link category 
 Author: Robert Felty
-Version: 0.3
+Version: 0.3.1
 Author URI: http://robfelty.com
 Tags: sidebar, widget, pages
 
@@ -44,21 +44,22 @@ cursor:pointer;
 /* font-family: Monaco, 'Andale Mono', Courier, monospace;*/
 }
 
+#sidebar ul.collapsPageList:before {content:'';} 
 #sidebar li.collapsPage:before {content:'';} 
 #sidebar li.collapsPage {list-style-type:none}
-#sidebar li.collapsPagePost {
+#sidebar li.collapsItem {
        text-indent:-1em;
        margin:0 0 0 1em;}
 li.widget.collapsPage ul {margin-left:.5em;}
-#sidebar li.collapsItem :before {content: '\\\\00BB \\\\00A0' !important;} 
+#sidebar li.collapsItem:before {content: '\\\\00BB \\\\00A0' !important;} 
 #sidebar li.collapsPage .sym {
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
     padding-right:5px;}";
     if( function_exists('add_option') ) {
-      add_option( 'collapsPageOrigStyle', $style);
+      update_option( 'collapsPageOrigStyle', $style);
     }
-    if (!get_option('collapsPage')) {
+    if (!get_option('collapsPageOptions')) {
       $options=array('%i%' => array(
         'title' => 'Pages', 
         'showPostCount'=> 'yes' ,
@@ -99,7 +100,7 @@ li.widget.collapsPage ul {margin-left:.5em;}
 		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Pages Plugin version: 0.3\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+		echo "// These variables are part of the Collapsing Pages Plugin version: 0.3.1\n// Copyright 2007 Robert Felty (robfelty.com)\n";
     $expandSym="<img src='". $url .
          "/wp-content/plugins/collapsing-pages/" . 
          "img/expand.gif' alt='expand' />";
