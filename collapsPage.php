@@ -37,6 +37,27 @@ add_action('admin_menu', array('collapsPage','setup'));
 class collapsPage {
 
 	function init() {
+    $style="span.collapsPage {border:0;
+padding:0; 
+margin:0; 
+cursor:pointer;
+/* font-family: Monaco, 'Andale Mono', Courier, monospace;*/
+}
+
+#sidebar li.collapsPage:before {content:'';} 
+#sidebar li.collapsPage {list-style-type:none}
+#sidebar li.collapsPagePost {
+       text-indent:-1em;
+       margin:0 0 0 1em;}
+li.widget.collapsPage ul {margin-left:.5em;}
+#sidebar li.collapsItem :before {content: '\\\\00BB \\\\00A0' !important;} 
+#sidebar li.collapsPage .sym {
+   font-size:1.2em;
+   font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+    padding-right:5px;}";
+    if( function_exists('add_option') ) {
+      add_option( 'collapsPageOrigStyle', $style);
+    }
     if (!get_option('collapsPage')) {
       $options=array('%i%' => array(
         'title' => 'Pages', 
@@ -52,34 +73,19 @@ class collapsPage {
         'showPages' => 'no',
         'animate' => 1,
       ));
-      if( function_exists('add_option') ) {
-        add_option( 'collapsPageOptions', $options);
-      }
-    }
-    $style="span.collapsPage {border:0;
-padding:0; 
-margin:0; 
-cursor:pointer;
-/* font-family: Monaco, 'Andale Mono', Courier, monospace;*/
-}
-
-#sidebar li.collapsPage:before {content:'';} 
-#sidebar li.collapsPage {list-style-type:none}
-#sidebar li.collapsPagePost {
-       text-indent:-1em;
-       margin:0 0 0 1em;}
-li.widget.collapsPage ul {margin-left:.5em;}
-#sidebar li.collapsItem :before {content: \"\\\\00BB \\\\00A0\" !important;} 
-#sidebar li.collapsPage .sym {
-   font-size:1.2em;
-   font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
-    padding-right:5px;}";
-    if( function_exists('add_option') ) {
+      update_option( 'collapsPageOptions', $options);
       add_option( 'collapsPageStyle', $style);
     }
 	}
 
 	function setup() {
+		if( function_exists('add_options_page') ) {
+			add_options_page(__('Collapsing Pages'),__('Collapsing
+      Pages'),1,basename(__FILE__),array('collapsPage','ui'));
+		}
+	}
+	function ui() {
+		include_once( 'collapsPageUI.php' );
 	}
 
 	function get_head() {

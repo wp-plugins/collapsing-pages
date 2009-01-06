@@ -22,10 +22,7 @@ plugins.
 == Installation ==
 
 IMPORTANT!
-Please deactivate before upgrading, then re-activate the plugin. Also, note
-that in WP 2.7, adding the widget does not seem to work if you have "show all
-widgets" selected, but it does if you select "show unused widgets" from the
-widget editing menu. Hopefully this will be corrected eventually
+Please deactivate before upgrading, then re-activate the plugin. 
 
 MANUAL INSTALLATION
 (the only option for pre 2.3 wordpress, unless you have the widget plugin installed)
@@ -72,7 +69,7 @@ Widget.
 = How do I provide custom styling? =
 
 The default style information is now contained in an option. You can edit this
-option from the widget options, or from the settings page. 
+option from the settings page. 
 
 
 == Screenshots ==
@@ -84,12 +81,6 @@ option from the widget options, or from the settings page.
 
 I use this plugin in my blog at http://blog.robfelty.com
 
-
-== OPTIONS AND CONFIGURATIONS ==
-
-  * Sort by page name, page slug,  or page id
-  * Sort in ascending or descending order
-
 == CAVEAT ==
 
 Currently this plugin relies on Javascript to expand and collapse the links.
@@ -99,7 +90,12 @@ behavior in wordpress anyways)
 
 == HISTORY ==
 
-0.3 (2008.12.04)
+* 0.3.1 (2009/01/06)
+    * Finally fixed disappearing widget problem when trying to add to sidebar
+    * Added debugging option to show the query used and the output
+    * Moved style option to options page
+
+* 0.3 (2008.12.04)
   * can now use multiple instance of the widget
   * can also use manually
   * added option to animate expanding
@@ -109,35 +105,35 @@ behavior in wordpress anyways)
   * made styling an option (better flexibility and reduce number of http
     requests)
 
-0.2.5 (2008.11.01)
+* 0.2.5 (2008.11.01)
   * fixed bug in that autoExpand was not available to getSubPage
 
-0.2.4 (2008.10.28)
+* 0.2.4 (2008.10.28)
   * fixed bug with missing seventh argument to getSubPage when used recursively
 
-0.2.3 (2008.07.14)
+* 0.2.3 (2008.07.14)
   * Added option to automatically expand some pages
   * Added option to control the number of levels of pages which are expanded
   * Added "self" class to pages in list which match the current page. No link
     is made for these. CSS can
     then be used to style these differently
 
-0.2.2 (2008.05.23)
+* 0.2.2 (2008.05.23)
   * Re-fixed code so that xhtml validates
   * Added option for different expand and collapse icons
 
-0.2.1 (2008.05.01)
+* 0.2.1 (2008.05.01)
   * Link now spans the whole dropdown
   * Now indicates the presence of an additional submenu (doesn't work in IE 6
     or less)
   * fixed html so that it validates correctly
 
-0.2 (2008.04.30)
+* 0.2 (2008.04.30)
   * Now includes the possibility of providing a drop-down menu of pages and
     sub-pages, instead of a nested list. Only useful for a header navigation 
 
-0.1.1 (2008.04.25)
+* 0.1.1 (2008.04.25)
   * Can exclude pages (and sub-pages of those pages)
 
-0.1 (2008.04.23):
+* 0.1 (2008.04.23):
 	Initial Release

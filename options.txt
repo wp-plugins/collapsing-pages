@@ -53,8 +53,9 @@
      <input type="text" name="collapsPage[<?php echo $number ?>][defaultExpand]" value="<?php echo $defaultExpand ?>" id="collapsPage-defaultExpand-<?php echo $number ?>"></input> 
     </p>
    <p>
-<label for="collapsPageStyle">Style info:</label>
-   <textarea cols='60' rows='6' id="collapsPageStyle" name="collapsPageStyle">
-    <?php echo stripslashes(get_option('collapsPageStyle')) ?>
-   </textarea>
+    <p>
+     <input type="checkbox" name="collapsPage[<?php echo $number ?>][debug]"
+<?php if ($debug=='1')  echo 'checked'; ?> id="collapsPage-debug-<?php echo
+$number ?>"></input> <label for="collapsPageDebug">Show debugging information
+(shows up as a hidden pre right after the title)</label>
     </p>

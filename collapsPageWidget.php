@@ -29,7 +29,7 @@ function collapsPageWidget($args, $widget_args=1) {
 function collapsPageWidgetInit() {
 if ( !$options = get_option('collapsPageOptions') )
     $options = array();
-  $control_ops = array('width' => 500, 'height' => 350, 'id_base' => 'collapsPage');
+  $control_ops = array('width' => 500, 'height' => 350, 'id_base' => 'collapspage');
 	$widget_ops = array('classname' => 'collapsPage', 'description' => __('Pages expand and collapse to show subpages and/or posts'));
   $name = __('Collapsing Pages');
 
@@ -38,15 +38,15 @@ if ( !$options = get_option('collapsPageOptions') )
     // Old widgets can have null values for some reason
     if ( !isset($options[$o]['title']) || !isset($options[$o]['title']) )
       continue;
-    $id = "collapsPage-$o"; // Never never never translate an id
+    $id = "collapspage-$o"; // Never never never translate an id
     wp_register_sidebar_widget($id, $name, 'collapsPageWidget', $widget_ops, array( 'number' => $o ));
     wp_register_widget_control($id, $name, 'collapsPageWidgetControl', $control_ops, array( 'number' => $o ));
   }
 
   // If there are none, we register the widget's existance with a generic template
   if ( !$id ) {
-    wp_register_sidebar_widget( 'collapsPage-1', $name, 'collapsPageWidget', $widget_ops, array( 'number' => -1 ) );
-    wp_register_widget_control( 'collapsPage-1', $name, 'collapsPageWidgetControl', $control_ops, array( 'number' => -1 ) );
+    wp_register_sidebar_widget( 'collapspage-1', $name, 'collapsPageWidget', $widget_ops, array( 'number' => -1 ) );
+    wp_register_widget_control( 'collapspage-1', $name, 'collapsPageWidgetControl', $control_ops, array( 'number' => -1 ) );
   }
 
 }

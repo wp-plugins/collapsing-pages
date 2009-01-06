@@ -177,11 +177,17 @@ function list_pages($number) {
   echo "\n    <ul id='collapsPageList'>\n";
 
       $pagequery = "SELECT $wpdb->posts.id, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
-    /* changing to use only one query 
-     * don't forget to exclude pages if so desired
-     */
   $pages = $wpdb->get_results($pagequery);
+  if ($debug==1) {
+    echo "<pre style='display:none' >";
+    printf ("MySQL server version: %s\n", mysql_get_server_info());
+    echo "PAGE QUERY: \n $pagequery\n";
+    echo "\nPAGE QUERY RESULTS\n";
+    print_r($pages);
+    echo "</pre>";
+  }
   $parents=array();
+
   foreach ($pages as $page) {
     if ($page->post_parent!=0) {
       array_push($parents, $page->post_parent);

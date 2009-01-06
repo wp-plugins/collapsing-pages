@@ -14,6 +14,7 @@ if ( -1 == $number ) {
   $showPosts='yes';
   $showPages='no';
   $animate=1;
+  $debug=0;
 } else {
   $title = attribute_escape($options[$number]['title']);
   $showPostCount = $options[$number]['showPostCount'];
@@ -27,5 +28,6 @@ if ( -1 == $number ) {
   $showPosts = $options[$number]['showPosts'];
   $showPages = $options[$number]['showPages'];
   $animate = $options[$number]['animate'];
+  $debug = $options[$number]['debug'];
 }
 ?>

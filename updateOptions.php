@@ -12,9 +12,13 @@ foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage
   if( isset($widget_collapsPage['includePosts']) ) {
     $includePosts='yes';
   }
-  $animate=0;
-  if( isset($widget_collapsPage['animate']) ) {
-    $animate=1;
+  $animate=1;
+  if(!isset($widget_collapsPage['animate']) ) {
+    $animate=0;
+  }
+  $debug=0;
+  if(isset($widget_collapsPage['debug']) ) {
+    $debug=1;
   }
   $sortOrder=$widget_collapsPage['sortOrder'];
   $sort=$widget_collapsPage['sort'];
