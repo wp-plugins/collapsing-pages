@@ -29,7 +29,8 @@ This file is part of Collapsing Pages
 
 if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
-  add_action('wp_head', wp_enqueue_script('collapsFunctions', "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js"));
+  add_action('wp_head', wp_enqueue_script('collapsFunctions',
+  "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.0'));
   add_action( 'wp_head', array('collapsPage','get_head'));
   add_action( 'wp_footer', array('collapsPage','get_foot'));
 }
