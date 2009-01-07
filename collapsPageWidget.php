@@ -102,6 +102,8 @@ if (function_exists('collapsPage')) {
     echo '<p style="text-align:right;"><label for="collapsPage-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsPage-title-'.$number.'" name="collapsPage['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
   include('options.txt');
   ?>
+  <p>Style can be set from the <a
+  href='options-general.php?page=collapsPage.php'>options page</a></p>
    <?php
     echo '<input type="hidden" id="collapsPage-submit-'.$number.'" name="collapsPage['.$number.'][submit]" value="1" />';
 
