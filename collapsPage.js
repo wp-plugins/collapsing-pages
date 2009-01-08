@@ -1,5 +1,5 @@
 /*
-Collapsing Pages version: 0.3.1
+Collapsing Pages version: 0.3.2
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Pages plugin by Andrew Rader

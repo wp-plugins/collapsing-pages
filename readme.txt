@@ -5,7 +5,7 @@ Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget
 Requires at least: 2.6
 Tested up to: 2.7
-Stable tag: 0.3.1
+Stable tag: 0.3.2
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -71,6 +71,12 @@ Widget.
 The default style information is now contained in an option. You can edit this
 option from the settings page. 
 
+= How do I make the current page prominent in the list of pages? =
+
+The current page has the "self" class. By default, the "self" class style is
+set to bold. If you would like to change this, you can change it in the
+settings page.
+
 
 == Screenshots ==
 
@@ -89,6 +95,12 @@ posts, but the links to the pages will still work (which is the default
 behavior in wordpress anyways)
 
 == HISTORY ==
+
+* 0.3.2 (2009/01/07)
+    * added version to javascript file
+    * not loading unnecessary code for admin pages (fixes interference with
+      akismet stats page
+    * 'self' tag now gets added in subpages
 
 * 0.3.1 (2009/01/06)
     * Finally fixed disappearing widget problem when trying to add to sidebar

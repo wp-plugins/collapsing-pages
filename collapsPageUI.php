@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.3.1
+Collapsing Pages version: 0.3.2
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Pages plugin by Andrew Rader
@@ -27,6 +27,20 @@ This file is part of Collapsing Pages
 
 check_admin_referer();
 
+$theOptions=get_option('collapsPageOptions');
+/*
+echo "<pre>\n";
+print_r($theOptions);
+echo "</pre>\n";
+*/
+$number = '%i%';
+$widgetOn=0;
+if (empty($theOptions)) {
+  $number = -1;
+} elseif (!isset($theOptions['%i%']['title']) || 
+    count($theOptions) > 1) {
+  $widgetOn=1; 
+}
 if( isset($_POST['resetOptions']) ) {
   if (isset($_POST['reset'])) {
     delete_option('collapsPageOptions');   
@@ -34,21 +48,9 @@ if( isset($_POST['resetOptions']) ) {
 } elseif( isset($_POST['infoUpdate']) ) {
   $style=$_POST['collapsPageStyle'];
   update_option('collapsPageStyle', $style);
-}
-$theOptions=get_option('collapsPageOptions');
-/*
-echo "<pre>\n";
-print_r($theOptions);
-echo "</pre>\n";
-*/
-if (empty($theOptions)) {
-  $number = -1;
-} elseif (!isset($theOptions['%i%']['title']) || 
-    count($theOptions) > 1) {
-  $widgetOn=1; 
-  //return;
-  $numbers=array_keys($theOptions);
-  $number= $numbers[0];
+  if ($widgetOn==0) {
+    include('updateOptions.php');
+  }
 }
 include('processOptions.php');
 ?>

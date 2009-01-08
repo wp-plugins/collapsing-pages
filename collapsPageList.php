@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.3.1
+Collapsing Pages version: 0.3.2
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -27,7 +27,8 @@ This file is part of Collapsing Pages
 
 // Helper functions
 function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number) {
-  global $expand, $expandSym, $collapseSym, $autoExpand, $animate, $depth;
+  global $expand, $expandSym, $collapseSym, $autoExpand, $animate, $depth,
+  $thisPage;
   if ($curDepth>=$depth && $depth!=-1) {
     return;
   }
@@ -42,51 +43,51 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
     foreach ($pages as $page2) {
       //$subPageLinks.= "page2 =". $page2->term_id;
         $subPageLink2=''; // clear info from subPageLink2
+      $self='';
+      if ($page2->id == $thisPage) {
+        $self='self';
+      }
       if ($page->id==$page2->post_parent) {
         if (!in_array($page2->id, $parents)) {
           /* check to see if there are more subpages under this one. If the
          * page id is not in the parents array, then there should be no more
          * subpages, and we do not print a triangle dropdown, otherwise we do
          * */
-        $subPageCount++;
-        if ($dropDown=TRUE) {
-          $subPageLinks.=( "        <li class='collapsItem'>" );
-          //$subPageLinks.=( "<li>" );
+          $subPageCount++;
+          $subPageLinks.=( "<li class='collapsItem $self'>" );
         } else {
-          $subPageLinks.=( "<li class='collapsItem'>" );
-        }
-      } else {
-        list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
-        if ($dropDown==TRUE) {
-          $subPageLinks.=( "<li class='submenu'>" );
-        } else {
-          if (in_array($page2->post_name, $autoExpand) ||
-            in_array($page2->title, $autoExpand)) {
-            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'>foo$collapseSym</span>" );
+          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
+          if ($dropDown==TRUE) {
+            $subPageLinks.=( "<li class='submenu'>" );
           } else {
-            $subPageLinks.=( "<li class='collapsPage'><span class='collapsPage show' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$expandSym</span></span>" );
+            if (in_array($page2->post_name, $autoExpand) ||
+              in_array($page2->title, $autoExpand)) {
+              $subPageLinks.="<li class='collapsPage $self'>" .
+                  "<span class='collapsPage show' " .
+                  "onclick='expandCollapse(" .
+                  "event, $expand, $animate, \"collapsPage\");".
+                  "return false'>foo$collapseSym</span>";
+            } else {
+              $subPageLinks.="<li class='collapsPage $self'>".
+                  "<span class='collapsPage show' onclick='expandCollapse(".
+                  "event, $expand, $animate, \"collapsPage\"); return false'>".
+                  "<span class='sym'>$expandSym</span></span>";
+            }
           }
         }
-      }
         $link2 = "<a href='".get_page_link($page2->id)."' ";
-      if ( empty($page2->page_description) ) {
-        //$link2 .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page2->name)) . '"';
-      } else {
-        //$link2 .= 'title="' . wp_specialchars(apply_filters('page_description',$page2->page_description,$page2)) . '"';
-      }
-      $link2 .= '>';
-      $link2 .= $page2->post_title. "</a>";
-      $subPageLinks.= $link2 ;
-      if (!in_array($page2->id, $parents)) {
-        $subPageLinks.="</li>\n";
-      }
-      // add in additional subpage information
-      $subPageLinks.="$subPageLink2";
-      // close <ul> and <li> before starting a new page
+        $link2 .= '>';
+        $link2 .= $page2->post_title. "</a>";
+        $subPageLinks.= $link2 ;
+        if (!in_array($page2->id, $parents)) {
+          $subPageLinks.="</li>\n";
+        }
+        // add in additional subpage information
+        $subPageLinks.="$subPageLink2";
+        // close <ul> and <li> before starting a new page
       }
     }
     if ($subPageCount>0 ) {
-      //$subPageLinks.= "      </ul>\n           </li> <!-- ending subpage -->\n";
       $subPageLinks.= "      </ul><!-- subpagecount = $subPageCount ending subpage -->\n";
     }
       $subPageLinks.= "      </li><!-- subpagecount = $subPageCount ending subpage -->\n";
@@ -97,7 +98,9 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 /* the page and tagging database structures changed drastically between wordpress 2.1 and 2.3. We will use different queries for page based vs. term_taxonomy based database structures */
 //$taxonomy=false;
 function list_pages($number) {
-  global $wpdb, $expand, $expandSym, $collapseSym, $animate, $depth;
+  global $wpdb, $expand, $expandSym, $collapseSym, $animate, $depth,
+  $thisPage, $post;
+  $thisPage = $post->ID;
   $options=get_option('collapsPageOptions');
   //print_r($options[$number]);
   extract($options[$number]);
@@ -194,13 +197,8 @@ function list_pages($number) {
     }
   }
   foreach( $pages as $page ) {
-    $thisPage= preg_replace('/\//', '', $_SERVER['REQUEST_URI']);  
-      if ($thisPage=='') {
-				$thisPage=$wpdb->get_var("SELECT option_value FROM $wpdb->options WHERE
-					option_name = 'page_on_front'");
-      }
 		$self='';
-    if ($page->id == $thisPage || $page->post_name == $thisPage) {
+    if ($page->id == $thisPage) {
       $self='self';
     }
     if ($page->post_parent==0) {
