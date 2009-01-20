@@ -46,7 +46,7 @@ margin:0;
 cursor:pointer;
 /* font-family: Monaco, 'Andale Mono', Courier, monospace;*/
 }
-li.collapsPage li.self {font-weight:bold}
+li.collapsPage a.self {font-weight:bold}
 #sidebar ul.collapsPageList:before {content:'';} 
 #sidebar li.collapsPage:before {content:'';} 
 #sidebar li.collapsPage {list-style-type:none}

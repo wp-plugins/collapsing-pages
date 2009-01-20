@@ -45,7 +45,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
         $subPageLink2=''; // clear info from subPageLink2
       $self='';
       if ($page2->id == $thisPage) {
-        $self='self';
+        $self="class='self'";
       }
       if ($page->id==$page2->post_parent) {
         if (!in_array($page2->id, $parents)) {
@@ -54,7 +54,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
          * subpages, and we do not print a triangle dropdown, otherwise we do
          * */
           $subPageCount++;
-          $subPageLinks.=( "<li class='collapsItem $self'>" );
+          $subPageLinks.=( "<li class='collapsItem'>" );
         } else {
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
           if ($dropDown==TRUE) {
@@ -62,20 +62,20 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
           } else {
             if (in_array($page2->post_name, $autoExpand) ||
               in_array($page2->title, $autoExpand)) {
-              $subPageLinks.="<li class='collapsPage $self'>" .
+              $subPageLinks.="<li class='collapsPage'>" .
                   "<span class='collapsPage show' " .
                   "onclick='expandCollapse(" .
                   "event, $expand, $animate, \"collapsPage\");".
                   "return false'>foo$collapseSym</span>";
             } else {
-              $subPageLinks.="<li class='collapsPage $self'>".
+              $subPageLinks.="<li class='collapsPage'>".
                   "<span class='collapsPage show' onclick='expandCollapse(".
                   "event, $expand, $animate, \"collapsPage\"); return false'>".
                   "<span class='sym'>$expandSym</span></span>";
             }
           }
         }
-        $link2 = "<a href='".get_page_link($page2->id)."' ";
+        $link2 = "<a $self href='".get_page_link($page2->id)."' ";
         $link2 .= '>';
         $link2 .= $page2->post_title. "</a>";
         $subPageLinks.= $link2 ;
@@ -199,14 +199,14 @@ function list_pages($number) {
   foreach( $pages as $page ) {
 		$self='';
     if ($page->id == $thisPage) {
-      $self='self';
+      $self="class='self'";
     }
     if ($page->post_parent==0) {
       $url = get_settings('siteurl');
       $home=$url;
       $lastPage= $page->id;
       // print out page name 
-      $link = "<a href='".get_page_link($page->id)."' ";
+      $link = "<a $self href='".get_page_link($page->id)."' ";
       if ( empty($page->page_description) ) {
         if( $showPostCount=='yes') {
           $link .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page->post_title)) . '"';
@@ -224,22 +224,22 @@ function list_pages($number) {
       $expanded='none';
       if (in_array($page->post_name, $autoExpand) ||
           in_array($page->title, $autoExpand)) {
-        $expanded='inline';
+        $expanded='block';
       }
       $curDepth=0;
       if ($depth!=0) {
         list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number);
       }
         if ($subPageCount>0) {
-          if ($expanded=='inline') {
-            print ("<li class='collapsPage $self'><span class='collapsPage hide' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$collapseSym</span></span>" );
+          if ($expanded=='block') {
+            print ("<li class='collapsPage '><span class='collapsPage hide' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$collapseSym</span></span>" );
           } else {
-            print ( "<li class='collapsPage $self'><span class='collapsPage show' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$expandSym</span></span>" );
+            print ( "<li class='collapsPage '><span class='collapsPage show' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$expandSym</span></span>" );
           }
         } else {
           //  print $page->title . "is NOT in the array\n";
           print( "<li id='" . $page->post_name . "-nav'" . 
-            " class='collapsItem $self'>" );
+            " class='collapsItem'>" );
         } 
       // don't include the triangles if posts are not shown and there are no
       // more subpages

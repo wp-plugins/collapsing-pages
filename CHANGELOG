@@ -1,5 +1,10 @@
 Collapsing Pages Changelog
 
+* 0.3.2 (2009/01/20)
+		* now 'self' class gets attributed to <a> instead of <li>, so it doesn't
+		  apply to all subpages when a parent page is selected
+    * changed 'inline' to 'block', which fixes formatting
+
 * 0.3.2 (2009/01/07)
     * added version to javascript file
     * not loading unnecessary code for admin pages (fixes interference with
