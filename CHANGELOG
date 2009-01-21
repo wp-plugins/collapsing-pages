@@ -1,8 +1,15 @@
 Collapsing Pages Changelog
 
+* 0.3.4 (2009/01/21)
+    * removed debugging info
+    * fixed settings panel
+   
 * 0.3.3 (2009/01/20)
 		* now 'self' class gets attributed to <a> instead of <li>, so it doesn't
 		  apply to all subpages when a parent page is selected
+			NOTE: You should change the css styling to reflect this (or deactivate,
+            then reactivate, and then click "restore original style" from the 
+            settings panel
     * changed 'inline' to 'block', which fixes formatting
 		* If current page is a subpage, the parent page is automatically expanded
 		  in the list

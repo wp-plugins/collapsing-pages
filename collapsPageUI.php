@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.3.3
+Collapsing Pages version: 0.3.4
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Pages plugin by Andrew Rader
@@ -36,7 +36,7 @@ echo "</pre>\n";
 $number = '%i%';
 $widgetOn=0;
 if (empty($theOptions)) {
-  $number = -1;
+  $number = '%i%';
 } elseif (!isset($theOptions['%i%']['title']) || 
     count($theOptions) > 1) {
   $widgetOn=1; 
@@ -44,6 +44,7 @@ if (empty($theOptions)) {
 if( isset($_POST['resetOptions']) ) {
   if (isset($_POST['reset'])) {
     delete_option('collapsPageOptions');   
+		$widgetOn=0;
   }
 } elseif( isset($_POST['infoUpdate']) ) {
   $style=$_POST['collapsPageStyle'];
