@@ -81,7 +81,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
                   "<span class='collapsPage show' " .
                   "onclick='expandCollapse(" .
                   "event, $expand, $animate, \"collapsPage\");".
-                  "return false'>foo$collapseSym</span>";
+                  "return false'>$collapseSym</span>";
             } else {
               $subPageLinks.="<li class='collapsPage'>".
                   "<span class='collapsPage show' onclick='expandCollapse(".
