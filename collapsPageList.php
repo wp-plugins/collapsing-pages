@@ -36,7 +36,6 @@ function checkCurrentPage($pageIndex, $pages) {
 	if ($pages[$pageIndex]->post_parent!=0) {
 		for ($pageIndex2=0; $pageIndex2<count($pages); $pageIndex2++) {
 		  if ($pages[$pageIndex2]->id == $pages[$pageIndex]->post_parent) {
-			  echo $pages[$pageIndex2]->post_name . "<br />";
 			  checkCurrentPage($pageIndex2,$pages);
 		  }
 		}
