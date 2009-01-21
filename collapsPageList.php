@@ -26,6 +26,22 @@ This file is part of Collapsing Pages
 */
 
 // Helper functions
+function checkCurrentPage($pageIndex, $pages) {
+ /* this function checks whether a given pageIndex refers to the page that is
+ * being displayed. If so, it adds all parent pages to the autoExpand array, so
+ * that it is automatically expanded 
+ */
+  global $autoExpand;
+	array_push($autoExpand, $pages[$pageIndex]->post_name);
+	if ($pages[$pageIndex]->post_parent!=0) {
+		for ($pageIndex2=0; $pageIndex2<count($pages); $pageIndex2++) {
+		  if ($pages[$pageIndex2]->id == $pages[$pageIndex]->post_parent) {
+			  echo $pages[$pageIndex2]->post_name . "<br />";
+			  checkCurrentPage($pageIndex2,$pages);
+		  }
+		}
+	}
+}
 function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number) {
   global $expand, $expandSym, $collapseSym, $autoExpand, $animate, $depth,
   $thisPage;
@@ -191,10 +207,13 @@ function list_pages($number) {
   }
   $parents=array();
 
-  foreach ($pages as $page) {
-    if ($page->post_parent!=0) {
-      array_push($parents, $page->post_parent);
+  for ($pageIndex=0; $pageIndex<count($pages); $pageIndex++) {
+    if ($pages[$pageIndex]->post_parent!=0) {
+      array_push($parents, $pages[$pageIndex]->post_parent);
     }
+    if ($pages[$pageIndex]->id == $thisPage) {
+			checkCurrentPage($pageIndex,$pages);
+		}
   }
   foreach( $pages as $page ) {
 		$self='';
