@@ -4,7 +4,7 @@ Plugin Name: Collapsing Pages
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-pages
 Description: Uses javascript to expand and collapse pages to show the posts that belong to the link category 
 Author: Robert Felty
-Version: 0.3.2
+Version: 0.3.3
 Author URI: http://robfelty.com
 Tags: sidebar, widget, pages
 
@@ -103,7 +103,7 @@ li.widget.collapsPage ul {margin-left:.5em;}
 		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Pages Plugin version: 0.3.2\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+		echo "// These variables are part of the Collapsing Pages Plugin version: 0.3.3\n// Copyright 2007 Robert Felty (robfelty.com)\n";
     $expandSym="<img src='". $url .
          "/wp-content/plugins/collapsing-pages/" . 
          "img/expand.gif' alt='expand' />";
