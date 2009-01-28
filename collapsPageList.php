@@ -92,7 +92,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
         }
         $link2 = "<a $self href='".get_page_link($page2->id)."' ";
         $link2 .= '>';
-        $link2 .= $page2->post_title. "</a>";
+        $link2 .= __($page2->post_title) . "</a>";
         $subPageLinks.= $link2 ;
         if (!in_array($page2->id, $parents)) {
           $subPageLinks.="</li>\n";
@@ -227,15 +227,15 @@ function list_pages($number) {
       $link = "<a $self href='".get_page_link($page->id)."' ";
       if ( empty($page->page_description) ) {
         if( $showPostCount=='yes') {
-          $link .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars($page->post_title)) . '"';
+          $link .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars(__($page->post_title))) . '"';
         } else {
-          $link .= "title='View all subpages'";
+          $link .= 'title="' . __("View all subpages") . '"';
         }
       } else {
         $link .= 'title="' . wp_specialchars(apply_filters('page_description',$page->page_description,$page)) . '"';
       }
       $link .= '>';
-      $link .= $page->post_title.'</a>';
+      $link .= __($page->post_title) . '</a>';
 
       // TODO not sure why we are checking for this at all TODO
       $subPageCount=0;
