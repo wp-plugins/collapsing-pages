@@ -4,8 +4,9 @@ if ( -1 == $number ) {
   $number = '%i%';
   $title = 'Pages';
   $showPostCount = 'yes';
-  $sortOrder = 'ASC';
   $sort='pageName';
+  $sortOrder = 'ASC';
+  $linkToPage='yes';
   $defaultExpand='';
   $expand='1';
   $depth='-1';
@@ -22,6 +23,7 @@ if ( -1 == $number ) {
   $depth = $options[$number]['depth'];
   $sort = $options[$number]['sort'];
   $sortOrder = $options[$number]['sortOrder'];
+  $linkToPage = $options[$number]['linkToPage'];
   $inExcludePages = $options[$number]['inExcludePages'];
   $inExcludePage = $options[$number]['inExcludePage'];
   $defaultExpand = $options[$number]['defaultExpand'];

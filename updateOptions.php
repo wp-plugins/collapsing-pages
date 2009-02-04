@@ -20,6 +20,7 @@ foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage
   if(isset($widget_collapsPage['debug']) ) {
     $debug=1;
   }
+  $linkToPage=$widget_collapsPage['linkToPage'];
   $sortOrder=$widget_collapsPage['sortOrder'];
   $sort=$widget_collapsPage['sort'];
   $depth=$widget_collapsPage['depth'];
@@ -35,8 +36,8 @@ foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage
   
   $expand= $widget_collapsPage['expand'];
   $defaultExpand=addslashes($widget_collapsPage['defaultExpand']);
-  $options[$widget_number] = compact( 'title','showPageCount',
-      'includePosts', 'sortOrder', 'sort', 'expand', 'depth',
+  $options[$widget_number] = compact( 'title','showPageCount', 'debug',
+      'includePosts', 'sortOrder', 'sort', 'expand', 'depth', 'linkToPage',
       'defaultExpand','animate', 'inExcludePage', 'inExcludePages');
 }
 update_option('collapsPageOptions', $options);

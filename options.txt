@@ -44,13 +44,24 @@
      <option  <?php if($inExcludePage=='include') echo 'selected'; ?> id="inExcludePageInclude-<?php echo $number ?>" value='include'>Include</option>
      <option  <?php if($inExcludePage=='exclude') echo 'selected'; ?> id="inExcludePageExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
      </select>
-     these pages (separated by commas):<br />
+     these pages (input slug or ID separated by commas):<br />
     <input type="text" name="collapsPage[<?php echo $number
     ?>][inExcludePages]" value="<?php echo $inExcludePages ?>"  
     id="collapsPage-inExcludePages-<?php echo $number ?>"></input> 
     </p>
-    <p>Auto-expand these categories (separated by commas):<br />
+    <p>Auto-expand these categories (input slug or ID separated by commas):<br />
      <input type="text" name="collapsPage[<?php echo $number ?>][defaultExpand]" value="<?php echo $defaultExpand ?>" id="collapsPage-defaultExpand-<?php echo $number ?>"></input> 
+    </p>
+    <p>Clicking on page name:<br />
+     <input type="radio" name="collapsPage[<?php echo $number ?>][linkToPage]"
+     <?php if($linkToPage=='yes') echo 'checked'; ?>
+     id="collapsPage-linkToPageYes-<?php echo $number ?>"
+     value='yes'></input> <label for="collapsPage-linkToPageYes">Links to page</label>
+     <input type="radio" name="collapsPage[<?php echo $number ?>][linkToPage]"
+     <?php if($linkToPage=='no') echo 'checked'; ?>
+     id="collapsPage-linkToPageNo-<?php echo $number ?>"
+     value='no'></input> <label for="linkToPageNo">Expands to show
+     sub-pages </label>
     </p>
    <p>
     <p>

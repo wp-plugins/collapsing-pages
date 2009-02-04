@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.3.4
+Collapsing Pages version: 0.3.5
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Pages plugin by Andrew Rader
@@ -27,18 +27,18 @@ This file is part of Collapsing Pages
 
 check_admin_referer();
 
-$theOptions=get_option('collapsPageOptions');
+$options=get_option('collapsPageOptions');
 /*
 echo "<pre>\n";
-print_r($theOptions);
+print_r($options);
 echo "</pre>\n";
 */
 $number = '%i%';
 $widgetOn=0;
-if (empty($theOptions)) {
+if (empty($options)) {
   $number = '%i%';
-} elseif (!isset($theOptions['%i%']['title']) || 
-    count($theOptions) > 1) {
+} elseif (!isset($options['%i%']['title']) || 
+    count($options) > 1) {
   $widgetOn=1; 
 }
 if( isset($_POST['resetOptions']) ) {

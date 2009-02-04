@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.3.4
+Collapsing Pages version: 0.3.5
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -35,7 +35,7 @@ function checkCurrentPage($pageIndex, $pages) {
 	array_push($autoExpand, $pages[$pageIndex]->post_name);
 	if ($pages[$pageIndex]->post_parent!=0) {
 		for ($pageIndex2=0; $pageIndex2<count($pages); $pageIndex2++) {
-		  if ($pages[$pageIndex2]->id == $pages[$pageIndex]->post_parent) {
+		  if ($pages[$pageIndex2]->ID == $pages[$pageIndex]->post_parent) {
 			  checkCurrentPage($pageIndex2,$pages);
 		  }
 		}
@@ -43,27 +43,28 @@ function checkCurrentPage($pageIndex, $pages) {
 }
 function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number) {
   global $expand, $expandSym, $collapseSym, $autoExpand, $animate, $depth,
-  $thisPage;
+  $thisPage, $options;
+  extract($options[$number]);
   if ($curDepth>=$depth && $depth!=-1) {
     return;
   }
   $curDepth++;
   $subPagePosts=array();
-  if (in_array($page->id, $parents)) {
+  if (in_array($page->ID, $parents)) {
     if ($dropDown==TRUE) {
       $subPageLinks.= "\n     <ul>\n";
     } else {
-      $subPageLinks.= "\n     <ul id='collapsPage-" . $page->id ."' style='display:$expanded;'>\n";
+      $subPageLinks.= "\n     <ul id='collapsPage-" . $page->ID ."' style='display:$expanded;'>\n";
     }
     foreach ($pages as $page2) {
       //$subPageLinks.= "page2 =". $page2->term_id;
         $subPageLink2=''; // clear info from subPageLink2
       $self='';
-      if ($page2->id == $thisPage) {
+      if ($page2->ID == $thisPage) {
         $self="class='self'";
       }
-      if ($page->id==$page2->post_parent) {
-        if (!in_array($page2->id, $parents)) {
+      if ($page->ID==$page2->post_parent) {
+        if (!in_array($page2->ID, $parents)) {
           /* check to see if there are more subpages under this one. If the
          * page id is not in the parents array, then there should be no more
          * subpages, and we do not print a triangle dropdown, otherwise we do
@@ -72,29 +73,31 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
           $subPageLinks.=( "<li class='collapsItem'>" );
         } else {
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
-          if ($dropDown==TRUE) {
-            $subPageLinks.=( "<li class='submenu'>" );
+					$subPageLinks.="<li class='collapsPage'>" .
+							"<span class='collapsPage show' " .
+							"onclick='expandCollapse(" .
+							"event, $expand, $animate, \"collapsPage\");".
+							"return false'>";
+					if (in_array($page2->post_name, $autoExpand) ||
+							in_array($page2->title, $autoExpand)) {
+						$subPageLinks.="<span class='sym'>$collapseSym";
+					} else {
+						$subPageLinks.="<span class='sym'>$expandSym";
+				  }
+					if ($linkToPage=='yes') {
+						$subPageLinks.="</span></span>";
           } else {
-            if (in_array($page2->post_name, $autoExpand) ||
-              in_array($page2->title, $autoExpand)) {
-              $subPageLinks.="<li class='collapsPage'>" .
-                  "<span class='collapsPage show' " .
-                  "onclick='expandCollapse(" .
-                  "event, $expand, $animate, \"collapsPage\");".
-                  "return false'>$collapseSym</span>";
-            } else {
-              $subPageLinks.="<li class='collapsPage'>".
-                  "<span class='collapsPage show' onclick='expandCollapse(".
-                  "event, $expand, $animate, \"collapsPage\"); return false'>".
-                  "<span class='sym'>$expandSym</span></span>";
-            }
-          }
+						$subPageLinks.="</span>";
+					}
         }
-        $link2 = "<a $self href='".get_page_link($page2->id)."' ";
+        $link2 = "<a $self href='".get_page_link($page2->ID)."' ";
         $link2 .= '>';
         $link2 .= __($page2->post_title) . "</a>";
+				if ($linkToPage=='no') {
+					$link2.="</span>";
+			  }
         $subPageLinks.= $link2 ;
-        if (!in_array($page2->id, $parents)) {
+        if (!in_array($page2->ID, $parents)) {
           $subPageLinks.="</li>\n";
         }
         // add in additional subpage information
@@ -114,7 +117,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 //$taxonomy=false;
 function list_pages($number) {
   global $wpdb, $expand, $expandSym, $collapseSym, $animate, $depth,
-  $thisPage, $post;
+  $thisPage, $post, $options;
   $thisPage = $post->ID;
   $options=get_option('collapsPageOptions');
   //print_r($options[$number]);
@@ -158,7 +161,8 @@ function list_pages($number) {
 	if ( empty($inExclusionsPage) ) {
 		$inExcludePageQuery = "AND post_name NOT IN ('')";
   } else {
-    $inExcludePageQuery ="AND post_name $in ($inExclusionsPage)";
+    $inExcludePageQuery ="AND post_name $in ($inExclusionsPage)
+    AND ID $in ($inExclusionsPage)";
   }
   $exclude=$exclude;
 	if ( !empty($exclusions) ) {
@@ -183,7 +187,7 @@ function list_pages($number) {
     if ($sort=='pageName') {
       $sortColumn="ORDER BY $wpdb->posts.post_title";
     } elseif ($sort=='pageId') {
-      $sortColumn="ORDER BY $wpdb->posts.id";
+      $sortColumn="ORDER BY $wpdb->posts.ID";
     } elseif ($sort=='pageSlug') {
       $sortColumn="ORDER BY $wpdb->posts.post_name";
     } elseif ($sort=='menuOrder') {
@@ -194,11 +198,13 @@ function list_pages($number) {
 
   echo "\n    <ul class='collapsPageList'>\n";
 
-      $pagequery = "SELECT $wpdb->posts.id, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
+      $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
   $pages = $wpdb->get_results($pagequery);
   if ($debug==1) {
     echo "<pre style='display:none' >";
     printf ("MySQL server version: %s\n", mysql_get_server_info());
+    echo "\ncollapsPage options:\n";
+    print_r($options[$number]);
     echo "PAGE QUERY: \n $pagequery\n";
     echo "\nPAGE QUERY RESULTS\n";
     print_r($pages);
@@ -210,38 +216,39 @@ function list_pages($number) {
     if ($pages[$pageIndex]->post_parent!=0) {
       array_push($parents, $pages[$pageIndex]->post_parent);
     }
-    if ($pages[$pageIndex]->id == $thisPage) {
+    if ($pages[$pageIndex]->ID == $thisPage) {
 			checkCurrentPage($pageIndex,$pages);
 		}
   }
   foreach( $pages as $page ) {
 		$self='';
-    if ($page->id == $thisPage) {
+    if ($page->ID == $thisPage) {
       $self="class='self'";
     }
     if ($page->post_parent==0) {
       $url = get_settings('siteurl');
       $home=$url;
-      $lastPage= $page->id;
+      $lastPage= $page->ID;
       // print out page name 
-      $link = "<a $self href='".get_page_link($page->id)."' ";
-      if ( empty($page->page_description) ) {
-        if( $showPostCount=='yes') {
-          $link .= 'title="'. sprintf(__("View all posts filed under %s"), wp_specialchars(__($page->post_title))) . '"';
-        } else {
-          $link .= 'title="' . __("View all subpages") . '"';
-        }
-      } else {
-        $link .= 'title="' . wp_specialchars(apply_filters('page_description',$page->page_description,$page)) . '"';
-      }
+      $link = "<a $self href='".get_page_link($page->ID)."' ";
+			if ($linkToPage=='yes') {
+				if ( empty($page->page_description) ) {
+					$link .= 'title="' . __($page->post_title). '"';
+				} else {
+					$link .= 'title="' . wp_specialchars(apply_filters('page_description',$page->page_description,$page)) . '"';
+				}
+			}
       $link .= '>';
       $link .= __($page->post_title) . '</a>';
+			if ($linkToPage=='no') {
+			  $link.='</span>';
+			}
 
       // TODO not sure why we are checking for this at all TODO
       $subPageCount=0;
       $expanded='none';
       if (in_array($page->post_name, $autoExpand) ||
-          in_array($page->title, $autoExpand)) {
+          in_array($page->ID, $autoExpand)) {
         $expanded='block';
       }
       $curDepth=0;
@@ -250,10 +257,18 @@ function list_pages($number) {
       }
         if ($subPageCount>0) {
           if ($expanded=='block') {
-            print ("<li class='collapsPage '><span class='collapsPage hide' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$collapseSym</span></span>" );
+					  $showing='hide';
+						$symbol=$collapseSym;
           } else {
-            print ( "<li class='collapsPage '><span class='collapsPage show' onclick='expandCollapse(event, $expand, $animate, \"collapsPage\"); return false'><span class='sym'>$expandSym</span></span>" );
+					  $showing='show';
+						$symbol=$expandSym;
           }
+					print ("<li class='collapsPage '><span class='collapsPage
+					$showing' onclick='expandCollapse(event, $expand, $animate,
+					\"collapsPage\"); return false'><span class='sym'>$symbol</span>" );
+					if ($linkToPage=='yes') {
+					  print("</span>");
+					}
         } else {
           //  print $page->title . "is NOT in the array\n";
           print( "<li id='" . $page->post_name . "-nav'" . 

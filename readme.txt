@@ -5,7 +5,7 @@ Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget
 Requires at least: 2.6
 Tested up to: 2.7
-Stable tag: 0.3.4
+Stable tag: 0.3.5
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -96,6 +96,15 @@ behavior in wordpress anyways)
 
 == HISTORY ==
 
+* 0.3.5 (2009/02/04)
+    * Updated internationalization support
+    * Can now exclude and auto-expand using page slug or ID
+    * Added option to make clicking on parent page expand sub-pages
+
+* 0.3.4 (2009/01/21)
+    * removed debugging info
+    * fixed settings panel
+   
 * 0.3.3 (2009/01/20)
 		* now 'self' class gets attributed to <a> instead of <li>, so it doesn't
 		  apply to all subpages when a parent page is selected
