@@ -13,7 +13,7 @@ function collapsPageWidget($args, $widget_args=1) {
 
   $title = ($options[$number]['title'] != "") ? $options[$number]['title'] : ""; 
 
-    echo $before_widget . $before_title . $title . $after_title;
+    echo $before_widget . $before_title . __($title) . $after_title;
        if( function_exists('collapsPage') ) {
         collapsPage($number);
        } else {
