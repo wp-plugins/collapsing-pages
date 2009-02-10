@@ -48,7 +48,13 @@ if( isset($_POST['resetOptions']) ) {
   }
 } elseif( isset($_POST['infoUpdate']) ) {
   $style=$_POST['collapsPageStyle'];
+	$defaultStyles=get_option('collapsPageDefaultStyles');
+	$selectedStyle=$_POST['collapsPageSelectedStyle'];
+	$defaultStyles['selected']=$selectedStyle;
+	$defaultStyles['custom']=$_POST['collapsPageStyle'];
   update_option('collapsPageStyle', $style);
+  update_option('collapsPageSidebarId', $_POST['collapsPageSidebarId']);
+  update_option('collapsPageDefaultStyles', $defaultStyles);
   if ($widgetOn==0) {
     include('updateOptions.php');
   }
@@ -80,26 +86,83 @@ include('processOptions.php');
     </div>
     ";
     } else {
-     echo '<p style="text-align:left;"><label for="collapsPage-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsPage-title-'.$number.'" name="collapsPage['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
      include('options.txt'); 
    }
    ?>
-    <p>
-  <input type='hidden' id='collapsPageOrigStyle' value="<?php echo
-stripslashes(get_option('collapsPageOrigStyle')) ?>" />
-<label for="collapsPageStyle">Style info:</label>
-   <input type='button' value='restore original style'
+	 Id of the sidebar where collapsing pages appears: 
+	 <input id='collapsPageSidebarId' name='collapsPageSidebarId' type='text' size='20' value="<?php echo
+	 get_option('collapsPageSidebarId')?>" onchange='changeStyle();' />
+	 <table>
+	   <tr>
+		   <td>
+  <input type='hidden' id='collapsPageCurrentStyle' value="<?php echo
+stripslashes(get_option('collapsPageStyle')) ?>" />
+  <input type='hidden' id='collapsPageSelectedStyle'
+	name='collapsPageSelectedStyle' />
+<label for="collapsPageStyle">Select style: </label>
+			 </td>
+			 <td>
+			 <select name='collapsPageDefaultStyles' id='collapsPageDefaultStyles' 
+			   onchange='changeStyle();' >
+			 <?php
+		$url = get_settings('siteurl') . '/wp-content/plugins/collapsing-pages';
+			 $styleOptions=get_option('collapsPageDefaultStyles');
+			 //print_r($styleOptions);
+			 $selected=$styleOptions['selected'];
+			 foreach ($styleOptions as $key=>$value) {
+			   if ($key!='selected') {
+           if ($key==$selected) {
+					   $select=' selected=selected ';
+					 } else {
+						 $select=' ';
+					 }
+					 echo '<option' .  $select . 'value="'.
+					     stripslashes($value) . '" >'.$key . '</option>';
+         }
+       }
+			 ?>
+			 </select>
+	     </td>
+			 <td>Preview<br />
+			 <img style='border:1px solid' id='collapsPageStylePreview' alt='preview' />
+			 </td>
+		</tr>
+		</table>
+		You may also customize your style below if you wish<br />
+   <input type='button' value='restore current style'
 onclick='restoreStyle();' /><br />
-   <textarea cols='78' rows='10' id="collapsPageStyle" name="collapsPageStyle">
-    <?php echo stripslashes(get_option('collapsPageStyle')) ?>
-   </textarea>
+   <textarea onfocus='customStyle();' cols='78' rows='10' id="collapsPageStyle" name="collapsPageStyle"><?php echo stripslashes(get_option('collapsPageStyle')) ?></textarea>
     </p>
 <script type='text/javascript'>
-function restoreStyle() {
-  var defaultStyle = document.getElementById('collapsPageOrigStyle').value;
-  var catStyle = document.getElementById('collapsPageStyle');
-  catStyle.value=defaultStyle;
+function changeStyle() {
+	var preview = document.getElementById('collapsPageStylePreview');
+	var pageStyles = document.getElementById('collapsPageDefaultStyles');
+	var selectedStyle;
+	var hiddenStyle=document.getElementById('collapsPageSelectedStyle');
+	for(i=0; i<pageStyles.options.length; i++) {
+		if (pageStyles.options[i].selected == true) {
+			selectedStyle=pageStyles.options[i];
+		}
+	}
+	hiddenStyle.value=selectedStyle.innerHTML
+	preview.src='<?php echo $url ?>/img/'+selectedStyle.innerHTML+'.png';
+  var pageStyle = document.getElementById('collapsPageStyle');
+	// add in the name of the sidebar
+  var sidebarId=document.getElementById('collapsPageSidebarId').value;
+	var theStyle='#' + sidebarId +
+			' ul.collapsPageList li:before {content: \'\'}\n' + selectedStyle.value;
+  pageStyle.value=theStyle;
 }
+function restoreStyle() {
+  var defaultStyle = document.getElementById('collapsPageCurrentStyle').value;
+  var pageStyle = document.getElementById('collapsPageStyle');
+  pageStyle.value=defaultStyle;
+}
+function customStyle() {
+	var hiddenStyle=document.getElementById('collapsPageSelectedStyle');
+	hiddenStyle.value='custom';
+}
+	changeStyle();
 </script>
    </ul>
   </fieldset>

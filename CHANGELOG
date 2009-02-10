@@ -1,5 +1,8 @@
 Collapsing Pages Changelog
 
+* 0.4 (2009/02/10)
+    * totally revised and improved style selecting methods
+
 * 0.3.5 (2009/02/04)
     * Updated internationalization support
     * Can now exclude and auto-expand using page slug or ID

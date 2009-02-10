@@ -40,27 +40,11 @@ add_action('admin_menu', array('collapsPage','setup'));
 class collapsPage {
 
 	function init() {
-    $style="span.collapsPage {border:0;
-padding:0; 
-margin:0; 
-cursor:pointer;
-/* font-family: Monaco, 'Andale Mono', Courier, monospace;*/
-}
-li.collapsPage a.self {font-weight:bold}
-#sidebar ul.collapsPageList:before {content:'';} 
-#sidebar li.collapsPage:before {content:'';} 
-#sidebar li.collapsPage {list-style-type:none}
-#sidebar li.collapsItem {
-       text-indent:-1em;
-       margin:0 0 0 1em;}
-li.widget.collapsPage ul {margin-left:.5em;}
-#sidebar li.collapsItem:before {content: '\\\\00BB \\\\00A0' !important;} 
-#sidebar li.collapsPage .sym {
-   font-size:1.2em;
-   font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
-    padding-right:5px;}";
+	  include('collapsPageStyles.php');
+		$defaultStyles=compact('custom','selected','default','block','noArrows');
     if( function_exists('add_option') ) {
       update_option( 'collapsPageOrigStyle', $style);
+      update_option( 'collapsPageDefaultStyles', $defaultStyles);
     }
     if (!get_option('collapsPageOptions')) {
       $options=array('%i%' => array(
@@ -76,12 +60,15 @@ li.widget.collapsPage ul {margin-left:.5em;}
         'inExcludePages' => '',
         'showPosts' => 'yes',
         'showPages' => 'no',
-        'animate' => 1,
+        'animate' => 0,
       ));
       update_option( 'collapsPageOptions', $options);
     }
     if (!get_option('collapsPageStyle')) {
       add_option( 'collapsPageStyle', $style);
+		}
+    if (!get_option('collapsPageSidebarId')) {
+      add_option( 'collapsPageSidebarId', 'sidebar');
 		}
 	}
 
