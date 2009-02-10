@@ -10,9 +10,7 @@ ul.collapsPageList ul.collapsPageList:before {content:'';}
 ul.collapsPageList li.collapsPage:before {content:'';} 
 ul.collapsPageList li.collapsPage {list-style-type:none}
 ul.collapsPageList li.collapsItem {
-       text-indent:-1em;
-       margin:0 0 0 1em;}
-li.widget.collapsPage ul {margin-left:.5em;}
+       margin:0 0 0 2em;}
 ul.collapsPageList li.collapsItem:before {content: '\\\\00BB \\\\00A0' !important;} 
 ul.collapsPageList li.collapsPage .sym {
    font-size:1.2em;
@@ -25,9 +23,12 @@ $block="li.collapsPage a {
             display:block;
             text-decoration:none;
             margin:0;
-            padding:0;}
-li.collapsPage a:hover {background:#CCC;}
-
+            padding:0;
+            }
+li.collapsPage a:hover {
+            background:#CCC;
+            text-decoration:none;
+          }
 span.collapsPage {
         border:0;
         padding:0; 
@@ -40,7 +41,6 @@ ul.collapsPageList li.collapsPage:before {content:'';}
 ul.collapsPageList li.collapsPage {list-style-type:none}
 ul.collapsPageList li.collapsItem {
       }
-li.widget.collapsPage ul {margin-left:.5em;}
 ul.collapsPageList li.collapsPage .sym {
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
@@ -62,7 +62,6 @@ ul.collapsPageList li.collapsPage {list-style-type:none}
 ul.collapsPageList li.collapsItem {
        text-indent:-1em;
        margin:0 0 0 1em;}
-li.widget.collapsPage ul {margin-left:.5em;}
 ul.collapsPageList li.collapsPage .sym {
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
