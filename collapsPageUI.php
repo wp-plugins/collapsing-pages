@@ -86,6 +86,7 @@ include('processOptions.php');
     </div>
     ";
     } else {
+     extract($options['%i%']);
      include('options.txt'); 
    }
    ?>
