@@ -59,9 +59,6 @@ li.collapsPage a.self {font-weight:bold}
 ul.collapsPageList ul.collapsPageList:before {content:'';} 
 ul.collapsPageList li.collapsPage:before {content:'';} 
 ul.collapsPageList li.collapsPage {list-style-type:none}
-ul.collapsPageList li.collapsItem {
-       text-indent:-1em;
-       margin:0 0 0 1em;}
 ul.collapsPageList li.collapsPage .sym {
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
