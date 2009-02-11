@@ -54,7 +54,7 @@ class collapsPage {
         'sort'=> 'pageName' ,
         'defaultExpand'=> '',
         'expand' => '1',
-        'depth' =>'-1',
+        'depth' =>-1,
         'inExcludePage' => 'include',
         'linkToPage' => 'yes',
         'inExcludePages' => '',

@@ -1,5 +1,5 @@
 <?php
-if ( -1 == $number ) {
+if ( -1 == $number || $number =='%i%' ) {
   /* default options go here */
   $number = '%i%';
   $title = 'Pages';
@@ -9,12 +9,12 @@ if ( -1 == $number ) {
   $linkToPage='yes';
   $defaultExpand='';
   $expand='1';
-  $depth='-1';
+  $depth=-1;
   $inExcludePage='include';
   $inExcludePages='';
   $showPosts='yes';
   $showPages='no';
-  $animate=1;
+  $animate=0;
   $debug=0;
 } else {
   $title = attribute_escape($options[$number]['title']);

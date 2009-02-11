@@ -86,9 +86,11 @@ include('processOptions.php');
     </div>
     ";
     } else {
-     extract($options['%i%']);
-     include('options.txt'); 
-   }
+      if (!empty($options)) {
+        extract($options['%i%']);
+      }
+      include('options.txt'); 
+    }
    ?>
 	 Id of the sidebar where collapsing pages appears: 
 	 <input id='collapsPageSidebarId' name='collapsPageSidebarId' type='text' size='20' value="<?php echo
