@@ -64,19 +64,19 @@ include('processOptions.php');
 <div class=wrap>
  <form method="post">
   <h2>Collapsing Pages Options</h2>
-  <fieldset name="Collapsing Pages Options">
-   <legend><?php _e('Display Options:'); ?></legend>
+  <fieldset name="<?php _e('Collapsing Pages Options', 'collapsing-pages'); ?>">
+   <legend><?php _e('Display Options:','collapsing-pages'); ?></legend>
    <ul style="list-style-type: none;">
    <?php
    if ($widgetOn==1) {
      echo "
     <div style='width:60em; background:#FFF; color:#444;border: 1px solid
     #444;padding:0 1em'>
-    <p>If you wish to use the collapsing categories plugin as a widget, you
+    <p>" . __('If you wish to use the collapsing categories plugin as a widget, you
     should set the options in the widget page (except for custom styling,
     which is set here). If you would like to use it manually (that is, you
-    modify your theme), then click below to delete the current widget options.
-    </p>
+    modify your theme), then click below to delete the current widget options.','collapsing-pages') .
+    "</p>
     <form method='post'>
     <p>
        <input type='hidden' name='reset' value='true' />
@@ -86,10 +86,10 @@ include('processOptions.php');
     </div>
     ";
     } else {
-      include('options.txt'); 
+      include('collapsPageOptions.php'); 
     }
    ?>
-	 Id of the sidebar where collapsing pages appears: 
+	 <?php _e('Id of the sidebar where collapsing pages appears:', 'collapsing-pages'); ?> 
 	 <input id='collapsPageSidebarId' name='collapsPageSidebarId' type='text' size='20' value="<?php echo
 	 get_option('collapsPageSidebarId')?>" onchange='changeStyle();' />
 	 <table>
@@ -123,12 +123,12 @@ stripslashes(get_option('collapsPageStyle')) ?>" />
 			 ?>
 			 </select>
 	     </td>
-			 <td>Preview<br />
+			 <td><?php _e('Preview', 'collapsing-pages'); ?><br />
 			 <img style='border:1px solid' id='collapsPageStylePreview' alt='preview' />
 			 </td>
 		</tr>
 		</table>
-		You may also customize your style below if you wish<br />
+		<?php _e('You may also customize your style below if you wish', 'collapsing-pages'); ?><br />
    <input type='button' value='restore current style'
 onclick='restoreStyle();' /><br />
    <textarea onfocus='customStyle();' cols='78' rows='10' id="collapsPageStyle" name="collapsPageStyle"><?php echo stripslashes(get_option('collapsPageStyle')) ?></textarea>
@@ -167,7 +167,7 @@ function customStyle() {
    </ul>
   </fieldset>
   <div class="submit">
-   <input type="submit" name="infoUpdate" value="<?php _e('Update options', 'Collapsing Pages'); ?> &raquo;" />
+   <input type="submit" name="infoUpdate" value="<?php _e('Update options', 'collapsing-pages'); ?> &raquo;" />
   </div>
  </form>
 </div>

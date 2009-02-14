@@ -2,7 +2,7 @@
 if ( -1 == $number) {
   /* default options go here */
   $number = '%i%';
-  $title = 'Pages';
+  $title = __('Pages', 'collapsing-pages');
   $showPostCount = 'yes';
   $sort='pageName';
   $sortOrder = 'ASC';

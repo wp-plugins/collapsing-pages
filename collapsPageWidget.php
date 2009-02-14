@@ -30,8 +30,8 @@ function collapsPageWidgetInit() {
 if ( !$options = get_option('collapsPageOptions') )
     $options = array();
   $control_ops = array('width' => 500, 'height' => 350, 'id_base' => 'collapspage');
-	$widget_ops = array('classname' => 'collapsPage', 'description' => __('Pages expand and collapse to show subpages and/or posts'));
-  $name = __('Collapsing Pages');
+	$widget_ops = array('classname' => 'collapsPage', 'description' => __('Pages expand and collapse to show subpages and/or posts', 'collapsing-pages'));
+  $name = __('Collapsing Pages', 'collapsing-pages');
 
   $id = false;
   foreach ( array_keys($options) as $o ) {
@@ -99,11 +99,11 @@ if (function_exists('collapsPage')) {
 		//$title		= wp_specialchars($options['title']);
     // Here is our little form segment. Notice that we don't need a
     // complete form. This will be embedded into the existing form.
-    echo '<p style="text-align:right;"><label for="collapsPage-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsPage-title-'.$number.'" name="collapsPage['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
-  include('options.txt');
+    echo '<p style="text-align:right;"><label for="collapsPage-title-'.$number.'">' . __('Title:', 'collapsing-pages') . '<input class="widefat" style="width: 200px;" id="collapsPage-title-'.$number.'" name="collapsPage['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
+  include('collapsPageOptions.php');
   ?>
-  <p>Style can be set from the <a
-  href='options-general.php?page=collapsPage.php'>options page</a></p>
+  <p><?php _e('Style can be set from the', 'collapsing-pages'); ?> <a
+  href='options-general.php?page=collapsPage.php'><?php _e('options page', 'collapsing-pages'); ?></a></p>
    <?php
     echo '<input type="hidden" id="collapsPage-submit-'.$number.'" name="collapsPage['.$number.'][submit]" value="1" />';
 

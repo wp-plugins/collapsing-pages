@@ -48,7 +48,7 @@ class collapsPage {
     }
     if (!get_option('collapsPageOptions')) {
       $options=array('%i%' => array(
-        'title' => 'Pages', 
+        'title' => __('Pages', 'collapsing-pages'), 
         'showPostCount'=> 'yes' ,
         'sortOrder'=> 'ASC' ,
         'sort'=> 'pageName' ,
@@ -74,8 +74,8 @@ class collapsPage {
 
 	function setup() {
 		if( function_exists('add_options_page') ) {
-			add_options_page(__('Collapsing Pages'),__('Collapsing
-      Pages'),1,basename(__FILE__),array('collapsPage','ui'));
+			add_options_page(__('Collapsing Pages', 'collapsing-pages'),__('Collapsing
+      Pages', 'collapsing-pages'),1,basename(__FILE__),array('collapsPage','ui'));
 		}
 	}
 	function ui() {
