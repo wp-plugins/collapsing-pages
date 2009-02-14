@@ -1,5 +1,5 @@
 <?php
-if ( -1 == $number || $number =='%i%' ) {
+if ( -1 == $number) {
   /* default options go here */
   $number = '%i%';
   $title = 'Pages';

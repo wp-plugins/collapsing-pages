@@ -1,6 +1,6 @@
 <?php
 foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage ) {
-  if (!isset($widget_collapsPage['title']) && isset($options[$widget_number]) ) { // user clicked cancel
+  if ($widget_number!='%i%' && !isset($widget_collapsPage['title']) && isset($options[$widget_number]) ) { // user clicked cancel
     continue;
   }
       $title = strip_tags(stripslashes($widget_collapsPage['title']));
