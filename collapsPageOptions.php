@@ -1,4 +1,4 @@
-<?php ?>    <p>
+    <p>
      <input type="checkbox" name="collapsPage[<?php echo $number ?>][includePosts]" <?php if($includePosts=='yes') echo 'checked'; ?> id="collapsPage-includePosts-<?php echo $number ?>"></input> <label for="showPosts"><?php _e('Show posts as well as pages', 'collapsing-pages');?></label>
    &nbsp;&nbsp;
    <input type="checkbox" name="collapsPage[<?php echo $number
@@ -69,4 +69,4 @@
 <?php if ($debug=='1')  echo 'checked'; ?> id="collapsPage-debug-<?php echo
 $number ?>"></input> <label for="collapsPageDebug"><?php _e('Show debugging information
 (shows up as a hidden pre right after the title)', 'collapsing-pages');?></label>
-    </p><?php ?>
+    </p>

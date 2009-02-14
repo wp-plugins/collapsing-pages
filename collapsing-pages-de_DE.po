@@ -3,186 +3,213 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Collapsing Pages 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 13:59+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2009-02-14 23:37+0100\n"
+"PO-Revision-Date: 2009-02-14 23:38+0100\n"
+"Last-Translator: Bernhard Reiter <ockham@raz.or.at>\n"
+"Language-Team: Deutsch <ockham@raz.or.at>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
 
-#: collapsPage.php:51 processOptions.php:5
+#: collapsPage.php:56
+#: processOptions.php:5
 msgid "Pages"
-msgstr ""
+msgstr "Seiten"
 
-#: collapsPage.php:77 collapsPageWidget.php:34
+#: collapsPage.php:82
+#: collapsPageWidget.php:34
 msgid "Collapsing Pages"
-msgstr ""
+msgstr "Zuklappende Seiten"
 
-#: collapsPage.php:77
+#: collapsPage.php:82
 msgid ""
 "Collapsing\n"
 "      Pages"
 msgstr ""
+"Zuklappende \n"
+"Seiten"
 
 #: collapsPageOptions.php:2
 msgid "Show posts as well as pages"
-msgstr ""
+msgstr "Artikel und Seiten anzeigen"
 
 #: collapsPageOptions.php:7
 msgid "Animate collapsing and expanding"
-msgstr ""
+msgstr "Auf- und Zuklappen mit Effekt"
 
 #: collapsPageOptions.php:9
 msgid "Sort by:"
-msgstr ""
+msgstr "Sortieren nach:"
 
 #: collapsPageOptions.php:10
 msgid "Page name"
-msgstr ""
+msgstr "Seitenname"
 
 #: collapsPageOptions.php:11
 msgid "Page id"
-msgstr ""
+msgstr "Seiten-ID"
 
 #: collapsPageOptions.php:12
 msgid "Page Slug"
-msgstr ""
+msgstr "Seiten-URL-Form"
 
 #: collapsPageOptions.php:13
 msgid "Menu Order"
-msgstr ""
+msgstr "Menüreihenfolge"
 
 #: collapsPageOptions.php:15
 msgid "Sort order:"
-msgstr ""
+msgstr "Sortierreihenfolge:"
 
 #: collapsPageOptions.php:16
 msgid "Ascending"
-msgstr ""
+msgstr "Aufsteigend"
 
 #: collapsPageOptions.php:17
 msgid "Descending"
-msgstr ""
+msgstr "Absteigend"
 
 #: collapsPageOptions.php:19
 msgid "Expanding and collapse characters:"
-msgstr ""
+msgstr "Auf- und Zuklapp-Zeichen"
 
 #: collapsPageOptions.php:25
 msgid "images:"
-msgstr ""
+msgstr "Bilder:"
 
 #: collapsPageOptions.php:33
 msgid "Include pages at this depth:"
-msgstr ""
+msgstr "Seiten bis zu dieser Tiefe einschließen:"
 
 #: collapsPageOptions.php:35
 msgid "All levels (default)"
-msgstr ""
+msgstr "Alle Ebenen (Standard)"
 
 #: collapsPageOptions.php:36
 msgid "Only main pages"
-msgstr ""
+msgstr "Nur Hauptseiten"
 
 #: collapsPageOptions.php:37
 msgid "Sub-pages"
-msgstr ""
+msgstr "Unter-Seiten"
 
 #: collapsPageOptions.php:38
 msgid "Sub-sub-pages"
-msgstr ""
+msgstr "Unter-Unter-Seiten"
 
 #: collapsPageOptions.php:39
 msgid "Sub-sub-sub-pages"
-msgstr ""
+msgstr "Unter-Unter-Unter-Seiten"
 
 #: collapsPageOptions.php:44
 msgid "Include"
-msgstr ""
+msgstr "Einschluss"
 
 #: collapsPageOptions.php:45
 msgid "Exclude"
-msgstr ""
+msgstr "Ausschluss"
 
 #: collapsPageOptions.php:47
 msgid "these pages (input slug or ID separated by commas):"
-msgstr ""
+msgstr "dieser Seiten (URL-Form oder ID durch Kommata getrennt eingeben):"
 
 #: collapsPageOptions.php:52
 msgid "Auto-expand these categories (input slug or ID separated by commas):"
-msgstr ""
+msgstr "Diese Kategorien automatisch aufklappen (URL-Form oder ID durch Kommata getrennt eingeben):"
 
 #: collapsPageOptions.php:55
 msgid "Clicking on page name:"
-msgstr ""
+msgstr "Bei Klick auf Seitenname:"
 
 #: collapsPageOptions.php:59
 msgid "Links to page"
-msgstr ""
+msgstr "Auf die Seite verweisen"
 
 #: collapsPageOptions.php:63
 msgid ""
 "Expands to show\n"
 "     sub-pages"
 msgstr ""
+"Aufklappen, um\n"
+" Unterseiten anzuzeigen."
 
 #: collapsPageOptions.php:70
 msgid ""
 "Show debugging information\n"
 "(shows up as a hidden pre right after the title)"
 msgstr ""
+"Debug-Informationen Anzeigen\n"
+"(werden als verstecktes pre direkt nach dem Titel angezeigt)"
 
+#: collapsPageUI.php:66
 #: collapsPageUI.php:67
 msgid "Collapsing Pages Options"
-msgstr ""
+msgstr "Optionen für Zuklappende Seiten"
 
 #: collapsPageUI.php:68
 msgid "Display Options:"
-msgstr ""
+msgstr "Anzeigeoptionen:"
 
 #: collapsPageUI.php:75
 msgid ""
 "If you wish to use the collapsing categories plugin as a widget, you\n"
 "    should set the options in the widget page (except for custom styling,\n"
 "    which is set here). If you would like to use it manually (that is, you\n"
-"    modify your theme), then click below to delete the current widget "
-"options."
+"    modify your theme), then click below to delete the current widget options."
 msgstr ""
+"Wenn Sie das Zuklappende Seiten-Plugin als Widget verwenden möchten,\n"
+"sollten Sie die Optionen auf der Widget-Seite einstellen (außer für individuelle Formatierung,\n"
+"die hier bearbeitet werden kann). Wenn Sie es manuell verwenden möchten (das heißt, Sie\n"
+"passen Ihr Theme an), so klicken Sie unten, um die derzeitigen Widget-Optionen zu löschen."
+
+#: collapsPageUI.php:83
+msgid "reset options"
+msgstr "Optionen zurücksetzen"
 
 #: collapsPageUI.php:92
 msgid "Id of the sidebar where collapsing pages appears:"
-msgstr ""
+msgstr "ID der Seitenleiste, wo die Zuklappenden Seiten aufscheinen:"
+
+#: collapsPageUI.php:102
+msgid "Select style:"
+msgstr "Formatierung auswählen:"
 
 #: collapsPageUI.php:126
 msgid "Preview"
-msgstr ""
+msgstr "Vorschau"
 
 #: collapsPageUI.php:131
 msgid "You may also customize your style below if you wish"
-msgstr ""
+msgstr "Wenn Sie möchten, können Sie auch Ihre Formatierung unten einstellen"
+
+#: collapsPageUI.php:132
+msgid "restore current style"
+msgstr "Derzeitige Formatierung wiederherstellen"
 
 #: collapsPageUI.php:170
 msgid "Update options"
-msgstr ""
+msgstr "Aktualisiere Optionen"
 
 #: collapsPageWidget.php:33
 msgid "Pages expand and collapse to show subpages and/or posts"
-msgstr ""
+msgstr "Seiten klappen auf und zu, um Unterseiten und/oder -artikel anzuzeigen."
 
 #: collapsPageWidget.php:102
 msgid "Title:"
-msgstr ""
+msgstr "Titel:"
 
 #: collapsPageWidget.php:105
-msgid "Style can be set from the"
-msgstr ""
+#, php-format
+msgid "Style can be set from the %s"
+msgstr "Die Formatierung kann auf der %s eingestellt werden"
 
-#: collapsPageWidget.php:106
+#: collapsPageWidget.php:105
 msgid "options page"
-msgstr ""
+msgstr "Optionen-Seite"
+

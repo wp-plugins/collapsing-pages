@@ -63,7 +63,7 @@ include('processOptions.php');
 ?>
 <div class=wrap>
  <form method="post">
-  <h2>Collapsing Pages Options</h2>
+  <h2><?php _e('Collapsing Pages Options', 'collapsing-pages'); ?></h2>
   <fieldset name="<?php _e('Collapsing Pages Options', 'collapsing-pages'); ?>">
    <legend><?php _e('Display Options:','collapsing-pages'); ?></legend>
    <ul style="list-style-type: none;">
@@ -80,7 +80,7 @@ include('processOptions.php');
     <form method='post'>
     <p>
        <input type='hidden' name='reset' value='true' />
-       <input type='submit' name='resetOptions' value='reset options' />
+       <input type='submit' name='resetOptions' value='" . __('reset options','collapsing-pages') . "' />
        </p>
     </form>
     </div>
@@ -99,7 +99,7 @@ include('processOptions.php');
 stripslashes(get_option('collapsPageStyle')) ?>" />
   <input type='hidden' id='collapsPageSelectedStyle'
 	name='collapsPageSelectedStyle' />
-<label for="collapsPageStyle">Select style: </label>
+<label for="collapsPageStyle"><?php _e('Select style:', 'collapsing-pages'); ?> </label>
 			 </td>
 			 <td>
 			 <select name='collapsPageDefaultStyles' id='collapsPageDefaultStyles' 
@@ -129,7 +129,7 @@ stripslashes(get_option('collapsPageStyle')) ?>" />
 		</tr>
 		</table>
 		<?php _e('You may also customize your style below if you wish', 'collapsing-pages'); ?><br />
-   <input type='button' value='restore current style'
+   <input type='button' value='<?php _e("restore current style", "collapsing-pages"); ?>'
 onclick='restoreStyle();' /><br />
    <textarea onfocus='customStyle();' cols='78' rows='10' id="collapsPageStyle" name="collapsPageStyle"><?php echo stripslashes(get_option('collapsPageStyle')) ?></textarea>
     </p>

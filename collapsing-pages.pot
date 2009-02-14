@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 13:59+0100\n"
+"POT-Creation-Date: 2009-02-14 23:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: collapsPage.php:51 processOptions.php:5
+#: collapsPage.php:56 processOptions.php:5
 msgid "Pages"
 msgstr ""
 
-#: collapsPage.php:77 collapsPageWidget.php:34
+#: collapsPage.php:82 collapsPageWidget.php:34
 msgid "Collapsing Pages"
 msgstr ""
 
-#: collapsPage.php:77
+#: collapsPage.php:82
 msgid ""
 "Collapsing\n"
 "      Pages"
@@ -138,7 +138,7 @@ msgid ""
 "(shows up as a hidden pre right after the title)"
 msgstr ""
 
-#: collapsPageUI.php:67
+#: collapsPageUI.php:66 collapsPageUI.php:67
 msgid "Collapsing Pages Options"
 msgstr ""
 
@@ -155,8 +155,16 @@ msgid ""
 "options."
 msgstr ""
 
+#: collapsPageUI.php:83
+msgid "reset options"
+msgstr ""
+
 #: collapsPageUI.php:92
 msgid "Id of the sidebar where collapsing pages appears:"
+msgstr ""
+
+#: collapsPageUI.php:102
+msgid "Select style:"
 msgstr ""
 
 #: collapsPageUI.php:126
@@ -165,6 +173,10 @@ msgstr ""
 
 #: collapsPageUI.php:131
 msgid "You may also customize your style below if you wish"
+msgstr ""
+
+#: collapsPageUI.php:132
+msgid "restore current style"
 msgstr ""
 
 #: collapsPageUI.php:170
@@ -180,9 +192,10 @@ msgid "Title:"
 msgstr ""
 
 #: collapsPageWidget.php:105
-msgid "Style can be set from the"
+#, php-format
+msgid "Style can be set from the %s"
 msgstr ""
 
-#: collapsPageWidget.php:106
+#: collapsPageWidget.php:105
 msgid "options page"
 msgstr ""

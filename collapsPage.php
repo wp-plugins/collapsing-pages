@@ -34,10 +34,15 @@ if (!is_admin()) {
   add_action( 'wp_head', array('collapsPage','get_head'));
   add_action( 'wp_footer', array('collapsPage','get_foot'));
 }
+add_action('init', array('collapsPage','init_textdomain'));
 add_action('activate_collapsing-pages/collapsPage.php', array('collapsPage','init'));
 add_action('admin_menu', array('collapsPage','setup'));
 
 class collapsPage {
+	function init_textdomain() {
+	  $plugin_dir = basename(dirname(__FILE__));
+	  load_plugin_textdomain( 'collapsing-pages', 'wp-content/plugins/' . $plugin_dir, $plugin_dir );
+	}
 
 	function init() {
 	  include('collapsPageStyles.php');

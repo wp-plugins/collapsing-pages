@@ -102,8 +102,8 @@ if (function_exists('collapsPage')) {
     echo '<p style="text-align:right;"><label for="collapsPage-title-'.$number.'">' . __('Title:', 'collapsing-pages') . '<input class="widefat" style="width: 200px;" id="collapsPage-title-'.$number.'" name="collapsPage['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
   include('collapsPageOptions.php');
   ?>
-  <p><?php _e('Style can be set from the', 'collapsing-pages'); ?> <a
-  href='options-general.php?page=collapsPage.php'><?php _e('options page', 'collapsing-pages'); ?></a></p>
+  <p><?php echo sprintf(__('Style can be set from the %s', 'collapsing-pages'), "<a href='options-general.php?page=collapsPage.php'>" . __('options page', 'collapsing-pages') . "</a>"); ?> 
+   </p>
    <?php
     echo '<input type="hidden" id="collapsPage-submit-'.$number.'" name="collapsPage['.$number.'][submit]" value="1" />';
 
