@@ -27,7 +27,22 @@ This file is part of Collapsing Pages
 
 check_admin_referer();
 
+$number = '%i%';
+$widgetOn=0;
+$options=get_option('collapsPageOptions');
+/*
+echo "<pre>\n";
+print_r($options);
+echo "</pre>\n";
+*/
+if (empty($options)) {
+  $number = -1;
+} elseif (!isset($options['%i%']['title']) || 
+    count($options) > 1) {
+  $widgetOn=1; 
+}
 if( isset($_POST['resetOptions']) ) {
+  echo "resetting";
   if (isset($_POST['reset'])) {
     delete_option('collapsPageOptions');   
 		$widgetOn=0;
@@ -44,20 +59,7 @@ if( isset($_POST['resetOptions']) ) {
   if ($widgetOn==0) {
     include('updateOptions.php');
   }
-}
-$options=get_option('collapsPageOptions');
-/*
-echo "<pre>\n";
-print_r($options);
-echo "</pre>\n";
-*/
-$number = '%i%';
-$widgetOn=0;
-if (empty($options)) {
-  $number = -1;
-} elseif (!isset($options['%i%']['title']) || 
-    count($options) > 1) {
-  $widgetOn=1; 
+  $options=get_option('collapsPageOptions');
 }
 include('processOptions.php');
 ?>
