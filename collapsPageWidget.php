@@ -27,6 +27,8 @@ function collapsPageWidget($args, $widget_args=1) {
 
 
 function collapsPageWidgetInit() {
+	  $plugin_dir = basename(dirname(__FILE__));
+	  load_plugin_textdomain( 'collapsing-pages', 'wp-content/plugins/' . $plugin_dir, $plugin_dir );
 if ( !$options = get_option('collapsPageOptions') )
     $options = array();
   $control_ops = array('width' => 500, 'height' => 350, 'id_base' => 'collapspage');

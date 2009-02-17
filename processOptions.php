@@ -7,6 +7,7 @@ if ( -1 == $number) {
   $sort='pageName';
   $sortOrder = 'ASC';
   $linkToPage='yes';
+  $postTitleLength=0;
   $defaultExpand='';
   $expand='1';
   $depth=-1;
@@ -24,6 +25,7 @@ if ( -1 == $number) {
   $sort = $options[$number]['sort'];
   $sortOrder = $options[$number]['sortOrder'];
   $linkToPage = $options[$number]['linkToPage'];
+  $postTitleLength = $options[$number]['postTitleLength'];
   $inExcludePages = $options[$number]['inExcludePages'];
   $inExcludePage = $options[$number]['inExcludePage'];
   $defaultExpand = $options[$number]['defaultExpand'];

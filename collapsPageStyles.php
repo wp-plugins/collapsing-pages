@@ -35,7 +35,8 @@ span.collapsPage {
         margin:0; 
         cursor:pointer;
 }
-li.collapsPage a.self {font-weight:bold}
+li.collapsPage a.self {background:#CCC;
+                       font-weight:bold}
 ul.collapsPageList ul.collapsPageList:before {content:'';} 
 ul.collapsPageList li.collapsPage:before {content:'';} 
 ul.collapsPageList li.collapsPage {list-style-type:none}

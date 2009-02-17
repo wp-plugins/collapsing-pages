@@ -41,6 +41,7 @@ function checkCurrentPage($pageIndex, $pages) {
 		}
 	}
 }
+
 function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number) {
   global $expand, $expandSym, $collapseSym, $autoExpand, $animate, $depth,
   $thisPage, $options;
@@ -91,11 +92,28 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 					}
         }
         $link2 = "<a $self href='".get_page_link($page2->ID)."' ";
+        $page2PostTitle=__($page2->post_title);
+        if ($linkToPage=='yes') {
+          if ( empty($page2->page_description) ) {
+            $link2 .= 'title="' . $page2PostTitle. '"';
+          } else {
+            $link2 .= 'title="' .
+                wp_specialchars(apply_filters('page_description',
+                $page2->page_description,$page2)) . '"';
+          }
+        }
         $link2 .= '>';
-        $link2 .= __($page2->post_title) . "</a>";
-				if ($linkToPage=='no') {
-					$link2.="</span>";
-			  }
+        $tmp_text = '';
+        if ($postTitleLength>0 && strlen($page2PostTitle)>$postTitleLength) {
+          $tmp_text = substr($page2PostTitle, 0, $postTitleLength );
+          $tmp_text .= ' &hellip;';
+        }
+
+        $titleText = $tmp_text == '' ? $page2PostTitle : $tmp_text;
+        $link2 .= $titleText. '</a>';
+        if ($linkToPage=='no') {
+          $link2.='</span>';
+        }
         $subPageLinks.= $link2 ;
         if (!in_array($page2->ID, $parents)) {
           $subPageLinks.="</li>\n";
@@ -112,7 +130,6 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
   }
   return array($subPageLinks,$subPageCount,$subPagePosts);
 }
-
 /* the page and tagging database structures changed drastically between wordpress 2.1 and 2.3. We will use different queries for page based vs. term_taxonomy based database structures */
 //$taxonomy=false;
 function list_pages($number) {
@@ -231,20 +248,29 @@ function list_pages($number) {
       $lastPage= $page->ID;
       // print out page name 
       $link = "<a $self href='".get_page_link($page->ID)."' ";
+      $pagePostTitle=__($page->post_title);
 			if ($linkToPage=='yes') {
 				if ( empty($page->page_description) ) {
-					$link .= 'title="' . __($page->post_title). '"';
+					$link .= 'title="' . $pagePostTitle. '"';
 				} else {
-					$link .= 'title="' . wp_specialchars(apply_filters('page_description',$page->page_description,$page)) . '"';
+					$link .= 'title="' .
+              wp_specialchars(apply_filters('page_description',
+              $page->page_description,$page)) . '"';
 				}
-			}
+      }
       $link .= '>';
-      $link .= __($page->post_title) . '</a>';
+			$tmp_text = '';
+			if ($postTitleLength>0 && strlen($pagePostTitle)>$postTitleLength) {
+				$tmp_text = substr($pagePostTitle, 0, $postTitleLength );
+				$tmp_text .= ' &hellip;';
+			}
+
+			$titleText = $tmp_text == '' ? $pagePostTitle : $tmp_text;
+      $link .= $titleText. '</a>';
 			if ($linkToPage=='no') {
 			  $link.='</span>';
 			}
 
-      // TODO not sure why we are checking for this at all TODO
       $subPageCount=0;
       $expanded='none';
       if (in_array($page->post_name, $autoExpand) ||
@@ -253,27 +279,37 @@ function list_pages($number) {
       }
       $curDepth=0;
       if ($depth!=0) {
-        list ($subPageLinks, $subPageCount, $subPagePosts)=getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number);
+        list ($subPageLinks, $subPageCount, $subPagePosts) =
+            getSubPage($page, $pages, $parents,$subPageCount,$dropDown,
+            $curDepth, $expanded, $number);
       }
-        if ($subPageCount>0) {
-          if ($expanded=='block') {
-					  $showing='hide';
-						$symbol=$collapseSym;
-          } else {
-					  $showing='show';
-						$symbol=$expandSym;
-          }
-					print ("<li class='collapsPage '><span class='collapsPage
-					$showing' onclick='expandCollapse(event, $expand, $animate,
-					\"collapsPage\"); return false'><span class='sym'>$symbol</span>" );
-					if ($linkToPage=='yes') {
-					  print("</span>");
-					}
+      if ($subPageCount>0) {
+        if ($expanded=='block') {
+          $showing='hide';
+          $symbol=$collapseSym;
         } else {
-          //  print $page->title . "is NOT in the array\n";
-          print( "<li id='" . $page->post_name . "-nav'" . 
-            " class='collapsItem'>" );
-        } 
+          $showing='show';
+          $symbol=$expandSym;
+        }
+        if (in_array($page->post_name, $autoExpand) ||
+            in_array($page->ID, $autoExpand)) {
+          $collapseTitle .= 'title="' . __('Click to collapse'). '"';
+        } else {
+          $collapseTitle .= 'title="' . __('Click to expand'). '"';
+        }
+        $theLi = "<li class='collapsPage '><span $collapseTitle " .
+            "class='collapsPage $showing' " .
+            "onclick='expandCollapse(event, $expand, $animate, ".
+            "\"collapsPage\"); return false'><span class='sym'> " .
+            "$symbol</span>";
+        if ($linkToPage=='yes') {
+          $theLi.="</span>";
+        }
+      } else {
+        $theLi="<li id='" . $page->post_name . "-nav'" . 
+          " class='collapsItem'>";
+      } 
+      print($theLi);
       // don't include the triangles if posts are not shown and there are no
       // more subpages
       print( $link );

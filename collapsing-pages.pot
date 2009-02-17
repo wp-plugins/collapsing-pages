@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-14 23:37+0100\n"
+"POT-Creation-Date: 2009-02-16 19:48-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,18 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: collapsPage.php:56 processOptions.php:5
-msgid "Pages"
+#: collapsPageList.php:285
+msgid "Click to collapse"
 msgstr ""
 
-#: collapsPage.php:82 collapsPageWidget.php:34
-msgid "Collapsing Pages"
-msgstr ""
-
-#: collapsPage.php:82
-msgid ""
-"Collapsing\n"
-"      Pages"
+#: collapsPageList.php:287
+msgid "Click to expand"
 msgstr ""
 
 #: collapsPageOptions.php:2
@@ -132,21 +126,43 @@ msgid ""
 "     sub-pages"
 msgstr ""
 
-#: collapsPageOptions.php:70
+#: collapsPageOptions.php:67
+msgid "Truncate Post Title to"
+msgstr ""
+
+#: collapsPageOptions.php:72
+msgid "characters"
+msgstr ""
+
+#: collapsPageOptions.php:77
 msgid ""
 "Show debugging information\n"
 "(shows up as a hidden pre right after the title)"
 msgstr ""
 
-#: collapsPageUI.php:66 collapsPageUI.php:67
+#: collapsPage.php:56 processOptions.php:5
+msgid "Pages"
+msgstr ""
+
+#: collapsPage.php:83 collapsPageWidget.php:36
+msgid "Collapsing Pages"
+msgstr ""
+
+#: collapsPage.php:83
+msgid ""
+"Collapsing\n"
+"      Pages"
+msgstr ""
+
+#: collapsPageUI.php:68 collapsPageUI.php:69
 msgid "Collapsing Pages Options"
 msgstr ""
 
-#: collapsPageUI.php:68
+#: collapsPageUI.php:70
 msgid "Display Options:"
 msgstr ""
 
-#: collapsPageUI.php:75
+#: collapsPageUI.php:77
 msgid ""
 "If you wish to use the collapsing categories plugin as a widget, you\n"
 "    should set the options in the widget page (except for custom styling,\n"
@@ -155,47 +171,47 @@ msgid ""
 "options."
 msgstr ""
 
-#: collapsPageUI.php:83
+#: collapsPageUI.php:85
 msgid "reset options"
 msgstr ""
 
-#: collapsPageUI.php:92
+#: collapsPageUI.php:94
 msgid "Id of the sidebar where collapsing pages appears:"
 msgstr ""
 
-#: collapsPageUI.php:102
+#: collapsPageUI.php:104
 msgid "Select style:"
 msgstr ""
 
-#: collapsPageUI.php:126
+#: collapsPageUI.php:128
 msgid "Preview"
 msgstr ""
 
-#: collapsPageUI.php:131
+#: collapsPageUI.php:133
 msgid "You may also customize your style below if you wish"
 msgstr ""
 
-#: collapsPageUI.php:132
+#: collapsPageUI.php:134
 msgid "restore current style"
 msgstr ""
 
-#: collapsPageUI.php:170
+#: collapsPageUI.php:172
 msgid "Update options"
 msgstr ""
 
-#: collapsPageWidget.php:33
+#: collapsPageWidget.php:35
 msgid "Pages expand and collapse to show subpages and/or posts"
 msgstr ""
 
-#: collapsPageWidget.php:102
+#: collapsPageWidget.php:104
 msgid "Title:"
 msgstr ""
 
-#: collapsPageWidget.php:105
+#: collapsPageWidget.php:107
 #, php-format
 msgid "Style can be set from the %s"
 msgstr ""
 
-#: collapsPageWidget.php:105
+#: collapsPageWidget.php:107
 msgid "options page"
 msgstr ""

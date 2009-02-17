@@ -66,6 +66,7 @@ class collapsPage {
         'showPosts' => 'yes',
         'showPages' => 'no',
         'animate' => 0,
+        'postTitleLength' => 0
       ));
       update_option( 'collapsPageOptions', $options);
     }
@@ -121,9 +122,11 @@ class collapsPage {
 }
 
 
-		include( 'collapsPageList.php' );
 function collapsPage($number) {
-	list_pages($number);
+  if (!is_admin()) {
+    include( 'collapsPageList.php' );
+    list_pages($number);
+  }
 }
 include('collapsPageWidget.php');
 ?>

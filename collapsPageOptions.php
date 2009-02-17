@@ -52,7 +52,7 @@
     <p><?php _e('Auto-expand these categories (input slug or ID separated by commas):', 'collapsing-pages');?><br />
      <input type="text" name="collapsPage[<?php echo $number ?>][defaultExpand]" value="<?php echo $defaultExpand ?>" id="collapsPage-defaultExpand-<?php echo $number ?>"></input> 
     </p>
-    <p><?php _e('Clicking on page name:', 'collapsing-pages');?><br />
+    <p><?php _e('Clicking on page name:', 'collapsing-pages');?>
      <input type="radio" name="collapsPage[<?php echo $number ?>][linkToPage]"
      <?php if($linkToPage=='yes') echo 'checked'; ?>
      id="collapsPage-linkToPageYes-<?php echo $number ?>"
@@ -64,6 +64,13 @@
      sub-pages', 'collapsing-pages');?> </label>
     </p>
    <p>
+   <?php _e('Truncate Post Title to') ?>
+   <input type="text" size='3' name="collapsPage[<?php echo $number
+   ?>][postTitleLength]"
+   id="postTitleLength-<?php echo $number ?>" value="<?php echo
+   $postTitleLength; ?>"></input> <label
+   for="postTitleLength"><?php _e('characters') ?></label>
+   </p>
     <p>
      <input type="checkbox" name="collapsPage[<?php echo $number ?>][debug]"
 <?php if ($debug=='1')  echo 'checked'; ?> id="collapsPage-debug-<?php echo
