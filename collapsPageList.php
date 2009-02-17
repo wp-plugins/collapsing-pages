@@ -92,7 +92,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 					}
         }
         $link2 = "<a $self href='".get_page_link($page2->ID)."' ";
-        $page2PostTitle=__($page2->post_title);
+        $page2PostTitle=apply_filters('the_title',$page2->post_title);
         if ($linkToPage=='yes') {
           if ( empty($page2->page_description) ) {
             $link2 .= 'title="' . $page2PostTitle. '"';
@@ -248,7 +248,7 @@ function list_pages($number) {
       $lastPage= $page->ID;
       // print out page name 
       $link = "<a $self href='".get_page_link($page->ID)."' ";
-      $pagePostTitle=__($page->post_title);
+      $pagePostTitle=apply_filters('the_title',$page->post_title);
 			if ($linkToPage=='yes') {
 				if ( empty($page->page_description) ) {
 					$link .= 'title="' . $pagePostTitle. '"';
