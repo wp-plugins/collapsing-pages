@@ -96,6 +96,13 @@ behavior in wordpress anyways)
 
 == HISTORY ==
 
+* 0.4 (2009/02/17)
+    * totally revised and improved style selecting methods
+    * fixed settings panel issue
+    * documentation now internationalized (Bernhard Reiter)
+    * german localization (Bernhard Reiter)
+    * Added truncate page title option
+
 * 0.3.5 (2009/02/04)
     * Updated internationalization support
     * Can now exclude and auto-expand using page slug or ID
