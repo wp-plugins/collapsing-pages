@@ -73,21 +73,26 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
           $subPageCount++;
           $subPageLinks.=( "<li class='collapsItem'>" );
         } else {
+	  if (in_array($page2->post_name, $autoExpand) ||
+	      in_array($page2->title, $autoExpand)) {
+		$symbol=$collapseSym;
+		$expanded = 'block';
+		$show = 'hide';
+	  } else {
+		$symbol=$expandSym;
+		$expanded = 'none';
+		$show = 'show';
+	  }
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
 					$subPageLinks.="<li class='collapsPage'>" .
-							"<span class='collapsPage show' " .
+							"<span class='collapsPage $show' " .
 							"onclick='expandCollapse(" .
 							"event, $expand, $animate, \"collapsPage\");".
 							"return false'>";
-					if (in_array($page2->post_name, $autoExpand) ||
-							in_array($page2->title, $autoExpand)) {
-						$subPageLinks.="<span class='sym'>$collapseSym";
-					} else {
-						$subPageLinks.="<span class='sym'>$expandSym";
-				  }
+					$subPageLinks.="<span class='sym'>".$symbol;
 					if ($linkToPage=='yes') {
 						$subPageLinks.="</span></span>";
-          } else {
+					} else {
 						$subPageLinks.="</span>";
 					}
         }
@@ -243,8 +248,6 @@ function list_pages($number) {
       $self="class='self'";
     }
     if ($page->post_parent==0) {
-      $url = get_settings('siteurl');
-      $home=$url;
       $lastPage= $page->ID;
       // print out page name 
       $link = "<a $self href='".get_page_link($page->ID)."' ";

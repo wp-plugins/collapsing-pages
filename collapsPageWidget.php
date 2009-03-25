@@ -38,7 +38,7 @@ if ( !$options = get_option('collapsPageOptions') )
   $id = false;
   foreach ( array_keys($options) as $o ) {
     // Old widgets can have null values for some reason
-    if ( !isset($options[$o]['title']) || !isset($options[$o]['title']) )
+    if ( !isset($options[$o]['title']) )
       continue;
     $id = "collapspage-$o"; // Never never never translate an id
     wp_register_sidebar_widget($id, $name, 'collapsPageWidget', $widget_ops, array( 'number' => $o ));
