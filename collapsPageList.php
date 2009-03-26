@@ -222,16 +222,6 @@ function list_pages($number) {
 
       $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
   $pages = $wpdb->get_results($pagequery);
-  if ($debug==1) {
-    echo "<pre style='display:none' >";
-    printf ("MySQL server version: %s\n", mysql_get_server_info());
-    echo "\ncollapsPage options:\n";
-    print_r($options[$number]);
-    echo "PAGE QUERY: \n $pagequery\n";
-    echo "\nPAGE QUERY RESULTS\n";
-    print_r($pages);
-    echo "</pre>";
-  }
   $parents=array();
 
   for ($pageIndex=0; $pageIndex<count($pages); $pageIndex++) {
@@ -241,6 +231,18 @@ function list_pages($number) {
     if ($pages[$pageIndex]->ID == $thisPage) {
 			checkCurrentPage($pageIndex,$pages);
 		}
+  }
+  if ($debug==1) {
+    echo "<pre style='display:none' >";
+    printf ("MySQL server version: %s\n", mysql_get_server_info());
+    echo "\ncollapsPage options:\n";
+    print_r($options[$number]);
+    echo "PAGE QUERY: \n $pagequery\n";
+    echo "\nPAGE QUERY RESULTS\n";
+    print_r($pages);
+    echo "\nAUTOEXPAND\n";
+    print_r($autoExpand);
+    echo "</pre>";
   }
   foreach( $pages as $page ) {
 		$self='';
