@@ -4,10 +4,6 @@ foreach ( (array) $_POST['collapsPage'] as $widget_number => $widget_collapsPage
     continue;
   }
       $title = strip_tags(stripslashes($widget_collapsPage['title']));
-  $showPageCount='no';
-  if( isset($widget_collapsPage['showPageCount']) ) {
-    $showPageCount='yes';
-  }
   $includePosts='no';
   if( isset($widget_collapsPage['includePosts']) ) {
     $includePosts='yes';

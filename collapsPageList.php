@@ -43,7 +43,8 @@ function checkCurrentPage($pageIndex, $pages) {
 }
 
 function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number) {
-  global $expand, $expandSym, $collapseSym, $autoExpand, $animate, $depth,
+  global $expand, $expandSym, $collapseSym, $expandSymJS, $collapseSymJS,
+      $autoExpand, $animate, $depth,
   $thisPage, $options;
   extract($options[$number]);
   if ($curDepth>=$depth && $depth!=-1) {
@@ -73,16 +74,16 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
           $subPageCount++;
           $subPageLinks.=( "<li class='collapsItem'>" );
         } else {
-	  if (in_array($page2->post_name, $autoExpand) ||
-	      in_array($page2->title, $autoExpand)) {
-		$symbol=$collapseSym;
-		$expanded = 'block';
-		$show = 'hide';
-	  } else {
-		$symbol=$expandSym;
-		$expanded = 'none';
-		$show = 'show';
-	  }
+          if (in_array($page2->post_name, $autoExpand) ||
+              in_array($page2->title, $autoExpand)) {
+            $symbol=$collapseSym;
+            $expanded = 'block';
+            $show = 'hide';
+            } else {
+            $symbol=$expandSym;
+            $expanded = 'none';
+            $show = 'show';
+          }
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
 					$subPageLinks.="<li class='collapsPage'>" .
 							"<span class='collapsPage $show' " .
@@ -138,7 +139,8 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 /* the page and tagging database structures changed drastically between wordpress 2.1 and 2.3. We will use different queries for page based vs. term_taxonomy based database structures */
 //$taxonomy=false;
 function list_pages($number) {
-  global $wpdb, $expand, $expandSym, $collapseSym, $animate, $depth,
+  global $wpdb, $expand, $expandSym, $collapseSym, $expandSymJS,
+      $collapseSymJS, $animate, $depth,
   $thisPage, $post, $options;
   $thisPage = $post->ID;
   $options=get_option('collapsPageOptions');
@@ -159,8 +161,8 @@ function list_pages($number) {
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
   } elseif ($expand==4) {
-    $expandSym=$customExpand;
-    $collapseSym=$customCollapse;
+    $expandSym=htmlentities($customExpand);
+    $collapseSym=htmlentities($customCollapse);
   } else {
     $expandSym='►';
     $collapseSym='▼';
