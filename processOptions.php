@@ -10,6 +10,8 @@ if ( -1 == $number) {
   $postTitleLength=0;
   $defaultExpand='';
   $expand='1';
+  $customExpand='';
+  $customCollapse='';
   $depth=-1;
   $inExcludePage='include';
   $inExcludePages='';
@@ -21,6 +23,8 @@ if ( -1 == $number) {
   $title = attribute_escape($options[$number]['title']);
   $showPostCount = $options[$number]['showPostCount'];
   $expand = $options[$number]['expand'];
+  $customExpand = $options[$number]['customExpand'];
+  $customCollapse = $options[$number]['customCollapse'];
   $depth = $options[$number]['depth'];
   $sort = $options[$number]['sort'];
   $sortOrder = $options[$number]['sortOrder'];

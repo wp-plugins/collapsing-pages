@@ -17,12 +17,20 @@
      <input type="radio" name="collapsPage[<?php echo $number ?>][sortOrder]" <?php if($sortOrder=='DESC') echo 'checked'; ?> id="collapsPage-sortDESC-<?php echo $number ?>" value='DESC'></input> <label for="sortDESC"><?php _e('Descending', 'collapsing-pages');?></label>
     </p>
     <p><?php _e('Expanding and collapse characters:', 'collapsing-pages');?><br />
-     html: <input type="radio" name="collapsPage[<?php echo $number ?>][expand]" <?php if($expand==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
+     <strong>html:</strong> <input type="radio" name="collapsPage[<?php echo $number ?>][expand]" <?php if($expand==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
      <input type="radio" name="collapsPage[<?php echo $number ?>][expand]" <?php if($expand==1) echo 'checked'; ?> id="expand1" value='1'></input> <label for="expand1">+&nbsp;&mdash;</label>
      <input type="radio" name="collapsPage[<?php echo $number ?>][expand]"
      <?php if($expand==2) echo 'checked'; ?> id="expand2" value='2'></input>
      <label for="expand2">[+]&nbsp;[&mdash;]</label>&nbsp;&nbsp;
-     <?php _e('images:', 'collapsing-pages');?>
+
+     <input type="radio" name="collapsPage[<?php echo $number ?>][expand]"
+     <?php if($expand==4) echo 'checked'; ?> id="expand4" value='4'></input>
+     <label for="expand4">custom</label>
+     <?php _e('expand:', 'collapsing-pages'); ?>
+     <input type="text" size='1' name="collapsPage[<?php echo $number ?>][customExpand]" value="<?php echo $customExpand ?>" id="collapsPage-customExpand-<?php echo $number ?>"></input> 
+     <?php _e('collapse:', 'collapsing-pages'); ?>
+     <input type="text" size='1' name="collapsPage[<?php echo $number ?>][customCollapse]" value="<?php echo $customCollapse ?>" id="collapsPage-customCollapse-<?php echo $number ?>"></input> 
+     <?php _e('<strong>images:</strong>', 'collapsing-pages');?>
      <input type="radio" name="collapsPage[<?php echo $number ?>][expand]"
      <?php if($expand==3) echo 'checked'; ?> id="expand0" value='3'></input>
      <label for="expand3"><img src='<?php echo get_settings('siteurl') .

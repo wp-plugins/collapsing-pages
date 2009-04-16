@@ -87,7 +87,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 					$subPageLinks.="<li class='collapsPage'>" .
 							"<span class='collapsPage $show' " .
 							"onclick='expandCollapse(" .
-							"event, $expand, $animate, \"collapsPage\");".
+							"event, \"$expandSymJS\", \"$collapseSymJS\", $animate, \"collapsPage\");".
 							"return false'>";
 					$subPageLinks.="<span class='sym'>".$symbol;
 					if ($linkToPage=='yes') {
@@ -158,10 +158,19 @@ function list_pages($number) {
     $collapseSym="<img src='". get_settings('siteurl') .
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
+  } elseif ($expand==4) {
+    $expandSym=$customExpand;
+    $collapseSym=$customCollapse;
   } else {
-    $expand=0;
     $expandSym='►';
     $collapseSym='▼';
+  }
+  if ($expand==3) {
+    $expandSymJS='expandImg';
+    $collapseSymJS='collapseImg';
+  } else {
+    $expandSymJS=$expandSym;
+    $collapseSymJS=$collapseSym;
   }
 	$inExclusionsPage = array();
 	if ( !empty($inExcludePage) && !empty($inExcludePages) ) {
@@ -298,13 +307,13 @@ function list_pages($number) {
         }
         if (in_array($page->post_name, $autoExpand) ||
             in_array($page->ID, $autoExpand)) {
-          $collapseTitle .= 'title="' . __('Click to collapse'). '"';
+          $collapseTitle = 'title="' . __('Click to collapse'). '" ';
         } else {
-          $collapseTitle .= 'title="' . __('Click to expand'). '"';
+          $collapseTitle = 'title="' . __('Click to expand'). '" ';
         }
         $theLi = "<li class='collapsPage '><span $collapseTitle " .
             "class='collapsPage $showing' " .
-            "onclick='expandCollapse(event, $expand, $animate, ".
+            "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
             "\"collapsPage\"); return false'><span class='sym'> " .
             "$symbol</span>";
         if ($linkToPage=='yes') {
