@@ -155,10 +155,10 @@ function list_pages($number) {
     $collapseSym='[—]';
   } elseif ($expand==3) {
     $expandSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-archives/" . 
+         "/wp-content/plugins/collapsing-pages/" . 
          "img/expand.gif' alt='expand' />";
     $collapseSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-archives/" . 
+         "/wp-content/plugins/collapsing-pages/" . 
          "img/collapse.gif' alt='collapse' />";
   } elseif ($expand==4) {
     $expandSym=htmlentities($customExpand);

@@ -1,5 +1,8 @@
 Collapsing Pages Changelog
 
+* 0.4.2 (2009/04/18)
+    * Fixed bug with wrong url to images
+
 * 0.4.1 (2009/04/16)
     * Added option for custom symbols
 
