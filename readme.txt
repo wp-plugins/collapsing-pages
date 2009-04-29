@@ -16,7 +16,7 @@ This is a very simple plugin that uses Javascript to form a collapsable set of
 links in the sidebar for the pages. Every page corresponding to a given
 parent page will be expanded.
 
-It is largely based off of my Collapsing Categories and Collapsing Archives
+It is largely based off of my Collapsing Pages and Collapsing Archives
 plugins. 
 
 == Installation ==

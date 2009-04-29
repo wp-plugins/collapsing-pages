@@ -51,25 +51,6 @@ class collapsPage {
       update_option( 'collapsPageOrigStyle', $style);
       update_option( 'collapsPageDefaultStyles', $defaultStyles);
     }
-    if (!get_option('collapsPageOptions')) {
-      $options=array('%i%' => array(
-        'title' => __('Pages', 'collapsing-pages'), 
-        'showPostCount'=> 'yes' ,
-        'sortOrder'=> 'ASC' ,
-        'sort'=> 'pageName' ,
-        'defaultExpand'=> '',
-        'expand' => '1',
-        'depth' =>-1,
-        'inExcludePage' => 'include',
-        'linkToPage' => 'yes',
-        'inExcludePages' => '',
-        'showPosts' => 'yes',
-        'showPages' => 'no',
-        'animate' => 0,
-        'postTitleLength' => 0
-      ));
-      update_option( 'collapsPageOptions', $options);
-    }
     if (!get_option('collapsPageStyle')) {
       add_option( 'collapsPageStyle', $style);
 		}

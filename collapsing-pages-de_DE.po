@@ -120,7 +120,7 @@ msgid "these pages (input slug or ID separated by commas):"
 msgstr "dieser Seiten (URL-Form oder ID durch Kommata getrennt eingeben):"
 
 #: collapsPageOptions.php:52
-msgid "Auto-expand these categories (input slug or ID separated by commas):"
+msgid "Auto-expand these pages (input slug or ID separated by commas):"
 msgstr "Diese Kategorien automatisch aufklappen (URL-Form oder ID durch Kommata getrennt eingeben):"
 
 #: collapsPageOptions.php:55
@@ -158,7 +158,7 @@ msgstr "Anzeigeoptionen:"
 
 #: collapsPageUI.php:75
 msgid ""
-"If you wish to use the collapsing categories plugin as a widget, you\n"
+"If you wish to use the collapsing pages plugin as a widget, you\n"
 "    should set the options in the widget page (except for custom styling,\n"
 "    which is set here). If you would like to use it manually (that is, you\n"
 "    modify your theme), then click below to delete the current widget options."

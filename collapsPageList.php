@@ -42,11 +42,11 @@ function checkCurrentPage($pageIndex, $pages) {
 	}
 }
 
-function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded, $number) {
+function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded) {
   global $expand, $expandSym, $collapseSym, $expandSymJS, $collapseSymJS,
       $autoExpand, $animate, $depth,
   $thisPage, $options;
-  extract($options[$number]);
+  extract($options);
   if ($curDepth>=$depth && $depth!=-1) {
     return;
   }
@@ -84,14 +84,14 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
             $expanded = 'none';
             $show = 'show';
           }
-          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded, $number);
+          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded);
 					$subPageLinks.="<li class='collapsPage'>" .
 							"<span class='collapsPage $show' " .
 							"onclick='expandCollapse(" .
 							"event, \"$expandSymJS\", \"$collapseSymJS\", $animate, \"collapsPage\");".
 							"return false'>";
 					$subPageLinks.="<span class='sym'>".$symbol;
-					if ($linkToPage=='yes') {
+					if ($linkToPage) {
 						$subPageLinks.="</span></span>";
 					} else {
 						$subPageLinks.="</span>";
@@ -99,7 +99,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
         }
         $link2 = "<a $self href='".get_page_link($page2->ID)."' ";
         $page2PostTitle=apply_filters('the_title',$page2->post_title);
-        if ($linkToPage=='yes') {
+        if ($linkToPage) {
           if ( empty($page2->page_description) ) {
             $link2 .= 'title="' . $page2PostTitle. '"';
           } else {
@@ -117,7 +117,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 
         $titleText = $tmp_text == '' ? $page2PostTitle : $tmp_text;
         $link2 .= $titleText. '</a>';
-        if ($linkToPage=='no') {
+        if (!$linkToPage) {
           $link2.='</span>';
         }
         $subPageLinks.= $link2 ;
@@ -138,14 +138,14 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 }
 /* the page and tagging database structures changed drastically between wordpress 2.1 and 2.3. We will use different queries for page based vs. term_taxonomy based database structures */
 //$taxonomy=false;
-function list_pages($number) {
+function list_pages($args) {
   global $wpdb, $expand, $expandSym, $collapseSym, $expandSymJS,
-      $collapseSymJS, $animate, $depth,
-  $thisPage, $post, $options;
+      $collapseSymJS, $animate, $depth, $thisPage, $post, $options;
+  include('defaults.php');
+  $options=wp_parse_args($args, $defaults);
+  print_r($options);
+  extract($options);
   $thisPage = $post->ID;
-  $options=get_option('collapsPageOptions');
-  //print_r($options[$number]);
-  extract($options[$number]);
 
   if ($expand==1) {
     $expandSym='+';
@@ -213,7 +213,7 @@ function list_pages($number) {
   }
 
   $isPage='';
-  //if (get_option('collapsPageIncludePosts'=='yes')) {
+  //if (get_option('collapsPageIncludePosts')) {
     $isPage="AND $wpdb->posts.post_type='page'";
   //}
   if ($sort!='') {
@@ -247,7 +247,7 @@ function list_pages($number) {
     echo "<pre style='display:none' >";
     printf ("MySQL server version: %s\n", mysql_get_server_info());
     echo "\ncollapsPage options:\n";
-    print_r($options[$number]);
+    print_r($options);
     echo "PAGE QUERY: \n $pagequery\n";
     echo "\nPAGE QUERY RESULTS\n";
     print_r($pages);
@@ -265,7 +265,7 @@ function list_pages($number) {
       // print out page name 
       $link = "<a $self href='".get_page_link($page->ID)."' ";
       $pagePostTitle=apply_filters('the_title',$page->post_title);
-			if ($linkToPage=='yes') {
+			if ($linkToPage) {
 				if ( empty($page->page_description) ) {
 					$link .= 'title="' . $pagePostTitle. '"';
 				} else {
@@ -283,7 +283,7 @@ function list_pages($number) {
 
 			$titleText = $tmp_text == '' ? $pagePostTitle : $tmp_text;
       $link .= $titleText. '</a>';
-			if ($linkToPage=='no') {
+			if (!$linkToPage) {
 			  $link.='</span>';
 			}
 
@@ -297,7 +297,7 @@ function list_pages($number) {
       if ($depth!=0) {
         list ($subPageLinks, $subPageCount, $subPagePosts) =
             getSubPage($page, $pages, $parents,$subPageCount,$dropDown,
-            $curDepth, $expanded, $number);
+            $curDepth, $expanded);
       }
       if ($subPageCount>0) {
         if ($expanded=='block') {
@@ -318,7 +318,7 @@ function list_pages($number) {
             "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
             "\"collapsPage\"); return false'><span class='sym'> " .
             "$symbol</span>";
-        if ($linkToPage=='yes') {
+        if ($linkToPage) {
           $theLi.="</span>";
         }
       } else {
