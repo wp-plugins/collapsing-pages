@@ -143,7 +143,6 @@ function list_pages($args) {
       $collapseSymJS, $animate, $depth, $thisPage, $post, $options;
   include('defaults.php');
   $options=wp_parse_args($args, $defaults);
-  print_r($options);
   extract($options);
   $thisPage = $post->ID;
 
