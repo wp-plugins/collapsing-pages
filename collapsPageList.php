@@ -176,27 +176,32 @@ function list_pages($args) {
 	$inExclusionsPage = array();
 	if ( !empty($inExcludePage) && !empty($inExcludePages) ) {
 		$exterms = preg_split('/[,]+/',$inExcludePages);
-    if ($inExcludePage=='include') {
-      $in='IN';
-    } else {
+    if ($inExcludePage=='exclude') {
       $in='NOT IN';
+      if ( count($exterms) ) {
+        foreach ( $exterms as $exterm ) {
+          if (empty($inExclusionsPage))
+            $inExclusionsPage = "'" . sanitize_title($exterm) . "'";
+          else
+            $inExclusionsPage .= ", '" . sanitize_title($exterm) . "' ";
+        }
+      }
+    } else {
+      global $includePages;
+      if ($inExcludePages!='') {
+        $includePages = preg_split('/[,]+/',$inExcludePages);
+        for ($i =0; $i<count($includePages); $i++) {
+          $includePages[$i]= sanitize_title($includePages[$i]);
+        } 
+      }
     }
-		if ( count($exterms) ) {
-			foreach ( $exterms as $exterm ) {
-				if (empty($inExclusionsPage))
-					$inExclusionsPage = "'" . sanitize_title($exterm) . "'";
-				else
-					$inExclusionsPage .= ", '" . sanitize_title($exterm) . "' ";
-			}
-		}
-	}
+  }
 	if ( empty($inExclusionsPage) ) {
 		$inExcludePageQuery = "AND post_name NOT IN ('')";
   } else {
     $inExcludePageQuery ="AND post_name $in ($inExclusionsPage)
     AND ID $in ($inExclusionsPage)";
   }
-  $exclude=$exclude;
 	if ( !empty($exclusions) ) {
 		$exclusions .= ')';
   }
@@ -241,6 +246,14 @@ function list_pages($args) {
     if ($pages[$pageIndex]->ID == $thisPage) {
 			checkCurrentPage($pageIndex,$pages);
 		}
+    // if only including certain pages, we build an array of those page ids 
+    if ($inExcludePage=='include') {
+      $includPageArray=array();
+      if (in_array($page->post_name, $includePages) ||
+          in_array($page->ID, $includePages)) {
+        array_push($includePageArray, $pages[$pageIndex]->ID);
+      }
+    }
   }
   if ($debug==1) {
     echo "<pre style='display:none' >";
@@ -255,6 +268,12 @@ function list_pages($args) {
     echo "</pre>";
   }
   foreach( $pages as $page ) {
+    if ($inExcludePage=='include') {
+      if (!in_array($page->ID, $includePageArray) &&
+          !in_array($page->post_parent, $includePageArray)) {
+        continue;
+      }
+    }
 		$self='';
     if ($page->ID == $thisPage) {
       $self="class='self'";
