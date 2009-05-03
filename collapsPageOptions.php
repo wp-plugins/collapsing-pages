@@ -1,9 +1,8 @@
     <p>
      <input type="checkbox" name="<?php echo $this->get_field_name('includePosts'); ?>" <?php if($includePosts) echo 'checked'; ?> id="<?php echo $this->get_field_id('includePosts'); ?>"></input> <label for="showPosts"><?php _e('Show posts as well as pages', 'collapsing-pages');?></label>
    &nbsp;&nbsp;
-   <input type="checkbox" name="collapsPage[<?php echo $number
-   ?>][animate]" <?php if ($animate==1) echo
-   'checked'; ?> id="animate-<?php echo $number ?>"></input> <label
+   <input type="checkbox" name="<?php echo $this->get_field_name('animate'); ?>" <?php if ($animate==1) echo
+   'checked'; ?> id="<?php echo $this->get_field_id('animate'); ?>"></input> <label
    for="animate"><?php _e('Animate collapsing and expanding', 'collapsing-pages');?></label>
    </p>
     <p><?php _e('Sort by:', 'collapsing-pages');?>&nbsp;&nbsp;
