@@ -3,9 +3,9 @@ Contributors: robfelty
 Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget, menu, navigation
-Requires at least: 2.6
-Tested up to: 2.7
-Stable tag: 0.4.2
+Requires at least: 2.8
+Tested up to: 2.8
+Stable tag: 0.4.7
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -18,6 +18,14 @@ parent page will be expanded.
 
 It is largely based off of my Collapsing Pages and Collapsing Archives
 plugins. 
+
+= What's new for 0.5.alpha? =
+* Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
+  and previous). If you are using wordpress 2.7.1 or previous, please use
+  collapsing pages version 0.4.7 or earlier
+* Can now add parameters to the collapsLink function if you choose not to use
+  the widget (see options section below)
+* Added option to collapse widget
 
 == Installation ==
 
@@ -149,12 +157,12 @@ the query style, just like for other wordpress functions such as
 
 = Examples =
 
-`collapsArch('animate=true&sort=ASC&expand=3,inExcludeCats=general,uncategorized')`
+`collapsPage('animate=true&sort=ASC&expand=3,inExcludePages=about')`
 This will produce a list with:
 * animation on
-* shown in chronological order
+* shown in alphabetical order
 * using images to mark collapsing and expanding
-* exclude posts from  the categories general and uncategorized
+* exclude page about
 == Demo ==
 
 I use this plugin in my blog at http://blog.robfelty.com

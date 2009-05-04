@@ -1,5 +1,10 @@
 Collapsing Pages Changelog
 
+* 0.5.alpha
+    * Added option to collapse widget
+    * Compatible with WP 2.8 (not backwards compatible)
+    * When using manually, can specify settings directly in code
+
 * 0.4.2 (2009/04/17)
     * Fixed bug with wrong url to images
     * Fixed bug with unicode codes showing up on page load instead of triangles
