@@ -4,7 +4,9 @@ $style="span.collapsPage {
         padding:0; 
         margin:0; 
         cursor:pointer;
-}
+} 
+
+li.widget_collapspage h2 span.sym {float:right;padding:0 .5em}
 li.collapsPage a.self {font-weight:bold}
 ul.collapsPageList ul.collapsPageList:before {content:'';} 
 ul.collapsPageList li.collapsPage:before {content:'';} 
@@ -35,6 +37,8 @@ span.collapsPage {
         margin:0; 
         cursor:pointer;
 }
+
+li.widget_collapspage h2 span.sym {float:right;padding:0 .5em}
 li.collapsPage a.self {background:#CCC;
                        font-weight:bold}
 ul.collapsPageList ul.collapsPageList:before {content:'';} 
@@ -57,6 +61,8 @@ $noArrows="span.collapsPage {
         cursor:pointer;
 }
 li.collapsPage a.self {font-weight:bold}
+
+li.widget_collapspage h2 span.sym {float:right;padding:0 .5em}
 ul.collapsPageList ul.collapsPageList:before {content:'';} 
 ul.collapsPageList li.collapsPage:before {content:'';} 
 ul.collapsPageList li.collapsPage {list-style-type:none}

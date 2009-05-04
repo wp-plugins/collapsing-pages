@@ -52,8 +52,7 @@
      <option  <?php if($inExcludePage=='exclude') echo 'selected'; ?> id="inExcludePageExclude-<?php echo $number ?>" value='exclude'><?php _e('Exclude', 'collapsing-pages');?></option>
      </select>
      <?php _e('these pages (input slug or ID separated by commas):', 'collapsing-pages');?><br />
-    <input type="text" name="collapsPage[<?php echo $number
-    ?>][inExcludePages]" value="<?php echo $inExcludePages ?>"  
+    <input type="text" name="<?php echo $this->get_field_name('inExcludePages') ?>" value="<?php echo $inExcludePages ?>"  
     id="<?php echo $this->get_field_id('inExcludePages'); ?>"></input> 
     </p>
     <p><?php _e('Auto-expand these pages (input slug or ID separated by commas):', 'collapsing-pages');?><br />
@@ -78,8 +77,14 @@
    for="postTitleLength"><?php _e('characters') ?></label>
    </p>
     <p>
+     <input type="checkbox" name="<?php echo $this->get_field_name('expandWidget'); ?>"
+<?php if ($expandWidget)  echo 'checked'; ?> id="collapsPage-expandWidget-<?php echo
+$number ?>"></input> <label for="collapsPageexpandWidget"><?php _e('Make whole
+widget collapsible', 'collapsing-pages');?></label>
+    </p>
+    <p>
      <input type="checkbox" name="<?php echo $this->get_field_name('debug'); ?>"
-<?php if ($debug=='1')  echo 'checked'; ?> id="collapsPage-debug-<?php echo
+<?php if ($debug)  echo 'checked'; ?> id="collapsPage-debug-<?php echo
 $number ?>"></input> <label for="collapsPageDebug"><?php _e('Show debugging information
 (shows up as a hidden pre right after the title)', 'collapsing-pages');?></label>
     </p>

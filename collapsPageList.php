@@ -42,10 +42,9 @@ function checkCurrentPage($pageIndex, $pages) {
 	}
 }
 
-function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, $expanded) {
-  global $expand, $expandSym, $collapseSym, $expandSymJS, $collapseSymJS,
-      $autoExpand, $animate, $depth,
-  $thisPage, $options;
+function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded) {
+  global  $expandSym, $collapseSym, $expandSymJS, $collapseSymJS,
+      $autoExpand,  $thisPage, $options;
   extract($options);
   if ($curDepth>=$depth && $depth!=-1) {
     return;
@@ -53,13 +52,8 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
   $curDepth++;
   $subPagePosts=array();
   if (in_array($page->ID, $parents)) {
-    if ($dropDown==TRUE) {
-      $subPageLinks.= "\n     <ul>\n";
-    } else {
-      $subPageLinks.= "\n     <ul id='collapsPage-" . $page->ID ."' style='display:$expanded;'>\n";
-    }
+    $subPageLinks.= "\n     <ul id='collapsPage-" . $page->ID ."' style='display:$expanded;'>\n";
     foreach ($pages as $page2) {
-      //$subPageLinks.= "page2 =". $page2->term_id;
         $subPageLink2=''; // clear info from subPageLink2
       $self='';
       if ($page2->ID == $thisPage) {
@@ -84,7 +78,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
             $expanded = 'none';
             $show = 'show';
           }
-          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount,$dropDown, $curDepth,$expanded);
+          list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount, $curDepth,$expanded);
 					$subPageLinks.="<li class='collapsPage'>" .
 							"<span class='collapsPage $show' " .
 							"onclick='expandCollapse(" .
@@ -146,33 +140,8 @@ function list_pages($args) {
   extract($options);
   $thisPage = $post->ID;
 
-  if ($expand==1) {
-    $expandSym='+';
-    $collapseSym='—';
-  } elseif ($expand==2) {
-    $expandSym='[+]';
-    $collapseSym='[—]';
-  } elseif ($expand==3) {
-    $expandSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/collapse.gif' alt='collapse' />";
-  } elseif ($expand==4) {
-    $expandSym=htmlentities($customExpand);
-    $collapseSym=htmlentities($customCollapse);
-  } else {
-    $expandSym='►';
-    $collapseSym='▼';
-  }
-  if ($expand==3) {
-    $expandSymJS='expandImg';
-    $collapseSymJS='collapseImg';
-  } else {
-    $expandSymJS=$expandSym;
-    $collapseSymJS=$collapseSym;
-  }
+  include('symbols.php');
+
 	$inExclusionsPage = array();
 	if ( !empty($inExcludePage) && !empty($inExcludePages) ) {
 		$exterms = preg_split('/[,]+/',$inExcludePages);
@@ -239,6 +208,8 @@ function list_pages($args) {
   $pages = $wpdb->get_results($pagequery);
   $parents=array();
 
+  global $includePageArray;
+  $includePageArray=array();
   for ($pageIndex=0; $pageIndex<count($pages); $pageIndex++) {
     if ($pages[$pageIndex]->post_parent!=0) {
       array_push($parents, $pages[$pageIndex]->post_parent);
@@ -247,10 +218,9 @@ function list_pages($args) {
 			checkCurrentPage($pageIndex,$pages);
 		}
     // if only including certain pages, we build an array of those page ids 
-    if ($inExcludePage=='include') {
-      $includPageArray=array();
-      if (in_array($page->post_name, $includePages) ||
-          in_array($page->ID, $includePages)) {
+    if ($inExcludePage=='include' && $inExcludePages!='') {
+      if (in_array($pages[$pageIndex]->post_name, $includePages) ||
+          in_array($pages[$pageIndex]->ID, $includePages)) {
         array_push($includePageArray, $pages[$pageIndex]->ID);
       }
     }
@@ -268,7 +238,7 @@ function list_pages($args) {
     echo "</pre>";
   }
   foreach( $pages as $page ) {
-    if ($inExcludePage=='include') {
+    if ($inExcludePage=='include' && $inExcludePages!='') {
       if (!in_array($page->ID, $includePageArray) &&
           !in_array($page->post_parent, $includePageArray)) {
         continue;
@@ -314,7 +284,7 @@ function list_pages($args) {
       $curDepth=0;
       if ($depth!=0) {
         list ($subPageLinks, $subPageCount, $subPagePosts) =
-            getSubPage($page, $pages, $parents,$subPageCount,$dropDown,
+            getSubPage($page, $pages, $parents,$subPageCount,
             $curDepth, $expanded);
       }
       if ($subPageCount>0) {

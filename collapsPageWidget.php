@@ -13,8 +13,21 @@ class collapsPageWidget extends WP_Widget {
  
   function widget($args, $instance) {
     extract($args, EXTR_SKIP);
- 
-    $title = empty($instance['title']) ? '&nbsp;' : apply_filters('widget_title', $instance['title']);
+    $thetitle = empty($instance['title']) ? '&nbsp;' : apply_filters('widget_title', $instance['title']);
+    $expandWidget=$instance['expandWidget'];
+    if ($expandWidget) {
+      $animate=$instance['animate'];
+      $expand=$instance['expand'];
+      include('symbols.php'); 
+      $title ="<span  class='collapsPage hide'" . 
+          "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
+          "\"collapsPage\"); return false'>" .
+          "<span class='sym'>$collapseSym</span>".
+      $thetitle . "</span>"; 
+    } else {
+      $title=$thetitle;
+    }
+        
     echo $before_widget . $before_title . $title . $after_title;
        if( function_exists('collapsPage') ) {
         collapsPage($instance);
