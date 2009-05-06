@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.4.2
+Collapsing Pages version: 0.4.3
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -117,7 +117,7 @@ function getSubPage($page, $pages, $parents,$subPageCount,$dropDown, $curDepth, 
 
         $titleText = $tmp_text == '' ? $page2PostTitle : $tmp_text;
         $link2 .= $titleText. '</a>';
-        if ($linkToPage=='no') {
+        if ($linkToPage=='no' && in_array($page2->ID, $parents)) {
           $link2.='</span>';
         }
         $subPageLinks.= $link2 ;
@@ -283,9 +283,6 @@ function list_pages($number) {
 
 			$titleText = $tmp_text == '' ? $pagePostTitle : $tmp_text;
       $link .= $titleText. '</a>';
-			if ($linkToPage=='no') {
-			  $link.='</span>';
-			}
 
       $subPageCount=0;
       $expanded='none';
@@ -300,6 +297,9 @@ function list_pages($number) {
             $curDepth, $expanded, $number);
       }
       if ($subPageCount>0) {
+        if ($linkToPage=='no') {
+          $link.='</span>';
+        }
         if ($expanded=='block') {
           $showing='hide';
           $symbol=$collapseSym;

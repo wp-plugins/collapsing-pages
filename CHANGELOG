@@ -1,5 +1,8 @@
 Collapsing Pages Changelog
 
+* 0.4.3 (2009/05/06) 
+    * Fixed html validation error
+
 * 0.4.2 (2009/04/17)
     * Fixed bug with wrong url to images
     * Fixed bug with unicode codes showing up on page load instead of triangles
