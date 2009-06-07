@@ -1,12 +1,12 @@
 Collapsing Pages Changelog
 
-* 0.5.1 
-    TODO: auto-expand from parent
-
 * 0.5.alpha
     * Added option to collapse widget
     * Compatible with WP 2.8 (not backwards compatible)
     * When using manually, can specify settings directly in code
+    * Changed hide and show classes to collapse and expand to avoid CSS class
+      conflicts
+    * Tweaked default styles
 
 * 0.4.2 (2009/04/17)
     * Fixed bug with wrong url to images

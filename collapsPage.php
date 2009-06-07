@@ -32,7 +32,6 @@ if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('collapsFunctions',
   "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.4'));
   add_action( 'wp_head', array('collapsPage','get_head'));
-  add_action( 'wp_footer', array('collapsPage','get_foot'));
 }
 add_action('init', array('collapsPage','init_textdomain'));
 add_action('activate_collapsing-pages/collapsPage.php', array('collapsPage','init'));
@@ -46,7 +45,7 @@ class collapsPage {
 
 	function init() {
 	  include('collapsPageStyles.php');
-		$defaultStyles=compact('custom','selected','default','block','noArrows');
+		$defaultStyles=compact('selected','default','block','noArrows','custom');
     if( function_exists('add_option') ) {
       update_option( 'collapsPageOrigStyle', $style);
       update_option( 'collapsPageDefaultStyles', $defaultStyles);
@@ -76,30 +75,6 @@ class collapsPage {
     </style>\n";
 
 	}
-  function get_foot() {
-		$url = get_settings('siteurl');
-		echo "<script type=\"text/javascript\">\n";
-		echo "// <![CDATA[\n";
-		echo '/* These variables are part of the Collapsing Pages Plugin
-		       *version: 0.5.alpha
-		       *revision: $Id$
-					 * Copyright 2007 Robert Felty (robfelty.com)
-					 */'. "\n";
-    $expandSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/collapse.gif' alt='collapse' />";
-    echo "var expandSym=\"$expandSym\";";
-    echo "var collapseSym=\"$collapseSym\";";
-    echo"
-    addLoadEvent(function() {
-      autoExpandCollapse('collapsPage');
-    });
-    ";
-		echo ";\n// ]]>\n</script>\n";
-  }
 }
 
 

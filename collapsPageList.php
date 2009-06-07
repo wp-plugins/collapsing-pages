@@ -72,11 +72,11 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
               in_array($page2->title, $autoExpand)) {
             $symbol=$collapseSym;
             $expanded = 'block';
-            $show = 'hide';
+            $show = 'collapse';
             } else {
             $symbol=$expandSym;
             $expanded = 'none';
-            $show = 'show';
+            $show = 'expand';
           }
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount, $curDepth,$expanded);
 					$subPageLinks.="<li class='collapsPage'>" .
@@ -289,10 +289,10 @@ function list_pages($args) {
       }
       if ($subPageCount>0) {
         if ($expanded=='block') {
-          $showing='hide';
+          $showing='collapse';
           $symbol=$collapseSym;
         } else {
-          $showing='show';
+          $showing='expand';
           $symbol=$expandSym;
         }
         if (in_array($page->post_name, $autoExpand) ||
@@ -326,4 +326,26 @@ function list_pages($args) {
   }
   echo "    </ul> <!-- ending collapsPage -->\n";
 }
+		$url = get_settings('siteurl');
+		echo "<script type=\"text/javascript\">\n";
+		echo "// <![CDATA[\n";
+		echo '/* These variables are part of the Collapsing Pages Plugin
+		       *version: 0.5.alpha
+		       *revision: $Id: collapsPage.php 115384 2009-05-04 02:32:53Z robfelty $
+					 * Copyright 2007 Robert Felty (robfelty.com)
+					 */'. "\n";
+    $expandSym="<img src='". $url .
+         "/wp-content/plugins/collapsing-pages/" . 
+         "img/expand.gif' alt='expand' />";
+    $collapseSym="<img src='". $url .
+         "/wp-content/plugins/collapsing-pages/" . 
+         "img/collapse.gif' alt='collapse' />";
+    echo "var expandSym=\"$expandSym\";";
+    echo "var collapseSym=\"$collapseSym\";";
+    echo"
+    collapsAddLoadEvent(function() {
+      autoExpandCollapse('collapsPage');
+    });
+    ";
+		echo ";\n// ]]>\n</script>\n";
 ?>
