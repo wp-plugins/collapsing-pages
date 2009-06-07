@@ -2,10 +2,17 @@
 Contributors: robfelty
 Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
+<<<<<<< .working
 Tags: pages, sidebar, widget
 Requires at least: 2.6
 Tested up to: 2.7
 Stable tag: 0.4.3
+=======
+Tags: pages, sidebar, widget, menu, navigation
+Requires at least: 2.8
+Tested up to: 2.8
+Stable tag: 0.4.7
+>>>>>>> .merge-right.r123636
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -16,8 +23,16 @@ This is a very simple plugin that uses Javascript to form a collapsable set of
 links in the sidebar for the pages. Every page corresponding to a given
 parent page will be expanded.
 
-It is largely based off of my Collapsing Categories and Collapsing Archives
+It is largely based off of my Collapsing Pages and Collapsing Archives
 plugins. 
+
+= What's new for 0.5.alpha? =
+* Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
+  and previous). If you are using wordpress 2.7.1 or previous, please use
+  collapsing pages version 0.4.7 or earlier
+* Can now add parameters to the collapsLink function if you choose not to use
+  the widget (see options section below)
+* Added option to collapse widget
 
 == Installation ==
 
@@ -36,13 +51,11 @@ change the following where appropriate	(most likely sidebar.php):
 	</ul>
 
 To something of the following:
-(use a div for the dropdown menu option, or ul for the sidebar nested list
-option)
 `
 	<?php
 	  if( function_exists('collapsPage') ) {
     echo "<div id='collapsPageDiv'>\n";
-	  collapsPage('%i%');
+	  collapsPage();
     echo "</div>\n";
 	} else {
 	  echo "<ul>\n";
@@ -51,6 +64,7 @@ option)
 	}
 	?>
 `
+You can specify options if you wish. See the options section.
 
 The above will fall back to the WP function for pages if you disable
 the plugin.
@@ -83,9 +97,83 @@ settings page.
 1. a few expanded pages with default theme, showing nested pages
 2. a few expanded pages with default theme, showing drop down version 
 
+== Options ==
+If using the manual version, you can pass options either as an array, or using
+the query style, just like for other wordpress functions such as
+`wp_list_pages`
+`
+  $defaults=array(
+    'title' => __('Pages', 'collapsing-pages'), 
+    'sortOrder'=> 'ASC' ,
+    'sort'=> 'pageName' ,
+    'defaultExpand'=> '',
+    'expand' => 0,
+    'depth' =>-1,
+    'inExcludePage' => 'exclude',
+    'linkToPage' => true,
+    'inExcludePages' => '',
+    'showPosts' => false,
+    'animate' => 0,
+    'postTitleLength' => 0
+  );
+`
+* inExcludePage
+    * Whether to include or exclude certain pages 
+        * 'exclude' (default) 
+        * 'include'
+* inExcludePages
+    * The pages which should be included or excluded
+* showPosts
+    * Whether or not to include posts as well as pages. Default if false
+* linkToPage
+    * True, clicking on a parent page title will link to that page (default)
+    * False, clicking on a parent page will expand to show sub-pages
+* sort
+    * How to sort the pages. Possible values:
+        * 'pageName' the title of the page (default)
+        * 'pageId' the Id of the page
+        * 'pageSlug' the url of the page
+        * 'menuOrder' custom order specified in the pages settings
+* sortOrder
+    * Whether pages should be sorted in normal or reverse
+      order. Possible values:
+        * 'ASC' normal order (a-z 0-9) (default)
+        * 'DESC' reverse order (z-a 9-0)  
+* expand
+    * The symbols to be used to mark expanding and collapsing. Possible values:
+        * '0' Triangles (default)
+        * '1' + -
+        * '2' [+] [-]
+        * '3' images (you can upload your own if you wish)
+        * '4' custom symbols
+* customExpand
+    * If you have selected '4' for the expand option, this character will be
+      used to mark expandable link categories
+* customCollapse
+    * If you have selected '4' for the expand option, this character will be
+      used to mark collapsible link categories
+* postTitleLength
+    * Truncate post titles to this number of characters (default: 0 = don't
+      truncate)
+* animate
+    * When set to true, collapsing and expanding will be animated
+* debug
+    * When set to true, extra debugging information will be displayed in the
+      underlying code of your page (but not visible from the browser). Use
+      this option if you are having problems
+
+= Examples =
+
+`collapsPage('animate=true&sort=ASC&expand=3,inExcludePages=about')`
+This will produce a list with:
+* animation on
+* shown in alphabetical order
+* using images to mark collapsing and expanding
+* exclude page about
 == Demo ==
 
 I use this plugin in my blog at http://blog.robfelty.com
+
 
 == CAVEAT ==
 

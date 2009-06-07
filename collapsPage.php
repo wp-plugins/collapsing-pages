@@ -4,7 +4,11 @@ Plugin Name: Collapsing Pages
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-pages
 Description: Uses javascript to expand and collapse pages to show the posts that belong to the link category 
 Author: Robert Felty
+<<<<<<< .working
 Version: 0.4.3
+=======
+Version: 0.5.alpha
+>>>>>>> .merge-right.r123636
 Author URI: http://robfelty.com
 Tags: sidebar, widget, pages
 
@@ -30,9 +34,12 @@ This file is part of Collapsing Pages
 if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
   add_action('wp_head', wp_enqueue_script('collapsFunctions',
+<<<<<<< .working
   "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.3'));
+=======
+  "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.4'));
+>>>>>>> .merge-right.r123636
   add_action( 'wp_head', array('collapsPage','get_head'));
-  add_action( 'wp_footer', array('collapsPage','get_foot'));
 }
 add_action('init', array('collapsPage','init_textdomain'));
 add_action('activate_collapsing-pages/collapsPage.php', array('collapsPage','init'));
@@ -46,29 +53,10 @@ class collapsPage {
 
 	function init() {
 	  include('collapsPageStyles.php');
-		$defaultStyles=compact('custom','selected','default','block','noArrows');
+		$defaultStyles=compact('selected','default','block','noArrows','custom');
     if( function_exists('add_option') ) {
       update_option( 'collapsPageOrigStyle', $style);
       update_option( 'collapsPageDefaultStyles', $defaultStyles);
-    }
-    if (!get_option('collapsPageOptions')) {
-      $options=array('%i%' => array(
-        'title' => __('Pages', 'collapsing-pages'), 
-        'showPostCount'=> 'yes' ,
-        'sortOrder'=> 'ASC' ,
-        'sort'=> 'pageName' ,
-        'defaultExpand'=> '',
-        'expand' => '1',
-        'depth' =>-1,
-        'inExcludePage' => 'include',
-        'linkToPage' => 'yes',
-        'inExcludePages' => '',
-        'showPosts' => 'yes',
-        'showPages' => 'no',
-        'animate' => 0,
-        'postTitleLength' => 0
-      ));
-      update_option( 'collapsPageOptions', $options);
     }
     if (!get_option('collapsPageStyle')) {
       add_option( 'collapsPageStyle', $style);
@@ -95,6 +83,7 @@ class collapsPage {
     </style>\n";
 
 	}
+<<<<<<< .working
   function get_foot() {
 		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
@@ -119,6 +108,8 @@ class collapsPage {
     ";
 		echo ";\n// ]]>\n</script>\n";
   }
+=======
+>>>>>>> .merge-right.r123636
 }
 
 
