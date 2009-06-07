@@ -4,11 +4,7 @@ Plugin Name: Collapsing Pages
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-pages
 Description: Uses javascript to expand and collapse pages to show the posts that belong to the link category 
 Author: Robert Felty
-<<<<<<< .working
-Version: 0.4.3
-=======
 Version: 0.5.alpha
->>>>>>> .merge-right.r123636
 Author URI: http://robfelty.com
 Tags: sidebar, widget, pages
 
@@ -34,11 +30,7 @@ This file is part of Collapsing Pages
 if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
   add_action('wp_head', wp_enqueue_script('collapsFunctions',
-<<<<<<< .working
-  "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.3'));
-=======
   "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.4'));
->>>>>>> .merge-right.r123636
   add_action( 'wp_head', array('collapsPage','get_head'));
 }
 add_action('init', array('collapsPage','init_textdomain'));
@@ -83,33 +75,6 @@ class collapsPage {
     </style>\n";
 
 	}
-<<<<<<< .working
-  function get_foot() {
-		$url = get_settings('siteurl');
-		echo "<script type=\"text/javascript\">\n";
-		echo "// <![CDATA[\n";
-		echo '/* These variables are part of the Collapsing Pages Plugin
-		       *version: 0.4.3
-		       *revision: $Id$
-					 * Copyright 2007 Robert Felty (robfelty.com)
-					 */'. "\n";
-    $expandSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/collapse.gif' alt='collapse' />";
-    echo "var expandSym=\"$expandSym\";";
-    echo "var collapseSym=\"$collapseSym\";";
-    echo"
-    addLoadEvent(function() {
-      autoExpandCollapse('collapsPage');
-    });
-    ";
-		echo ";\n// ]]>\n</script>\n";
-  }
-=======
->>>>>>> .merge-right.r123636
 }
 
 

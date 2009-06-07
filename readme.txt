@@ -2,17 +2,10 @@
 Contributors: robfelty
 Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
-<<<<<<< .working
-Tags: pages, sidebar, widget
-Requires at least: 2.6
-Tested up to: 2.7
-Stable tag: 0.4.3
-=======
 Tags: pages, sidebar, widget, menu, navigation
 Requires at least: 2.8
 Tested up to: 2.8
 Stable tag: 0.4.7
->>>>>>> .merge-right.r123636
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.

@@ -1,10 +1,6 @@
 <?php
 /*
-<<<<<<< .working
-Collapsing Pages version: 0.4.3
-=======
 Collapsing Pages version: 0.5.alpha
->>>>>>> .merge-right.r123636
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -115,11 +111,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
 
         $titleText = $tmp_text == '' ? $page2PostTitle : $tmp_text;
         $link2 .= $titleText. '</a>';
-<<<<<<< .working
-        if ($linkToPage=='no' && in_array($page2->ID, $parents)) {
-=======
         if (!$linkToPage) {
->>>>>>> .merge-right.r123636
           $link2.='</span>';
         }
         $subPageLinks.= $link2 ;
@@ -279,12 +271,9 @@ function list_pages($args) {
 
 			$titleText = $tmp_text == '' ? $pagePostTitle : $tmp_text;
       $link .= $titleText. '</a>';
-<<<<<<< .working
-=======
 			if (!$linkToPage) {
 			  $link.='</span>';
 			}
->>>>>>> .merge-right.r123636
 
       $subPageCount=0;
       $expanded='none';
@@ -299,9 +288,6 @@ function list_pages($args) {
             $curDepth, $expanded);
       }
       if ($subPageCount>0) {
-        if ($linkToPage=='no') {
-          $link.='</span>';
-        }
         if ($expanded=='block') {
           $showing='collapse';
           $symbol=$collapseSym;

@@ -1,10 +1,6 @@
 <?php
 /*
-<<<<<<< .working
-Collapsing Pages version: 0.4.3
-=======
 Collapsing Pages version: 1.2.beta
->>>>>>> .merge-right.r123636
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Pages plugin by Andrew Rader

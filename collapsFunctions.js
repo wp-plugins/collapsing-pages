@@ -1,8 +1,4 @@
-<<<<<<< .working
-/*  Collapse Functions, version 1.3
-=======
 /*  Collapse Functions, version 1.4
->>>>>>> .merge-right.r123636
  *
  *--------------------------------------------------------------------------*/
 String.prototype.trim = function() {
