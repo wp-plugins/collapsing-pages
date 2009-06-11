@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.5.alpha
+Collapsing Pages version: 0.5.beta
 Copyright 2007 Robert Felty
 
 This work is largely based on the Collapsing Pages plugin by Andrew Rader
@@ -330,7 +330,7 @@ function list_pages($args) {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Pages Plugin
-		       *version: 0.5.alpha
+		       *version: 0.5.beta
 		       *revision: $Id: collapsPage.php 115384 2009-05-04 02:32:53Z robfelty $
 					 * Copyright 2007 Robert Felty (robfelty.com)
 					 */'. "\n";
