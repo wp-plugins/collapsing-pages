@@ -3,11 +3,6 @@
 Collapsing Pages version: 0.5.beta
 Copyright 2007 Robert Felty
 
-This work is largely based on the Fancy Pages plugin by Andrew Rader
-(http://nymb.us), which was also distributed under the GPLv2. I have tried
-contacting him, but his website has been down for quite some time now. See the
-CHANGELOG file for more information.
-
 This file is part of Collapsing Pages
 
     Collapsing Pages is free software; you can redistribute it and/or modify
