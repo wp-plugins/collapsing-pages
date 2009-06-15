@@ -11,7 +11,7 @@
       } elseif ($new_instance['sort'] == 'pageSlug') {
         $sort= 'pageSlug' ;
       } elseif ($new_instance['sort'] == 'menuOrder') {
-        $sort= 'pageOrder' ;
+        $sort= 'menuOrder' ;
       } elseif ($new_instance['sort'] == '') {
         $sort= '' ;
         $sortOrder= '' ;
