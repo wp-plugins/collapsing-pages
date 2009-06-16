@@ -80,7 +80,7 @@ class collapsPage {
 
 function collapsPage($number) {
   if (!is_admin()) {
-    include( 'collapsPageList.php' );
+    include_once( 'collapsPageList.php' );
     list_pages($number);
   }
 }
