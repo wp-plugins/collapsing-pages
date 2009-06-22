@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.5.beta
+Collapsing Pages version: 0.5.1
 Copyright 2007 Robert Felty
 
 This file is part of Collapsing Pages

@@ -5,7 +5,7 @@ Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget, menu, navigation
 Requires at least: 2.8
 Tested up to: 2.8
-Stable tag: 0.5.beta
+Stable tag: 0.5.1
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -19,13 +19,22 @@ parent page will be expanded.
 It is largely based off of my Collapsing Pages and Collapsing Archives
 plugins. 
 
-= What's new for 0.5.alpha? =
-* Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
-  and previous). If you are using wordpress 2.7.1 or previous, please use
-  collapsing pages version 0.4.7 or earlier
-* Can now add parameters to the collapsLink function if you choose not to use
-  the widget (see options section below)
-* Added option to collapse widget
+= What's new?=
+* 0.5.1
+    * Fixed menuorder option
+    * Fixed problem with multiple instances
+    * Fixed problems with cookies on page load
+
+* 0.5.beta
+    * A few more tweaks
+
+* 0.5.alpha
+    * Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
+      and previous). If you are using wordpress 2.7.1 or previous, please use
+      collapsing pages version 0.4.7 or earlier
+    * Can now add parameters to the collapsLink function if you choose not to
+      use the widget (see options section below)
+    * Added option to collapse widget
 
 == Installation ==
 
@@ -176,6 +185,39 @@ posts, but the links to the pages will still work (which is the default
 behavior in wordpress anyways)
 
 == HISTORY ==
+
+* 0.5.1
+    * Fixed menuorder option
+    * Fixed problem with multiple instances
+    * Fixed problems with cookies on page load
+
+* 0.5.beta
+    * A few more tweaks
+
+* 0.5.alpha
+    * Added option to collapse widget
+    * Compatible with WP 2.8 (not backwards compatible)
+    * When using manually, can specify settings directly in code
+    * Changed hide and show classes to collapse and expand to avoid CSS class
+      conflicts
+    * Tweaked default styles
+
+* 0.4.3 (2009/05/06) 
+    * Fixed html validation error
+
+* 0.4.2 (2009/04/17)
+    * Fixed bug with wrong url to images
+    * Fixed bug with unicode codes showing up on page load instead of triangles
+
+* 0.4.1 (2009/04/16)
+    * Added option for custom symbols
+
+* 0.4 (2009/02/17)
+    * totally revised and improved style selecting methods
+    * fixed settings panel issue
+    * documentation now internationalized (Bernhard Reiter)
+    * german localization (Bernhard Reiter)
+    * Added truncate page title option
 
 * 0.4 (2009/02/17)
     * totally revised and improved style selecting methods
