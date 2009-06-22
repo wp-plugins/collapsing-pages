@@ -3,8 +3,6 @@
 Collapsing Pages version: 0.5.1
 Copyright 2007 Robert Felty
 
-This file is part of Collapsing Pages
-
     Collapsing Pages is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or

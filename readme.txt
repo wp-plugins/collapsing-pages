@@ -20,6 +20,7 @@ It is largely based off of my Collapsing Pages and Collapsing Archives
 plugins. 
 
 = What's new?=
+
 * 0.5.1
     * Fixed menuorder option
     * Fixed problem with multiple instances
