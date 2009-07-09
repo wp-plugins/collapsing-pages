@@ -197,7 +197,7 @@ function list_pages($args) {
     $sortOrder = $sortOrder;
   } 
 
-  echo "\n    <ul class='collapsPageList'>\n";
+  //echo "\n    <ul class='collapsPageList'>\n";
 
       $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
   $pages = $wpdb->get_results($pagequery);
@@ -319,7 +319,7 @@ function list_pages($args) {
       }
     }
   }
-  echo "    </ul> <!-- ending collapsPage -->\n";
+//  echo "    </ul> <!-- ending collapsPage -->\n";
 }
 		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";

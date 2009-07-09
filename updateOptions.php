@@ -47,10 +47,14 @@
       }
       $depth=$new_instance['depth'];
       $postTitleLength=$new_instance['postTitleLength'];
+      $useCookies=true;
+      if (!isset($new_instance['useCookies'])) {
+        $useCookies= false ;
+      }
       $instance = compact(
           'title','sort','sortOrder','defaultExpand',
           'expand','inExcludePage','inExcludePages', 'depth',
           'animate', 'debug', 'showPosts', 'customExpand', 'customCollapse',
-          'linkToPage', 'postTitleLength','expandWidget');
+          'linkToPage', 'postTitleLength','expandWidget', 'useCookies');
 
 ?>

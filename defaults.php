@@ -11,6 +11,7 @@
     'inExcludePages' => '',
     'showPosts' => false,
     'animate' => 0,
-    'postTitleLength' => 0
+    'postTitleLength' => 0,
+    'useCookies' => true
   );
 ?>

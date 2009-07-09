@@ -16,7 +16,7 @@
     $expandSym=htmlentities($customExpand);
     $collapseSym=htmlentities($customCollapse);
   } else {
-    $expandSym='►';
+    $expandSym='▶';
     $collapseSym='▼';
   }
   if ($expand==3) {

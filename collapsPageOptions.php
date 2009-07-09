@@ -76,6 +76,15 @@
    $postTitleLength; ?>"></input> <label
    for="postTitleLength"><?php _e('characters') ?></label>
    </p>
+  <a style='cursor:pointer' onclick='showAdvanced("<?php echo $this->get_field_id('advanced') ?>", "<?php echo $this->get_field_id('arrow') ?>");'><span id="<?php echo $this->get_field_id('arrow') ?>">&#9654;</span> Advanced options</a>
+  <div id="<?php echo $this->get_field_id('advanced') ?>" style='display:none;'>
+   <p>
+     <input type="checkbox" name="<?php echo
+     $this->get_field_name('useCookies'); ?>"
+<?php if ($useCookies)  echo 'checked'; ?> id="<?php echo
+$this->get_field_id('useCookies'); ?>"></input><label for="<?php echo
+$this->get_field_id('useCookies'); ?>"><?php _e('Remember expanding and collapsing for each visitor (using cookies)', 'collapsing-pages'); ?></label>
+   </p>
     <p>
      <input type="checkbox" name="<?php echo $this->get_field_name('expandWidget'); ?>"
 <?php if ($expandWidget)  echo 'checked'; ?> id="collapsPage-expandWidget-<?php echo
@@ -88,3 +97,17 @@ widget collapsible', 'collapsing-pages');?></label>
 $number ?>"></input> <label for="collapsPageDebug"><?php _e('Show debugging information
 (shows up as a hidden pre right after the title)', 'collapsing-pages');?></label>
     </p>
+  </div>
+  <script type='text/javascript'>
+  function showAdvanced(advancedId, arrowId) {
+    var advanced = document.getElementById(advancedId);
+    var arrow = document.getElementById(arrowId);
+    if (advanced.style.display=='none') {
+      advanced.style.display='block';
+      arrow.innerHTML='&#9660;';
+    } else {
+      advanced.style.display='none';
+      arrow.innerHTML='&#9654;';
+    }
+  }
+  </script>

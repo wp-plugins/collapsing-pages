@@ -21,21 +21,17 @@ plugins.
 
 = What's new?=
 
+* 0.5.2 (2009.07.07)
+    * Added advanced options section in configuration
+    * Added option to remember expanding and collapsing for each visitor
+      (using cookies)
+    * Now issuing a correct id for each ul when using widgets 
+    * Small change in manual installation
+
 * 0.5.1
     * Fixed menuorder option
     * Fixed problem with multiple instances
     * Fixed problems with cookies on page load
-
-* 0.5.beta
-    * A few more tweaks
-
-* 0.5.alpha
-    * Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
-      and previous). If you are using wordpress 2.7.1 or previous, please use
-      collapsing pages version 0.4.7 or earlier
-    * Can now add parameters to the collapsLink function if you choose not to
-      use the widget (see options section below)
-    * Added option to collapse widget
 
 == Installation ==
 
@@ -56,15 +52,13 @@ change the following where appropriate	(most likely sidebar.php):
 To something of the following:
 `
 	<?php
+  echo "<ul>\n";
 	  if( function_exists('collapsPage') ) {
-    echo "<div id='collapsPageDiv'>\n";
 	  collapsPage();
-    echo "</div>\n";
 	} else {
-	  echo "<ul>\n";
 	  wp_list_pages(...);
-	  echo "</ul>\n";
 	}
+  echo "</ul>\n";
 	?>
 `
 You can specify options if you wish. See the options section.
@@ -117,7 +111,9 @@ the query style, just like for other wordpress functions such as
     'inExcludePages' => '',
     'showPosts' => false,
     'animate' => 0,
+    'useCookies' => true,
     'postTitleLength' => 0
+    'debug' => false,
   );
 `
 * inExcludePage
@@ -160,6 +156,12 @@ the query style, just like for other wordpress functions such as
       truncate)
 * animate
     * When set to true, collapsing and expanding will be animated
+*   useCookies
+    * When true, expanding and collapsing of pages is remembered for each
+      visitor. When false, pages are always display collapsed (unless
+      explicitly set to auto-expand). Possible values:
+         * true (default)
+         * false
 * debug
     * When set to true, extra debugging information will be displayed in the
       underlying code of your page (but not visible from the browser). Use

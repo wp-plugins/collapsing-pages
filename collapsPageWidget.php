@@ -29,13 +29,13 @@ class collapsPageWidget extends WP_Widget {
     }
         
     echo $before_widget . $before_title . $title . $after_title;
-       if( function_exists('collapsPage') ) {
-        collapsPage($instance);
-       } else {
-        echo "<ul>\n";
-        wp_list_pages();
-        echo "</ul>\n";
-       }
+    echo "<ul id=" . $this->get_field_id('collapsPageList') . ">\n";
+    if( function_exists('collapsPage') ) {
+      collapsPage($instance);
+    } else {
+      wp_list_pages();
+    }
+    echo "</ul>\n";
 
     echo $after_widget;
   }

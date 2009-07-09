@@ -1,4 +1,12 @@
 Collapsing Pages Changelog
+* 0.5.2 (2009.07.07)
+    * Added advanced options section in configuration
+    * Added option to remember expanding and collapsing for each visitor
+      (using cookies)
+    * Now issuing a correct id for each ul when using widgets 
+    * Now using correct right triangle symbol
+    * Small change in manual installation
+
 * 0.5.1
     * Fixed menuorder option
     * Fixed problem with multiple instances
