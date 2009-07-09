@@ -324,11 +324,12 @@ function list_pages($args) {
 		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo '/* These variables are part of the Collapsing Pages Plugin
-		       *version: 0.5.1
-		       *revision: $Id: collapsPage.php 115384 2009-05-04 02:32:53Z robfelty $
-					 * Copyright 2007 Robert Felty (robfelty.com)
-					 */'. "\n";
+		echo '
+/* These variables are part of the Collapsing Pages Plugin
+* version: 0.5.1
+* revision: $Id$
+* Copyright 2007-2009 Robert Felty (robfelty.com)
+*/'. "\n";
     $expandSym="<img src='". $url .
          "/wp-content/plugins/collapsing-pages/" . 
          "img/expand.gif' alt='expand' />";
@@ -337,10 +338,12 @@ function list_pages($args) {
          "img/collapse.gif' alt='collapse' />";
     echo "var expandSym=\"$expandSym\";";
     echo "var collapseSym=\"$collapseSym\";";
-    echo"
-    collapsAddLoadEvent(function() {
-      autoExpandCollapse('collapsPage');
-    });
-    ";
+    if ($useCookies) {
+      echo"
+      collapsAddLoadEvent(function() {
+        autoExpandCollapse('collapsPage');
+      });
+      ";
+    }
 		echo ";\n// ]]>\n</script>\n";
 ?>
