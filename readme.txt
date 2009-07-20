@@ -5,7 +5,7 @@ Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget, menu, navigation
 Requires at least: 2.8
 Tested up to: 2.8
-Stable tag: 0.5.1
+Stable tag: 0.5.2
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -21,7 +21,7 @@ plugins.
 
 = What's new?=
 
-* 0.5.2 (2009.07.07)
+* 0.5.2 (2009.07.19)
     * Added advanced options section in configuration
     * Added option to remember expanding and collapsing for each visitor
       (using cookies)

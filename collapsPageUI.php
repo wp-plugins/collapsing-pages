@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.5.1
+Collapsing Pages version: 0.5.2
 Copyright 2007 Robert Felty
 
     Collapsing Pages is free software; you can redistribute it and/or modify

@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.5.1
+Collapsing Pages version: 0.5.2
 Copyright 2007 Robert Felty
 
 This file is part of Collapsing Pages
@@ -326,7 +326,7 @@ function list_pages($args) {
 		echo "// <![CDATA[\n";
 		echo '
 /* These variables are part of the Collapsing Pages Plugin
-* version: 0.5.1
+* version: 0.5.2
 * revision: $Id$
 * Copyright 2007-2009 Robert Felty (robfelty.com)
 */'. "\n";
