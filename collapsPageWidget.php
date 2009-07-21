@@ -29,7 +29,7 @@ class collapsPageWidget extends WP_Widget {
     }
         
     echo $before_widget . $before_title . $title . $after_title;
-    echo "<ul id=" . $this->get_field_id('collapsPageList') . ">\n";
+    echo "<ul id='" . $this->get_field_id('collapsPageList') . "'>\n";
     if( function_exists('collapsPage') ) {
       collapsPage($instance);
     } else {
