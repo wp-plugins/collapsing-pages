@@ -221,7 +221,7 @@ function list_pages($args) {
     }
   }
   if ($debug==1) {
-    echo "<pre style='display:none' >";
+    echo "<li style='display:none' >";
     printf ("MySQL server version: %s\n", mysql_get_server_info());
     echo "\ncollapsPage options:\n";
     print_r($options);
@@ -230,7 +230,7 @@ function list_pages($args) {
     print_r($pages);
     echo "\nAUTOEXPAND\n";
     print_r($autoExpand);
-    echo "</pre>";
+    echo "</li>";
   }
   foreach( $pages as $page ) {
     if ($inExcludePage=='include' && $inExcludePages!='') {
@@ -322,7 +322,7 @@ function list_pages($args) {
 //  echo "    </ul> <!-- ending collapsPage -->\n";
 }
 		$url = get_settings('siteurl');
-		echo "<script type=\"text/javascript\">\n";
+		echo "<li style='display:none'><script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '
 /* These variables are part of the Collapsing Pages Plugin
@@ -345,5 +345,5 @@ function list_pages($args) {
       });
       ";
     }
-		echo ";\n// ]]>\n</script>\n";
+		echo ";\n// ]]>\n</script></li>\n";
 ?>
