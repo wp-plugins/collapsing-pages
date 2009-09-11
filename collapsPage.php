@@ -59,7 +59,8 @@ class collapsPage {
 	}
 
 	function setup() {
-		if( function_exists('add_options_page') ) {
+		if( function_exists('add_options_page') &&
+        current_user_can('manage_options') {
 			add_options_page(__('Collapsing Pages', 'collapsing-pages'),__('Collapsing
       Pages', 'collapsing-pages'),1,basename(__FILE__),array('collapsPage','ui'));
 		}
