@@ -183,8 +183,9 @@ behavior in wordpress anyways)
 
 == CHANGELOG ==
 
-=  0.5.3 (2009.09.xx) =
+=  0.5.3 (2009.09.09) =
     * Restricted settings page to authorized users
+    * Fixed bug with manual usage
 
 =  0.5.2 (2009.07.19) =
     * Added advanced options section in configuration

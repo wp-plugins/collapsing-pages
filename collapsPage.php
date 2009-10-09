@@ -79,10 +79,10 @@ class collapsPage {
 }
 
 
-function collapsPage($number) {
+function collapsPage($args='') {
   if (!is_admin()) {
     include_once( 'collapsPageList.php' );
-    list_pages($number);
+    list_pages($args);
   }
 }
 include('collapsPageWidget.php');
