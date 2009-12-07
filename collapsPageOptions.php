@@ -1,5 +1,5 @@
     <p>
-     <input type="checkbox" name="<?php echo $this->get_field_name('includePosts'); ?>" <?php if($includePosts) echo 'checked'; ?> id="<?php echo $this->get_field_id('includePosts'); ?>"></input> <label for="showPosts"><?php _e('Show posts as well as pages', 'collapsing-pages');?></label>
+     <input type="checkbox" name="<?php echo $this->get_field_name('showPosts'); ?>" <?php if($showPosts) echo 'checked'; ?> id="<?php echo $this->get_field_id('showPosts'); ?>"></input> <label for="showPosts"><?php _e('Show posts as well as pages', 'collapsing-pages');?></label>
    &nbsp;&nbsp;
    <input type="checkbox" name="<?php echo $this->get_field_name('animate'); ?>" <?php if ($animate==1) echo
    'checked'; ?> id="<?php echo $this->get_field_id('animate'); ?>"></input> <label

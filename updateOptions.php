@@ -40,7 +40,7 @@
       }
       $inExcludePages=addslashes($new_instance['inExcludePages']);
       $defaultExpand=addslashes($new_instance['defaultExpand']);
-      if ($new_instance['showPosts']=='yes') {
+      if ($new_instance['showPosts']) {
         $showPosts= true ;
       } else {
         $showPosts=false;

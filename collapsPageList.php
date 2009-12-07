@@ -129,11 +129,11 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
 //$taxonomy=false;
 function list_pages($args) {
   global $wpdb, $expand, $expandSym, $collapseSym, $expandSymJS,
-      $collapseSymJS, $animate, $depth, $thisPage, $post, $options;
+      $collapseSymJS, $animate, $depth, $thisPage, $wp_query, $options;
   include('defaults.php');
   $options=wp_parse_args($args, $defaults);
   extract($options);
-  $thisPage = $post->ID;
+  $thisPage = $wp_query->post->ID;
 
   include('symbols.php');
 

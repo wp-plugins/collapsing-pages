@@ -183,9 +183,11 @@ behavior in wordpress anyways)
 
 == CHANGELOG ==
 
-=  0.5.3 (2009.09.09) =
+=  0.5.3 (2009.xx.xx) =
     * Restricted settings page to authorized users
     * Fixed bug with manual usage
+    * Fixed bug with selecting "show posts as well as pages option"
+    * Fixed bug with wrong page id assigned to self class
 
 =  0.5.2 (2009.07.19) =
     * Added advanced options section in configuration
