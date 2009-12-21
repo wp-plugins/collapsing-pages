@@ -1,5 +1,5 @@
     <?php
-$style="#sidebar span.collapsPage {
+$style="#sidebar span.collapsing.pages {
         border:0;
         padding:0; 
         margin:0; 
@@ -7,31 +7,31 @@ $style="#sidebar span.collapsPage {
 } 
 
 #sidebar li.widget_collapspage h2 span.sym {float:right;padding:0 .5em}
-#sidebar li.collapsPage a.self {font-weight:bold}
-#sidebar ul.collapsPageList ul.collapsPageList:before {content:'';} 
-#sidebar ul.collapsPageList li.collapsPage:before {content:'';} 
-#sidebar ul.collapsPageList li.collapsPage {list-style-type:none}
-#sidebar ul.collapsPageList li.collapsItem {
+#sidebar li.collapsing.pages a.self {font-weight:bold}
+#sidebar ul.collapsing.pages.list ul.collapsing.pages.list:before {content:'';} 
+#sidebar ul.collapsing.pages.list li.collapsing.pages:before {content:'';} 
+#sidebar ul.collapsing.pages.list li.collapsing.pages {list-style-type:none}
+#sidebar ul.collapsing.pages.list li.collapsItem {
        margin:0 0 0 2em;}
-#sidebar ul.collapsPageList li.collapsItem:before {content: '\\\\00BB \\\\00A0' !important;} 
-#sidebar ul.collapsPageList li.collapsPage .sym {
+#sidebar ul.collapsing.pages.list li.collapsItem:before {content: '\\\\00BB \\\\00A0' !important;} 
+#sidebar ul.collapsing.pages.list li.collapsing.pages .sym {
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
     padding-right:5px;}";
 
 $default=$style;
 
-$block="#sidebar ul.collapsPageList li a {
+$block="#sidebar ul.collapsing.pages.list li a {
             display:block;
             text-decoration:none;
             margin:0;
             padding:0;
             }
-#sidebar ul.collapsPageList li a:hover {
+#sidebar ul.collapsing.pages.list li a:hover {
             background:#CCC;
             text-decoration:none;
           }
-#sidebar span.collapsPage {
+#sidebar span.collapsing.pages {
         border:0;
         padding:0; 
         margin:0; 
@@ -39,15 +39,15 @@ $block="#sidebar ul.collapsPageList li a {
 }
 
 #sidebar li.widget_collapspage h2 span.sym {float:right;padding:0 .5em}
-#sidebar li.collapsPage a.self {background:#CCC;
+#sidebar li.collapsing.pages a.self {background:#CCC;
                        font-weight:bold}
-#sidebar ul.collapsPageList ul.collapsPageList:before {content:'';} 
-#sidebar ul.collapsPageList li.collapsPage {list-style-type:none}
-#sidebar ul.collapsPageList li.collapsItem:before, 
-  #sidebar ul.collapsPageList li.collapsPage:before {
+#sidebar ul.collapsing.pages.list ul.collapsing.pages.list:before {content:'';} 
+#sidebar ul.collapsing.pages.list li.collapsing.pages {list-style-type:none}
+#sidebar ul.collapsing.pages.list li.collapsItem:before, 
+  #sidebar ul.collapsing.pages.list li.collapsing.pages:before {
        content:'';
   } 
-#sidebar ul.collapsPageList li.collapsPage .sym {
+#sidebar ul.collapsing.pages.list li.collapsing.pages .sym {
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
     float:left;
@@ -55,19 +55,19 @@ $block="#sidebar ul.collapsPageList li a {
 }
 ";
 
-$noArrows="#sidebar span.collapsPage {
+$noArrows="#sidebar span.collapsing.pages {
         border:0;
         padding:0; 
         margin:0; 
         cursor:pointer;
 }
-#sidebar li.collapsPage a.self {font-weight:bold}
+#sidebar li.collapsing.pages a.self {font-weight:bold}
 
 #sidebar li.widget_collapspage h2 span.sym {float:right;padding:0 .5em}
-#sidebar ul.collapsPageList ul.collapsPageList:before {content:'';} 
-#sidebar ul.collapsPageList li.collapsPage:before {content:'';} 
-#sidebar ul.collapsPageList li.collapsPage {list-style-type:none}
-#sidebar ul.collapsPageList li.collapsPage .sym {
+#sidebar ul.collapsing.pages.list ul.collapsing.pages.list:before {content:'';} 
+#sidebar ul.collapsing.pages.list li.collapsing.pages:before {content:'';} 
+#sidebar ul.collapsing.pages.list li.collapsing.pages {list-style-type:none}
+#sidebar ul.collapsing.pages.list li.collapsing.pages .sym {
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
     padding-right:5px;}";

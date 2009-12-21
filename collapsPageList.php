@@ -74,10 +74,10 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
             $show = 'expand';
           }
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount, $curDepth,$expanded);
-					$subPageLinks.="<li class='collapsPage'>" .
-							"<span class='collapsPage $show' " .
+					$subPageLinks.="<li class='collapsing pages'>" .
+							"<span class='collapsing pages $show' " .
 							"onclick='expandCollapse(" .
-							"event, \"$expandSymJS\", \"$collapseSymJS\", $animate, \"collapsPage\");".
+							"event, \"$expandSymJS\", \"$collapseSymJS\", $animate, \"collapsing pages\");".
 							"return false'>";
 					$subPageLinks.="<span class='sym'>".$symbol;
 					if ($linkToPage) {
@@ -197,7 +197,7 @@ function list_pages($args) {
     $sortOrder = $sortOrder;
   } 
 
-  //echo "\n    <ul class='collapsPageList'>\n";
+  //echo "\n    <ul class='collapsing pages list'>\n";
 
       $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
   $pages = $wpdb->get_results($pagequery);
@@ -296,10 +296,10 @@ function list_pages($args) {
         } else {
           $collapseTitle = 'title="' . __('Click to expand'). '" ';
         }
-        $theLi = "<li class='collapsPage '><span $collapseTitle " .
-            "class='collapsPage $showing' " .
+        $theLi = "<li class='collapsing pages '><span $collapseTitle " .
+            "class='collapsing pages $showing' " .
             "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
-            "\"collapsPage\"); return false'><span class='sym'> " .
+            "\"collapsing pages\"); return false'><span class='sym'> " .
             "$symbol</span>";
         if ($linkToPage) {
           $theLi.="</span>";
@@ -341,7 +341,7 @@ function list_pages($args) {
     if ($useCookies) {
       echo"
       collapsAddLoadEvent(function() {
-        autoExpandCollapse('collapsPage');
+        autoExpandCollapse('collapsing pages');
       });
       ";
     }

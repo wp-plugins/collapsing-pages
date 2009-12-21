@@ -19,9 +19,9 @@ class collapsPageWidget extends WP_Widget {
       $animate=$instance['animate'];
       $expand=$instance['expand'];
       include('symbols.php'); 
-      $title ="<span  class='collapsPage collapse'" . 
+      $title ="<span  class='collapsing pages collapse'" . 
           "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
-          "\"collapsPage\"); return false'>" .
+          "\"collapsing pages\"); return false'>" .
           "<span class='sym'>$collapseSym</span>".
       $thetitle . "</span>"; 
     } else {
