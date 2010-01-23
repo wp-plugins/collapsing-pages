@@ -188,6 +188,8 @@ behavior in wordpress anyways)
     * Fixed bug with manual usage
     * Fixed bug with selecting "show posts as well as pages option"
     * Fixed bug with wrong page id assigned to self class
+    * Switched from scriptaculous to jquery. No longer conflicts with plugins
+      which use mootools (e.g. featured content gallery)
 
 =  0.5.2 (2009.07.19) =
     * Added advanced options section in configuration
