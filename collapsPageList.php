@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.5.2
+Collapsing Pages version: 0.5.3
 Copyright 2007 Robert Felty
 
 This file is part of Collapsing Pages
@@ -61,7 +61,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
          * subpages, and we do not print a triangle dropdown, otherwise we do
          * */
           $subPageCount++;
-          $subPageLinks.=( "<li class='collapsItem'>" );
+          $subPageLinks.=( "<li class='collapsing pages item'>" );
         } else {
           if (in_array($page2->post_name, $autoExpand) ||
               in_array($page2->title, $autoExpand)) {
@@ -306,7 +306,7 @@ function list_pages($args) {
         }
       } else {
         $theLi="<li id='" . $page->post_name . "-nav'" . 
-          " class='collapsItem'>";
+          " class='collapsing pages item'>";
       } 
       print($theLi);
       // don't include the triangles if posts are not shown and there are no
@@ -326,7 +326,7 @@ function list_pages($args) {
 		echo "// <![CDATA[\n";
 		echo '
 /* These variables are part of the Collapsing Pages Plugin
-* version: 0.5.2
+* version: 0.5.3
 * revision: $Id$
 * Copyright 2007-2009 Robert Felty (robfelty.com)
 */'. "\n";

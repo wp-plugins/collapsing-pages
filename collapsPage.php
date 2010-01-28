@@ -4,7 +4,7 @@ Plugin Name: Collapsing Pages
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-pages
 Description: Uses javascript to expand and collapse pages to show the posts that belong to the link category 
 Author: Robert Felty
-Version: 0.5.development
+Version: 0.5.3
 Author URI: http://robfelty.com
 Tags: sidebar, widget, pages
 
@@ -27,11 +27,18 @@ This file is part of Collapsing Pages
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */ 
 
+global $collapsPageVersion;
+$collapsPageVersion = '0.5.3';
 if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('jquery'));
   add_action('wp_head', wp_enqueue_script('collapsFunctions',
   "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.6'));
   add_action( 'wp_head', array('collapsPage','get_head'));
+} else {
+  // call upgrade function if current version is lower than actual version
+  $dbversion = get_option('collapsPageVersion');
+  if (!$dbversion || $collapsPageVersion != $dbversion)
+    collapsPage::init();
 }
 add_action('init', array('collapsPage','init_textdomain'));
 add_action('activate_collapsing-pages/collapsPage.php', array('collapsPage','init'));
@@ -44,7 +51,15 @@ class collapsPage {
 	}
 
 	function init() {
+    global $collapsPageVersion;
 	  include('collapsPageStyles.php');
+		$defaultStyles=compact('selected','default','block','noArrows','custom');
+    $dbversion = get_option('collapsPageVersion');
+    if ($collapsPageVersion != $dbversion && $selected!='custom') {
+      $style = $defaultStyles[$selected];
+      update_option( 'collapsPageStyle', $style);
+      update_option( 'collapsPageVersion', $collapsPageVersion);
+    }
 		$defaultStyles=compact('selected','default','block','noArrows','custom');
     if( function_exists('add_option') ) {
       update_option( 'collapsPageOrigStyle', $style);
@@ -55,6 +70,9 @@ class collapsPage {
 		}
     if (!get_option('collapsPageSidebarId')) {
       add_option( 'collapsPageSidebarId', 'sidebar');
+		}
+    if (!get_option('collapsPageVersion')) {
+      add_option( 'collapsPageVersion', $collapsPageVersion);
 		}
 	}
 

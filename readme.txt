@@ -4,8 +4,8 @@ Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget, menu, navigation
 Requires at least: 2.8
-Tested up to: 2.8
-Stable tag: 0.5.2
+Tested up to: 2.9.1
+Stable tag: 0.5.3
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -21,11 +21,17 @@ plugins.
 
 = What's new?=
 
+*  0.5.3 (2010.01.28)
+    * Restricted settings page to authorized users
+    * Fixed bug with manual usage
+    * Fixed bug with selecting "show posts as well as pages option"
+    * Fixed bug with wrong page id assigned to self class
+    * Changed css classes to make them more consistent with other collapsing
+      plugins (thanks Bernhard Reiter)
+    * Updated German localization (thanks Bernhard Reiter)
+    * Switched from scriptaculous to jquery. No longer conflicts with plugins
+      which use mootools (e.g. featured content gallery)
 
-* 0.5.1
-    * Fixed menuorder option
-    * Fixed problem with multiple instances
-    * Fixed problems with cookies on page load
 
 == Installation ==
 
@@ -183,11 +189,14 @@ behavior in wordpress anyways)
 
 == CHANGELOG ==
 
-=  0.5.3 (2009.xx.xx) =
+=  0.5.3 (2010.01.28) =
     * Restricted settings page to authorized users
     * Fixed bug with manual usage
     * Fixed bug with selecting "show posts as well as pages option"
     * Fixed bug with wrong page id assigned to self class
+    * Changed css classes to make them more consistent with other collapsing
+      plugins (thanks Bernhard Reiter)
+    * Updated German localization (thanks Bernhard Reiter)
     * Switched from scriptaculous to jquery. No longer conflicts with plugins
       which use mootools (e.g. featured content gallery)
 

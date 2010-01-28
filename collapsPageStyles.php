@@ -11,10 +11,13 @@ $style="#sidebar span.collapsing.pages {
 #sidebar ul.collapsing.pages.list ul.collapsing.pages.list:before {content:'';} 
 #sidebar ul.collapsing.pages.list li.collapsing.pages:before {content:'';} 
 #sidebar ul.collapsing.pages.list li.collapsing.pages {list-style-type:none}
-#sidebar ul.collapsing.pages.list li.collapsItem {
-       margin:0 0 0 2em;}
-#sidebar ul.collapsing.pages.list li.collapsItem:before {content: '\\\\00BB \\\\00A0' !important;} 
+#sidebar ul.collapsing.pages.list li.collapsing.pages{
+       padding:0 0 0 1em;
+       text-indent:-1em;
+}
+#sidebar ul.collapsing.pages.list li.collapsing.pages.item:before {content: '\\\\00BB \\\\00A0' !important;} 
 #sidebar ul.collapsing.pages.list li.collapsing.pages .sym {
+   cursor:pointer;
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
     padding-right:5px;}";
@@ -43,11 +46,12 @@ $block="#sidebar ul.collapsing.pages.list li a {
                        font-weight:bold}
 #sidebar ul.collapsing.pages.list ul.collapsing.pages.list:before {content:'';} 
 #sidebar ul.collapsing.pages.list li.collapsing.pages {list-style-type:none}
-#sidebar ul.collapsing.pages.list li.collapsItem:before, 
+#sidebar ul.collapsing.pages.list li.collapsing.pages.item:before, 
   #sidebar ul.collapsing.pages.list li.collapsing.pages:before {
        content:'';
   } 
 #sidebar ul.collapsing.pages.list li.collapsing.pages .sym {
+   cursor:pointer;
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
     float:left;
@@ -68,6 +72,7 @@ $noArrows="#sidebar span.collapsing.pages {
 #sidebar ul.collapsing.pages.list li.collapsing.pages:before {content:'';} 
 #sidebar ul.collapsing.pages.list li.collapsing.pages {list-style-type:none}
 #sidebar ul.collapsing.pages.list li.collapsing.pages .sym {
+   cursor:pointer;
    font-size:1.2em;
    font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
     padding-right:5px;}";

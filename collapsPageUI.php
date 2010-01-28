@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.5.2
+Collapsing Pages version: 0.5.3
 Copyright 2007 Robert Felty
 
     Collapsing Pages is free software; you can redistribute it and/or modify
@@ -125,7 +125,11 @@ function changeStyle(preview,template,select,selected,custom) {
   preview.src='<?php echo $url ?>/img/'+selectedStyle.innerHTML+'.png';
   var sidebarId=document.getElementById('collapsPageSidebarId').value;
 
-  var theStyle = selectedStyle.value.replace(/#[a-zA-Z]+\s/g, '#'+sidebarId + ' ');
+  if (sidebarId!='') {
+    var theStyle = selectedStyle.value.replace(/#[a-zA-Z]+\s/g, '#'+sidebarId + ' ');
+  } else {
+    var theStyle = selectedStyle.value.replace(/#[a-zA-Z]+\s/g, '');
+  }
   pageStyle.value=theStyle
 }
 
