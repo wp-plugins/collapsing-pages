@@ -299,7 +299,7 @@ function list_pages($args) {
         $theLi = "<li class='collapsing pages '><span $collapseTitle " .
             "class='collapsing pages $showing' " .
             "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
-            "\"collapsing pages\"); return false'><span class='sym'> " .
+            "\"collapsing pages\"); return false'><span class='sym'>" .
             "$symbol</span>";
         if ($linkToPage) {
           $theLi.="</span>";
