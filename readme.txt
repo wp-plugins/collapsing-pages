@@ -190,90 +190,87 @@ behavior in wordpress anyways)
 == CHANGELOG ==
 
 =  0.5.3 (2010.01.28) =
-    * Restricted settings page to authorized users
-    * Fixed bug with manual usage
-    * Fixed bug with selecting "show posts as well as pages option"
-    * Fixed bug with wrong page id assigned to self class
-    * Changed css classes to make them more consistent with other collapsing
-      plugins (thanks Bernhard Reiter)
-    * Updated German localization (thanks Bernhard Reiter)
-    * Switched from scriptaculous to jquery. No longer conflicts with plugins
-      which use mootools (e.g. featured content gallery)
+  * Restricted settings page to authorized users
+  * Fixed bug with manual usage
+  * Fixed bug with selecting "show posts as well as pages option"
+  * Fixed bug with wrong page id assigned to self class
+  * Switched from scriptaculous to jquery. No longer conflicts with plugins
+    which use mootools (e.g. featured content gallery)
 
 =  0.5.2 (2009.07.19) =
-    * Added advanced options section in configuration
-    * Added option to remember expanding and collapsing for each visitor
-      (using cookies)
-    * Now issuing a correct id for each ul when using widgets 
-    * Small change in manual installation
+  * Added advanced options section in configuration
+  * Added option to remember expanding and collapsing for each visitor
+    (using cookies)
+  * Now issuing a correct id for each ul when using widgets 
+  * Small change in manual installation
 
 =  0.5.1 =
-    * Fixed menuorder option
-    * Fixed problem with multiple instances
-    * Fixed problems with cookies on page load
+  * Fixed menuorder option
+  * Fixed problem with multiple instances
+  * Fixed problems with cookies on page load
 
 =  0.5.beta =
-    * A few more tweaks
+  * A few more tweaks
 
 =  0.5.alpha =
-    * Added option to collapse widget
-    * Compatible with WP 2.8 (not backwards compatible)
-    * When using manually, can specify settings directly in code
-    * Changed hide and show classes to collapse and expand to avoid CSS class
-      conflicts
-    * Tweaked default styles
+  * Added option to collapse widget
+  * Compatible with WP 2.8 (not backwards compatible)
+  * When using manually, can specify settings directly in code
+  * Changed hide and show classes to collapse and expand to avoid CSS class
+    conflicts
+  * Tweaked default styles
 
 =  0.4.3 (2009/05/06)  =
-    * Fixed html validation error
+  * Fixed html validation error
 
 =  0.4.2 (2009/04/17) =
-    * Fixed bug with wrong url to images
-    * Fixed bug with unicode codes showing up on page load instead of triangles
+  * Fixed bug with wrong url to images
+  * Fixed bug with unicode codes showing up on page load instead of triangles
 
 =  0.4.1 (2009/04/16) =
-    * Added option for custom symbols
+  * Added option for custom symbols
 
 =  0.4 (2009/02/17) =
-    * totally revised and improved style selecting methods
-    * fixed settings panel issue
-    * documentation now internationalized (Bernhard Reiter)
-    * german localization (Bernhard Reiter)
-    * Added truncate page title option
+  * totally revised and improved style selecting methods
+  * fixed settings panel issue
+  * documentation now internationalized (Bernhard Reiter)
+  * german localization (Bernhard Reiter)
+  * Added truncate page title option
 
 =  0.4 (2009/02/17) =
-    * totally revised and improved style selecting methods
-    * fixed settings panel issue
-    * documentation now internationalized (Bernhard Reiter)
-    * german localization (Bernhard Reiter)
-    * Added truncate page title option
+  * totally revised and improved style selecting methods
+  * fixed settings panel issue
+  * documentation now internationalized (Bernhard Reiter)
+  * german localization (Bernhard Reiter)
+  * Added truncate page title option
 
 =  0.3.5 (2009/02/04) =
-    * Updated internationalization support
-    * Can now exclude and auto-expand using page slug or ID
-    * Added option to make clicking on parent page expand sub-pages
+  * Updated internationalization support
+  * Can now exclude and auto-expand using page slug or ID
+  * Added option to make clicking on parent page expand sub-pages
 
 =  0.3.4 (2009/01/21) =
-    * removed debugging info
-    * fixed settings panel
+  * removed debugging info
+  * fixed settings panel
    
 =  0.3.3 (2009/01/20) =
 		* now 'self' class gets attributed to <a> instead of <li>, so it doesn't
 		  apply to all subpages when a parent page is selected
-    * changed 'inline' to 'block', which fixes formatting
+  * changed 'inline' to 'block', which fixes formatting
 		* If current page is a subpage, the parent page is automatically expanded
 		  in the list
 
 =  0.3.2 (2009/01/07) =
-    * added version to javascript file
-    * not loading unnecessary code for admin pages (fixes interference with
-      akismet stats page
-    * 'self' tag now gets added in subpages
+  * added version to javascript file
+  * not loading unnecessary code for admin pages (fixes interference with
+    akismet stats page
+  * 'self' tag now gets added in subpages
 
 =  0.3.1 (2009/01/06) =
-    * Finally fixed disappearing widget problem when trying to add to sidebar
-    * Added debugging option to show the query used and the output
-    * Moved style option to options page
-    * tweaked default style some
+  * Finally fixed disappearing widget problem when trying to add to sidebar
+  * Added debugging option to show the query used and the output
+  * Moved style option to options page
+  * tweaked default style some
 
 =  0.3 (2008.12.04) =
   * can now use multiple instance of the widget
