@@ -77,10 +77,60 @@ Widget.
 
 == Frequently Asked Questions ==
 
-= How do I provide custom styling? =
+=  How do I change the style of the collapsing categories lists? =
 
-The default style information is now contained in an option. You can edit this
-option from the settings page. 
+As of version 0.5.3, there are several default styles that come with
+collapsing-categories. You can choose from these in the settings panel, or you
+can create your own custom style. A good strategy is to choose a default, then
+modify it slightly to your needs. 
+
+The following classes are used:
+* collapsing - applied to all ul and li elements
+* pages - applied to all ul and li elements
+* list - applied to the top-level ul
+* item - applied to each li which has no sub-elements
+* expand - applied to a page which can be expanded (is currently
+  collapsed)
+* collapse - applied to a page which can be collapsed (is currently
+  expanded)
+* sym - class for the expanding / collapsing symbol
+
+An example:
+`
+<ul id='widget-collapspage-3-collapsPageList' class='collapsing pages list'>
+  <li id='about-nav' class='collapsing pages item'><a href='http://blog.robfelty.com/about/' title="About">About</a>
+  </li>
+<li id='donate-nav' class='collapsing pages item'><a
+href='http://blog.robfelty.com/donate/' title="Donate">Donate</a>
+</li> <!-- ending page subcat count = 0-->
+<li class='collapsing pages '><span title="Click to collapse"
+class='collapsing pages collapse' onclick='expandCollapse(event, "▶", "▼", 1,
+"collapsing pages"); return false'><span class='sym'>▼</span></span><a
+href='http://blog.robfelty.com/plugins/' title="Wordpress Plugins">Wordpress
+Plugins</a>
+     <ul id='collapsPage-67' style='display:block;'>
+<li class='collapsing pages item'><a
+href='http://blog.robfelty.com/plugins/collapsing-archives/' title="Collapsing
+Archives">Collapsing Archives</a></li>
+
+<li class='collapsing pages item'><a
+href='http://blog.robfelty.com/plugins/collapsing-categories/'
+title="Collapsing Categories">Collapsing Categories</a></li>
+<li class='collapsing pages item'><a
+href='http://blog.robfelty.com/plugins/collapsing-links/' title="Collapsing
+Links">Collapsing Links</a></li>
+<li class='collapsing pages item'><a
+href='http://blog.robfelty.com/plugins/collapsing-pages/' title="Collapsing
+Pages">Collapsing Pages</a></li>
+<li class='collapsing pages item'><a
+href='http://blog.robfelty.com/plugins/postie/' title="Postie">Postie</a></li>
+      </ul><!-- subpagecount = 5 ending subpage -->
+      </li><!-- subpagecount = 5 ending subpage -->
+<li id='forum-nav' class='collapsing pages item'><a
+href='http://blog.robfelty.com/forum/' title="WP Plugin Forum">WP Plugin
+Forum</a>                  </li> <!-- ending page subcat count = 0-->
+</ul>
+`
 
 = How do I make the current page prominent in the list of pages? =
 
