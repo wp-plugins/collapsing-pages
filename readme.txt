@@ -239,7 +239,9 @@ behavior in wordpress anyways)
 
 == CHANGELOG ==
 
-= 0.6 (2010.xx.xx) =
+= 0.6 (2010.xx.xx) = 
+* Fixed html validation bug when linkToPage is false (thanks to
+  levente.csabai)
 * fixed html parsing error in widget (thanks to vbonline)'
 
 =  0.5.3 (2010.01.28) =

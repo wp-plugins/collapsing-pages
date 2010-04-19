@@ -106,8 +106,8 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
 
         $titleText = $tmp_text == '' ? $page2PostTitle : $tmp_text;
         $link2 .= $titleText. '</a>';
-        if (!$linkToPage) {
-          $link2.='</span>';
+        if (!$linkToPage && in_array($page2->ID, $parents)) {
+          $link2.="subpagecount=$subPageCount</span>";
         }
         $subPageLinks.= $link2 ;
         if (!in_array($page2->ID, $parents)) {
@@ -207,7 +207,7 @@ function list_pages($args) {
   $includePageArray=array();
   for ($pageIndex=0; $pageIndex<count($pages); $pageIndex++) {
     if ($pages[$pageIndex]->post_parent!=0) {
-      array_push($parents, $pages[$pageIndex]->post_parent);
+      $parents[] =  $pages[$pageIndex]->post_parent;
     }
     if ($pages[$pageIndex]->ID == $thisPage) {
 			checkCurrentPage($pageIndex,$pages);
@@ -266,9 +266,6 @@ function list_pages($args) {
 
 			$titleText = $tmp_text == '' ? $pagePostTitle : $tmp_text;
       $link .= $titleText. '</a>';
-			if (!$linkToPage) {
-			  $link.='</span>';
-			}
 
       $subPageCount=0;
       $expanded='none';
@@ -282,6 +279,9 @@ function list_pages($args) {
             getSubPage($page, $pages, $parents,$subPageCount,
             $curDepth, $expanded);
       }
+			if (!$linkToPage && $subPageCount > 1) {
+			  $link.='</span>';
+			}
       if ($subPageCount>0) {
         if ($expanded=='block') {
           $showing='collapse';
