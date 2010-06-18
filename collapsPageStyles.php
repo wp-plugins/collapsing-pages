@@ -1,4 +1,4 @@
-    <?php
+<?php
 $style="#sidebar span.collapsing.pages {
         border:0;
         padding:0; 
