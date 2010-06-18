@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget, menu, navigation
 Requires at least: 2.8
-Tested up to: 2.9.1
+Tested up to: 3.0
 Stable tag: 0.6
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
