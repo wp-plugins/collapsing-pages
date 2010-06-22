@@ -55,7 +55,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         $self="class='self'";
       }
       if ($page->ID==$page2->post_parent) {
-        if (!in_array($page2->ID, $parents)) {
+        if (!in_array($page2->ID, $parents) || $curDepth>=$depth) {
           /* check to see if there are more subpages under this one. If the
          * page id is not in the parents array, then there should be no more
          * subpages, and we do not print a triangle dropdown, otherwise we do
