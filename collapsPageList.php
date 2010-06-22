@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.6
+Collapsing Pages version: 0.6.1
 Copyright 2007 Robert Felty
 
 This file is part of Collapsing Pages
@@ -107,7 +107,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         $titleText = $tmp_text == '' ? $page2PostTitle : $tmp_text;
         $link2 .= $titleText. '</a>';
         if (!$linkToPage && in_array($page2->ID, $parents)) {
-          $link2.="subpagecount=$subPageCount</span>";
+          $link2.="</span>";
         }
         $subPageLinks.= $link2 ;
         if (!in_array($page2->ID, $parents)) {
@@ -197,7 +197,6 @@ function list_pages($args) {
     $sortOrder = $sortOrder;
   } 
 
-  //echo "\n    <ul class='collapsing pages list'>\n";
 
       $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
   $pages = $wpdb->get_results($pagequery);
@@ -326,7 +325,7 @@ function list_pages($args) {
 		echo "// <![CDATA[\n";
 		echo '
 /* These variables are part of the Collapsing Pages Plugin
-* version: 0.6
+* version: 0.6.1
 * revision: $Id$
 * Copyright 2007-2009 Robert Felty (robfelty.com)
 */'. "\n";

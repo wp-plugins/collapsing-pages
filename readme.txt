@@ -5,7 +5,7 @@ Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget, menu, navigation
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.6
+Stable tag: 0.6.1
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -20,6 +20,9 @@ It is largely based off of my Collapsing Pages and Collapsing Archives
 plugins. 
 
 = What's new?=
+
+* 0.6.1 (2010.06.21)
+    * Removed extraneous debugging info (subpagecount=)
 
 * 0.6 (2010.06.18)
     * Fixed html validation bug when linkToPage is false (thanks to
@@ -232,6 +235,9 @@ posts, but the links to the pages will still work (which is the default
 behavior in wordpress anyways)
 
 == CHANGELOG ==
+
+= 0.6.1 (2010.06.21) =
+* Removed extraneous debugging info (subpagecount=)
 
 = 0.6 (2010.06.18) = 
 * Fixed html validation bug when linkToPage is false (thanks to
