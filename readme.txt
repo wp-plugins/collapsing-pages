@@ -236,9 +236,11 @@ behavior in wordpress anyways)
 
 == CHANGELOG ==
 
-= 0.6.2 (2010.xx.) =
+= 1.0 (2010.xx.) =
 * Fixed bug where expanding symbol showed up at lowest depth specified instead
   (thanks to tkibler for pointing it out)
+* Added option to only display pages of the current subpage
+* TODO: Added option to show top-level page (previously it was always shown)
 
 = 0.6.1 (2010.06.21) =
 * Removed extraneous debugging info (subpagecount=)

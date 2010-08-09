@@ -1,9 +1,9 @@
     <p>
-     <input type="checkbox" name="<?php echo $this->get_field_name('showPosts'); ?>" <?php if($showPosts) echo 'checked'; ?> id="<?php echo $this->get_field_id('showPosts'); ?>"></input> <label for="showPosts"><?php _e('Show posts as well as pages', 'collapsing-pages');?></label>
-   &nbsp;&nbsp;
-   <input type="checkbox" name="<?php echo $this->get_field_name('animate'); ?>" <?php if ($animate==1) echo
-   'checked'; ?> id="<?php echo $this->get_field_id('animate'); ?>"></input> <label
-   for="animate"><?php _e('Animate collapsing and expanding', 'collapsing-pages');?></label>
+     <input type="checkbox" name="<?php echo
+     $this->get_field_name('currentPageOnly'); ?>" <?php if($currentPageOnly) echo
+     'checked'; ?> id="<?php echo $this->get_field_id('currentPageOnly');
+     ?>"></input> <label for="currentPageOnly"><?php _e('Show only subpages of
+     current page', 'collapsing-pages');?></label>
    </p>
     <p><?php _e('Sort by:', 'collapsing-pages');?>&nbsp;&nbsp;
      <input type="radio" name="<?php echo $this->get_field_name('sort'); ?>" <?php if($sort=='pageName') echo 'checked'; ?> id="<?php echo $this->get_field_id('sortPageName'); ?>" value='pageName'></input> <label for="sortPageName"><?php _e('Page name', 'collapsing-pages');?></label>
@@ -76,6 +76,11 @@
    $postTitleLength; ?>"></input> <label
    for="postTitleLength"><?php _e('characters') ?></label>
    </p>
+   <p>
+   <input type="checkbox" name="<?php echo $this->get_field_name('animate'); ?>" <?php if ($animate==1) echo
+   'checked'; ?> id="<?php echo $this->get_field_id('animate'); ?>"></input> <label
+   for="animate"><?php _e('Animate collapsing and expanding', 'collapsing-pages');?></label>
+  </p>
   <a style='cursor:pointer' onclick='showAdvanced("<?php echo $this->get_field_id('advanced') ?>", "<?php echo $this->get_field_id('arrow') ?>");'><span id="<?php echo $this->get_field_id('arrow') ?>">&#9654;</span> Advanced options</a>
   <div id="<?php echo $this->get_field_id('advanced') ?>" style='display:none;'>
    <p>

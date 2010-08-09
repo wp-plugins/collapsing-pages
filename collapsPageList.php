@@ -52,16 +52,22 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         $subPageLink2=''; // clear info from subPageLink2
       $self='';
       if ($page2->ID == $thisPage) {
-        $self="class='self'";
+        $self="self";
+      }
+      if (in_array($page2->post_name, $autoExpand)) {
+        $parent="parent";
+      } else {
+        $parent="";
       }
       if ($page->ID==$page2->post_parent) {
-        if (!in_array($page2->ID, $parents) || $curDepth>=$depth) {
+        if (!in_array($page2->ID, $parents) || ($curDepth>=$depth &&
+            $depth!=-1)) {
           /* check to see if there are more subpages under this one. If the
          * page id is not in the parents array, then there should be no more
          * subpages, and we do not print a triangle dropdown, otherwise we do
          * */
           $subPageCount++;
-          $subPageLinks.=( "<li class='collapsing pages item'>" );
+          $subPageLinks.=( "<li class='collapsing pages item $self $parent'>" );
         } else {
           if (in_array($page2->post_name, $autoExpand) ||
               in_array($page2->title, $autoExpand)) {
@@ -74,7 +80,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
             $show = 'expand';
           }
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount, $curDepth,$expanded);
-					$subPageLinks.="<li class='collapsing pages'>" .
+					$subPageLinks.="<li class='collapsing pages $self $parent'>" .
 							"<span class='collapsing pages $show' " .
 							"onclick='expandCollapse(" .
 							"event, \"$expandSymJS\", \"$collapseSymJS\", $animate, \"collapsing pages\");".
@@ -86,7 +92,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
 						$subPageLinks.="</span>";
 					}
         }
-        $link2 = "<a $self href='".get_page_link($page2->ID)."' ";
+        $link2 = "<a href='".get_page_link($page2->ID)."' ";
         $page2PostTitle=apply_filters('the_title',$page2->post_title);
         if ($linkToPage) {
           if ( empty($page2->page_description) ) {
@@ -232,6 +238,8 @@ function list_pages($args) {
     echo "</li>";
   }
   foreach( $pages as $page ) {
+    if ($currentPageOnly && !in_array($page->post_name, $autoExpand))
+      continue;
     if ($inExcludePage=='include' && $inExcludePages!='') {
       if (!in_array($page->ID, $includePageArray) &&
           !in_array($page->post_parent, $includePageArray)) {
@@ -240,12 +248,17 @@ function list_pages($args) {
     }
 		$self='';
     if ($page->ID == $thisPage) {
-      $self="class='self'";
+      $self="self";
+    }
+    if (in_array($page->post_name, $autoExpand)) {
+      $parent="parent";
+    } else {
+      $parent="";
     }
     if ($page->post_parent==0) {
       $lastPage= $page->ID;
       // print out page name 
-      $link = "<a $self href='".get_page_link($page->ID)."' ";
+      $link = "<a href='".get_page_link($page->ID)."' ";
       $pagePostTitle=apply_filters('the_title',$page->post_title);
 			if ($linkToPage) {
 				if ( empty($page->page_description) ) {
@@ -295,7 +308,7 @@ function list_pages($args) {
         } else {
           $collapseTitle = 'title="' . __('Click to expand'). '" ';
         }
-        $theLi = "<li class='collapsing pages '><span $collapseTitle " .
+        $theLi = "<li class='collapsing pages $self $parent'><span $collapseTitle " .
             "class='collapsing pages $showing' " .
             "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
             "\"collapsing pages\"); return false'><span class='sym'>" .
@@ -305,7 +318,7 @@ function list_pages($args) {
         }
       } else {
         $theLi="<li id='" . $page->post_name . "-nav'" . 
-          " class='collapsing pages item'>";
+          " class='collapsing pages item $self $parent'>";
       } 
       print($theLi);
       // don't include the triangles if posts are not shown and there are no

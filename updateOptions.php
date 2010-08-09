@@ -40,10 +40,10 @@
       }
       $inExcludePages=addslashes($new_instance['inExcludePages']);
       $defaultExpand=addslashes($new_instance['defaultExpand']);
-      if ($new_instance['showPosts']) {
-        $showPosts= true ;
+      if ($new_instance['currentPageOnly']) {
+        $currentPageOnly= true ;
       } else {
-        $showPosts=false;
+        $currentPageOnly=false;
       }
       $depth=$new_instance['depth'];
       $postTitleLength=$new_instance['postTitleLength'];
@@ -54,7 +54,7 @@
       $instance = compact(
           'title','sort','sortOrder','defaultExpand',
           'expand','inExcludePage','inExcludePages', 'depth',
-          'animate', 'debug', 'showPosts', 'customExpand', 'customCollapse',
+          'animate', 'debug', 'currentPageOnly', 'customExpand', 'customCollapse',
           'linkToPage', 'postTitleLength','expandWidget', 'useCookies');
 
 ?>

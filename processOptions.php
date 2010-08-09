@@ -15,7 +15,7 @@ if ( -1 == $number) {
   $depth=-1;
   $inExcludePage='include';
   $inExcludePages='';
-  $showPosts='yes';
+  $currentPageOnly='yes';
   $showPages='no';
   $animate=0;
   $debug=0;
@@ -33,7 +33,7 @@ if ( -1 == $number) {
   $inExcludePages = $options[$number]['inExcludePages'];
   $inExcludePage = $options[$number]['inExcludePage'];
   $defaultExpand = $options[$number]['defaultExpand'];
-  $showPosts = $options[$number]['showPosts'];
+  $currentPageOnly = $options[$number]['currentPageOnly'];
   $showPages = $options[$number]['showPages'];
   $animate = $options[$number]['animate'];
   $debug = $options[$number]['debug'];
