@@ -56,9 +56,23 @@
       if (!isset($new_instance['useCookies'])) {
         $useCookies= false ;
       }
+/* update style settings */
+      $style = $new_instance['style'];
+/*
+    $id = $this->get_field_id('list');
+    $widgetStyle = $new_instance['style'];
+    $styles = get_option('collapsPageStyles');
+    $styles[$id] = $this->set_style($widgetStyle, $id);
+    update_option('collapsPageStyles', $styles);
+    $out = var_export($id, TRUE);
+    $handle = fopen('collapsewidget.txt', 'w');
+    fwrite($handle, $out);
+    fclose($handle);
+    */
+
       $instance = compact(
           'title','sort','sortOrder','defaultExpand', 'showTopLevel',
-          'expand','inExcludePage','inExcludePages', 'depth',
+          'expand','inExcludePage','inExcludePages', 'depth', 'style',
           'animate', 'debug', 'currentPageOnly', 'customExpand', 'customCollapse',
           'linkToPage', 'postTitleLength','expandWidget', 'useCookies');
 

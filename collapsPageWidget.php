@@ -15,6 +15,8 @@ class collapsPageWidget extends WP_Widget {
     extract($args, EXTR_SKIP);
     $thetitle = empty($instance['title']) ? '&nbsp;' : apply_filters('widget_title', $instance['title']);
     $expandWidget=$instance['expandWidget'];
+    $instance['number'] = $this->get_field_id('top');
+    $instance['number'] = preg_replace('/[a-zA-Z-]/', '', $instance['number']);
     if ($expandWidget) {
       $animate=$instance['animate'];
       $expand=$instance['expand'];
@@ -29,7 +31,7 @@ class collapsPageWidget extends WP_Widget {
     }
         
     echo $before_widget . $before_title . $title . $after_title;
-    echo "<ul id='" . $this->get_field_id('collapsPageList') .
+    echo "<ul id='" . $this->get_field_id('top') .
     	  "' class='collapsing pages list'>\n";
     if( function_exists('collapsPage') ) {
       collapsPage($instance);
@@ -40,6 +42,7 @@ class collapsPageWidget extends WP_Widget {
 
     echo $after_widget;
   }
+
  
   function update($new_instance, $old_instance) {
     $instance = $old_instance;
@@ -48,17 +51,14 @@ class collapsPageWidget extends WP_Widget {
   }
  
   function form($instance) {
-  include('defaults.php');
-  $options=wp_parse_args($instance, $defaults);
-  extract($options);
+    include('defaults.php');
+    include('collapsPageStyles.php');
+    $options=wp_parse_args($instance, $defaults);
+    extract($options);
 ?>
       <p><label for="<?php echo $this->get_field_id('title'); ?>">Title: <input  id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo attribute_escape($title); ?>" /></label></p>
 <?php
     include('collapsPageOptions.php');
-?>
-  <p>Style can be set from the <a
-  href='options-general.php?page=collapsPage.php'>options page</a></p>
-<?php
   }
 }
 function registerCollapsPageWidget() {

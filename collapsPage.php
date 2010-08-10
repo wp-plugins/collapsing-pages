@@ -88,12 +88,23 @@ class collapsPage {
 	}
 
 	function get_head() {
-    $style=stripslashes(get_option('collapsPageStyle'));
-    echo "<style type='text/css'>
-    $style
-    </style>\n";
+    echo "<style type='text/css'>\n";
+    echo collapsPage::set_styles();
+    echo "</style>\n";
 
 	}
+
+  function set_styles() {
+    $widget_options = get_option('widget_collapspage');
+    include('collapsPageStyles.php');
+    $css = '';
+    foreach ($widget_options as $key=>$value) {
+      $id = "widget-collapspage-$key-top";
+      $style = $defaultStyles[$value['style']];
+      $css .= str_replace('{ID}', '#' . $id, $style);
+    }
+    return($css);
+  }
 }
 
 

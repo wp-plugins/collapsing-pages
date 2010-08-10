@@ -51,7 +51,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         $subPageLink2=''; // clear info from subPageLink2
       $self='';
       if ($page2->ID == $thisPage) {
-        $self="self";
+        $self="class='self'";
       }
       if (in_array($page2->post_name, $autoExpand)) {
         $parent="parent";
@@ -59,6 +59,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         $parent="";
       }
       if ($page->ID==$page2->post_parent) {
+        $theID='collapsPage-' . $page2->ID . ":$number";
 
         if (!in_array($page2->ID, $parents) || ($curDepth>=$depth &&
             $depth!=-1)) {
@@ -67,10 +68,11 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
          * subpages, and we do not print a triangle dropdown, otherwise we do
          * */
           $subPageCount++;
-          $subPageLinks.=( "<li class='collapsing pages item $self $parent'>" );
+          $subPageLinks.=( "<li class='collapsing pages item $parent'>" );
         } else {
           if (in_array($page2->post_name, $autoExpand) ||
-              in_array($page2->title, $autoExpand)) {
+              in_array($page2->title, $autoExpand) || 
+              ($useCookies && $_COOKIE[$theID]==1)) {
             $symbol=$collapseSym;
             $expanded = 'block';
             $show = 'collapse';
@@ -80,9 +82,8 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
             $show = 'expand';
           }
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount, $curDepth,$expanded);
-          $theUl .= "\n     <ul id='collapsPage-" . 
-              $page->ID ."' style='display:$expanded;'>\n";
-					$subPageLinks.="<li class='collapsing pages $self $parent'>" .
+          $theUl .= "\n     <ul id='$theID' style='display:$expanded;'>\n";
+					$subPageLinks.="<li class='collapsing pages $parent $show'>" .
 							"<span class='collapsing pages $show' " .
 							"onclick='expandCollapse(" .
 							"event, \"$expandSymJS\", \"$collapseSymJS\", $animate, \"collapsing pages\");".
@@ -94,7 +95,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
 						$subPageLinks.="</span>";
 					}
         }
-        $link2 = "<a href='".get_page_link($page2->ID)."' ";
+        $link2 = "<a $self href='".get_page_link($page2->ID)."' ";
         $page2PostTitle=apply_filters('the_title',$page2->post_title);
         if ($linkToPage) {
           if ( empty($page2->page_description) ) {
@@ -117,7 +118,10 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         if (!$linkToPage && in_array($page2->ID, $parents)) {
           $link2.="</span>";
         }
-        $subPageLinks.= $link2 . $theUl;
+        $subPageLinks.= $link2;
+        if (in_array($page2->ID, $parents) || ($curDepth>=$depth &&
+            $depth!=-1)) 
+          $subPageLinks .= $theUl;
         if (!in_array($page2->ID, $parents)) {
           $subPageLinks.="</li>\n";
         }
@@ -202,7 +206,10 @@ function list_pages($args) {
   } 
 
 
-      $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $sortColumn $sortOrder";
+      $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent,
+      $wpdb->posts.post_title, $wpdb->posts.post_name,
+      date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE
+      $wpdb->posts.post_status='publish' AND post_type='page' $inExcludePageQuery $sortColumn $sortOrder";
   $pages = $wpdb->get_results($pagequery);
   $parents=array();
 
@@ -236,6 +243,7 @@ function list_pages($args) {
     echo "</li>";
   }
   foreach( $pages as $page ) {
+    $theID='collapsPage-' . $page->ID . ":$number";
     if ($currentPageOnly && !in_array($page->post_name, $autoExpand))
       continue;
     if ($inExcludePage=='include' && $inExcludePages!='') {
@@ -246,7 +254,7 @@ function list_pages($args) {
     }
 		$self='';
     if ($page->ID == $thisPage) {
-      $self="self";
+      $self="class='self'";
     }
     if (in_array($page->post_name, $autoExpand)) {
       $parent="parent";
@@ -256,7 +264,7 @@ function list_pages($args) {
     if ($page->post_parent==0) {
       $lastPage= $page->ID;
       // print out page name 
-      $link = "<a href='".get_page_link($page->ID)."' ";
+      $link = "<a $self href='".get_page_link($page->ID)."' ";
       $pagePostTitle=apply_filters('the_title',$page->post_title);
 			if ($linkToPage) {
 				if ( empty($page->page_description) ) {
@@ -280,7 +288,8 @@ function list_pages($args) {
       $subPageCount=0;
       $expanded='none';
       if (in_array($page->post_name, $autoExpand) ||
-          in_array($page->ID, $autoExpand)) {
+          in_array($page->ID, $autoExpand) ||
+              ($useCookies && $_COOKIE[$theID]==1)) {
         $expanded='block';
       }
       $curDepth=0;
@@ -294,10 +303,10 @@ function list_pages($args) {
 			}
       if ($subPageCount>0) {
         if ($expanded=='block') {
-          $showing='collapse';
+          $show='collapse';
           $symbol=$collapseSym;
         } else {
-          $showing='expand';
+          $show='expand';
           $symbol=$expandSym;
         }
         if (in_array($page->post_name, $autoExpand) ||
@@ -306,8 +315,8 @@ function list_pages($args) {
         } else {
           $collapseTitle = 'title="' . __('Click to expand'). '" ';
         }
-        $theLi = "<li class='collapsing pages $self $parent'><span $collapseTitle " .
-            "class='collapsing pages $showing' " .
+        $theLi = "<li class='collapsing pages $parent $show'><span $collapseTitle " .
+            "class='collapsing pages $show' " .
             "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
             "\"collapsing pages\"); return false'><span class='sym'>" .
             "$symbol</span>";
@@ -316,15 +325,14 @@ function list_pages($args) {
         }
       } else {
         $theLi="<li id='" . $page->post_name . "-nav'" . 
-          " class='collapsing pages item $self $parent'>";
+          " class='collapsing pages item $parent'>";
       } 
       if ($showTopLevel) {
         $collapse_page_text = $theLi;
         $collapse_page_text .= $link;
-        echo "subpagecount=$subPageCount\n";
         if ($subPageCount>0 ) {
-          $collapse_page_text .= "\n     <ul id='collapsPage-" . 
-              $page->ID ."' style='display:$expanded;'>\n";
+          $collapse_page_text .= "\n     <ul id='$theID' " .
+              "style='display:$expanded;'>\n";
         }
       }
       $collapse_page_text .= $subPageLinks;
@@ -353,12 +361,5 @@ function list_pages($args) {
          "img/collapse.gif' alt='collapse' />";
     echo "var expandSym=\"$expandSym\";";
     echo "var collapseSym=\"$collapseSym\";";
-    if ($useCookies) {
-      echo"
-      collapsAddLoadEvent(function() {
-        autoExpandCollapse('collapsing pages');
-      });
-      ";
-    }
 		echo ";\n// ]]>\n</script></li>\n";
 ?>

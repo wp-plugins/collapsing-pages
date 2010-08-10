@@ -87,6 +87,18 @@
    'checked'; ?> id="<?php echo $this->get_field_id('animate'); ?>"></input> <label
    for="animate"><?php _e('Animate collapsing and expanding', 'collapsing-pages');?></label>
   </p>
+  <p><label for='<?php echo $this->get_field_id("style")?>'><?php _e('Style',
+  'collapsing-pages')?></label>
+  <select id='<?php echo $this->get_field_id("style")?>'
+    name='<?php echo $this->get_field_name("style")?>'>
+  <?php $styles = get_option('collapsPageStyles'); ?>
+  <?php foreach ($styleOptions as $key =>$value): ?>
+  <option value='<?php echo attribute_escape($key) ?>' 
+  <?php if ($style == $key) echo "selected='selected'" ?>>
+  <?php echo $value ?></option>
+  <?php endforeach ?>
+  </select>
+  </p>
   <a style='cursor:pointer' onclick='showAdvanced("<?php echo $this->get_field_id('advanced') ?>", "<?php echo $this->get_field_id('arrow') ?>");'><span id="<?php echo $this->get_field_id('arrow') ?>">&#9654;</span> Advanced options</a>
   <div id="<?php echo $this->get_field_id('advanced') ?>" style='display:none;'>
    <p>

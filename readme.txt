@@ -242,7 +242,8 @@ behavior in wordpress anyways)
 * Added option to only display pages of the current subpage
 * Added option to show top-level page (previously it was always shown)
 * Cleaned up widget settings
-* TODO: improved style management
+* improved style management, including the ability to specify style per widget
+* Switched from unicode symbols to html entities
 
 = 0.6.1 (2010.06.21) =
 * Removed extraneous debugging info (subpagecount=)
