@@ -4,7 +4,7 @@ class collapsPageWidget extends WP_Widget {
     $widget_ops = array('classname' => 'widget_collapspage', 'description' =>
     'Collapsible page listing' );
 		$control_ops = array (
-			'width' => '400', 
+			'width' => '500', 
 			'height' => '400'
 			);
     $this->WP_Widget('collapspage', 'Collapsing Pages', $widget_ops,

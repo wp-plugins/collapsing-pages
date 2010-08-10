@@ -12,6 +12,8 @@
     'showPosts' => false,
     'animate' => 0,
     'postTitleLength' => 0,
+    'currentPageOnly' => 0,
+    'showTopLevel' => 1,
     'useCookies' => true
   );
 ?>

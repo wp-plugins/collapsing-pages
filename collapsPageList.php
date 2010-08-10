@@ -47,7 +47,6 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
   $curDepth++;
   $subPagePosts=array();
   if (in_array($page->ID, $parents)) {
-    $subPageLinks.= "\n     <ul id='collapsPage-" . $page->ID ."' style='display:$expanded;'>\n";
     foreach ($pages as $page2) {
         $subPageLink2=''; // clear info from subPageLink2
       $self='';
@@ -60,6 +59,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         $parent="";
       }
       if ($page->ID==$page2->post_parent) {
+
         if (!in_array($page2->ID, $parents) || ($curDepth>=$depth &&
             $depth!=-1)) {
           /* check to see if there are more subpages under this one. If the
@@ -80,6 +80,8 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
             $show = 'expand';
           }
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount, $curDepth,$expanded);
+          $theUl .= "\n     <ul id='collapsPage-" . 
+              $page->ID ."' style='display:$expanded;'>\n";
 					$subPageLinks.="<li class='collapsing pages $self $parent'>" .
 							"<span class='collapsing pages $show' " .
 							"onclick='expandCollapse(" .
@@ -115,7 +117,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         if (!$linkToPage && in_array($page2->ID, $parents)) {
           $link2.="</span>";
         }
-        $subPageLinks.= $link2 ;
+        $subPageLinks.= $link2 . $theUl;
         if (!in_array($page2->ID, $parents)) {
           $subPageLinks.="</li>\n";
         }
@@ -186,10 +188,6 @@ function list_pages($args) {
 	  $autoExpand = array();
   }
 
-  $isPage='';
-  //if (get_option('collapsPageIncludePosts')) {
-    $isPage="AND $wpdb->posts.post_type='page'";
-  //}
   if ($sort!='') {
     if ($sort=='pageName') {
       $sortColumn="ORDER BY $wpdb->posts.post_title";
@@ -204,7 +202,7 @@ function list_pages($args) {
   } 
 
 
-      $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $isPage $sortColumn $sortOrder";
+      $pagequery = "SELECT $wpdb->posts.ID, $wpdb->posts.post_parent, $wpdb->posts.post_title, $wpdb->posts.post_name, date($wpdb->posts.post_date) as 'date' FROM $wpdb->posts WHERE $wpdb->posts.post_status='publish' $inExcludePageQuery $sortColumn $sortOrder";
   $pages = $wpdb->get_results($pagequery);
   $parents=array();
 
@@ -320,18 +318,23 @@ function list_pages($args) {
         $theLi="<li id='" . $page->post_name . "-nav'" . 
           " class='collapsing pages item $self $parent'>";
       } 
-      print($theLi);
-      // don't include the triangles if posts are not shown and there are no
-      // more subpages
-      print( $link );
-      echo $subPageLinks;
+      if ($showTopLevel) {
+        $collapse_page_text = $theLi;
+        $collapse_page_text .= $link;
+        echo "subpagecount=$subPageCount\n";
+        if ($subPageCount>0 ) {
+          $collapse_page_text .= "\n     <ul id='collapsPage-" . 
+              $page->ID ."' style='display:$expanded;'>\n";
+        }
+      }
+      $collapse_page_text .= $subPageLinks;
       // close <ul> and <li> before starting a new page
       if ($subPageCount==0 ) {
-        echo "                  </li> <!-- ending page subcat count = $subPageCount-->\n";
+        $collapse_page_text .="                  </li> <!-- ending page subcat count = $subPageCount-->\n";
       }
+      print $collapse_page_text;
     }
   }
-//  echo "    </ul> <!-- ending collapsPage -->\n";
 }
 		$url = get_settings('siteurl');
 		echo "<li style='display:none'><script type=\"text/javascript\">\n";

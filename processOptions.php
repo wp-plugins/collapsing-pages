@@ -15,7 +15,8 @@ if ( -1 == $number) {
   $depth=-1;
   $inExcludePage='include';
   $inExcludePages='';
-  $currentPageOnly='yes';
+  $currentPageOnly=1;
+  $showTopLevel=1;
   $showPages='no';
   $animate=0;
   $debug=0;
@@ -34,6 +35,7 @@ if ( -1 == $number) {
   $inExcludePage = $options[$number]['inExcludePage'];
   $defaultExpand = $options[$number]['defaultExpand'];
   $currentPageOnly = $options[$number]['currentPageOnly'];
+  $showTopLevel = $options[$number]['showTopLevel'];
   $showPages = $options[$number]['showPages'];
   $animate = $options[$number]['animate'];
   $debug = $options[$number]['debug'];

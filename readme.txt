@@ -240,7 +240,9 @@ behavior in wordpress anyways)
 * Fixed bug where expanding symbol showed up at lowest depth specified instead
   (thanks to tkibler for pointing it out)
 * Added option to only display pages of the current subpage
-* TODO: Added option to show top-level page (previously it was always shown)
+* Added option to show top-level page (previously it was always shown)
+* Cleaned up widget settings
+* TODO: improved style management
 
 = 0.6.1 (2010.06.21) =
 * Removed extraneous debugging info (subpagecount=)

@@ -4,16 +4,22 @@
      'checked'; ?> id="<?php echo $this->get_field_id('currentPageOnly');
      ?>"></input> <label for="currentPageOnly"><?php _e('Show only subpages of
      current page', 'collapsing-pages');?></label>
+     <input type="checkbox" name="<?php echo
+     $this->get_field_name('showTopLevel'); ?>" <?php if(!$showTopLevel) echo
+     'checked'; ?> id="<?php echo $this->get_field_id('showTopLevel');
+     ?>"></input> <label for="showTopLevel"><?php _e('Hide top-level pages', 'collapsing-pages');?></label>
    </p>
     <p><?php _e('Sort by:', 'collapsing-pages');?>&nbsp;&nbsp;
-     <input type="radio" name="<?php echo $this->get_field_name('sort'); ?>" <?php if($sort=='pageName') echo 'checked'; ?> id="<?php echo $this->get_field_id('sortPageName'); ?>" value='pageName'></input> <label for="sortPageName"><?php _e('Page name', 'collapsing-pages');?></label>
-     <input type="radio" name="<?php echo $this->get_field_name('sort'); ?>" <?php if($sort=='pageId') echo 'checked'; ?> id="<?php echo $this->get_field_id('sortPageId'); ?>" value='pageId'></input> <label for="sortPageId"><?php _e('Page id', 'collapsing-pages');?></label>
-     <input type="radio" name="<?php echo $this->get_field_name('sort'); ?>" <?php if($sort=='pageSlug') echo 'checked'; ?> id="<?php echo $this->get_field_id('sortPageSlug'); ?>" value='pageSlug'></input> <label for="sortPageSlug"><?php _e('Page Slug', 'collapsing-pages');?></label>
-     <input type="radio" name="<?php echo $this->get_field_name('sort'); ?>" <?php if($sort=='menuOrder') echo 'checked'; ?> id="<?php echo $this->get_field_id('sortMenuOrder'); ?>" value='menuOrder'></input> <label for="sortMenuOrder"><?php _e('Menu Order', 'collapsing-pages');?></label>
-    </p>
-    <p><?php _e('Sort order:', 'collapsing-pages');?>&nbsp;&nbsp
-     <input type="radio" name="<?php echo $this->get_field_name('sortOrder'); ?>" <?php if($sortOrder=='ASC') echo 'checked'; ?> id="<?php echo $this->get_field_id('sortASC'); ?>" value='ASC'></input> <label for="sortASC"><?php _e('Ascending', 'collapsing-pages');?></label>
-     <input type="radio" name="<?php echo $this->get_field_name('sortOrder'); ?>" <?php if($sortOrder=='DESC') echo 'checked'; ?> id="<?php echo $this->get_field_id('sortDESC'); ?>" value='DESC'></input> <label for="sortDESC"><?php _e('Descending', 'collapsing-pages');?></label>
+     <select name="<?php echo $this->get_field_name('sort'); ?>">
+     <option   <?php if($sort=='pageName') echo 'selected="selected"'; ?> id="<?php echo $this->get_field_id('sortPageName'); ?>" value='pageName'><?php _e('Page name', 'collapsing-pages');?></option>
+     <option  <?php if($sort=='pageId') echo 'selected="selected"'; ?> id="<?php echo $this->get_field_id('sortPageId'); ?>" value='pageId'><?php _e('Page id', 'collapsing-pages');?></option>
+     <option  <?php if($sort=='pageSlug') echo 'selected="selected"'; ?> id="<?php echo $this->get_field_id('sortPageSlug'); ?>" value='pageSlug'><?php _e('Page Slug', 'collapsing-pages');?></option>
+     <option  <?php if($sort=='menuOrder') echo 'selected="selected"'; ?> id="<?php echo $this->get_field_id('sortMenuOrder'); ?>" value='menuOrder'><?php _e('Menu Order', 'collapsing-pages');?></option>
+    </select>
+    <select name="<?php echo $this->get_field_name('sortOrder'); ?>">
+         <option <?php if($sortOrder=='ASC') echo 'selected="selected"'; ?> id="<?php echo $this->get_field_id('sortASC'); ?>" value='ASC'><?php _e('Ascending', 'collapsing-pages');?></option>
+     <option   <?php if($sortOrder=='DESC') echo 'selected="selected"'; ?> id="<?php echo $this->get_field_id('sortDESC'); ?>" value='DESC'><?php _e('Descending', 'collapsing-pages');?></option>
+    </select>
     </p>
     <p><?php _e('Expanding and collapse characters:', 'collapsing-pages');?><br />
      <strong>html:</strong> <input type="radio" name="<?php echo $this->get_field_name('expand'); ?>" <?php if($expand==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
@@ -59,15 +65,15 @@
      <input type="text" name="<?php echo $this->get_field_name('defaultExpand'); ?>" value="<?php echo $defaultExpand ?>" id="<?php echo $this->get_field_id('defaultExpand'); ?>"></input> 
     </p>
     <p><?php _e('Clicking on page name:', 'collapsing-pages');?>
-     <input type="radio" name="<?php echo $this->get_field_name('linkToPage'); ?>"
-     <?php if($linkToPage) echo 'checked'; ?>
+    <select name="<?php echo $this->get_field_name('linkToPage'); ?>">
+     <option  
+     <?php if($linkToPage) echo 'selected="selected"'; ?>
      id="<?php echo $this->get_field_id('linkToPageYes'); ?>"
-     value='yes'></input> <label for="collapsPage-linkToPageYes"><?php _e('Links to page', 'collapsing-pages');?></label>
-     <input type="radio" name="<?php echo $this->get_field_name('linkToPage'); ?>"
-     <?php if(!$linkToPage) echo 'checked'; ?>
+     value='yes'><?php _e('Links to page', 'collapsing-pages');?></option>
+     <option  <?php if(!$linkToPage) echo 'selected="selected"'; ?>
      id="<?php echo $this->get_field_id('linkToPageNo'); ?>"
-     value='no'></input> <label for="linkToPageNo"><?php _e('Expands to show
-     sub-pages', 'collapsing-pages');?> </label>
+     value='no'><?php _e('Expands to show sub-pages', 'collapsing-pages');?> </option>
+    </select>
     </p>
    <p>
    <?php _e('Truncate Post Title to') ?>

@@ -45,6 +45,11 @@
       } else {
         $currentPageOnly=false;
       }
+      if ($new_instance['showTopLevel']) {
+        $showTopLevel= false ;
+      } else {
+        $showTopLevel=true;
+      }
       $depth=$new_instance['depth'];
       $postTitleLength=$new_instance['postTitleLength'];
       $useCookies=true;
@@ -52,7 +57,7 @@
         $useCookies= false ;
       }
       $instance = compact(
-          'title','sort','sortOrder','defaultExpand',
+          'title','sort','sortOrder','defaultExpand', 'showTopLevel',
           'expand','inExcludePage','inExcludePages', 'depth',
           'animate', 'debug', 'currentPageOnly', 'customExpand', 'customCollapse',
           'linkToPage', 'postTitleLength','expandWidget', 'useCookies');
