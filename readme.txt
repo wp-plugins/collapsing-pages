@@ -244,6 +244,7 @@ behavior in wordpress anyways)
 * Cleaned up widget settings
 * improved style management, including the ability to specify style per widget
 * Switched from unicode symbols to html entities
+* Not showing tags for title if empty
 
 = 0.6.1 (2010.06.21) =
 * Removed extraneous debugging info (subpagecount=)

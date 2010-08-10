@@ -13,7 +13,7 @@ class collapsPageWidget extends WP_Widget {
  
   function widget($args, $instance) {
     extract($args, EXTR_SKIP);
-    $thetitle = empty($instance['title']) ? '&nbsp;' : apply_filters('widget_title', $instance['title']);
+    $thetitle = apply_filters('widget_title', $instance['title']);
     $expandWidget=$instance['expandWidget'];
     $instance['number'] = $this->get_field_id('top');
     $instance['number'] = preg_replace('/[a-zA-Z-]/', '', $instance['number']);
@@ -30,7 +30,9 @@ class collapsPageWidget extends WP_Widget {
       $title=$thetitle;
     }
         
-    echo $before_widget . $before_title . $title . $after_title;
+    echo $before_widget;
+    if (!empty($title))
+      echo $before_title . $title . $after_title;
     echo "<ul id='" . $this->get_field_id('top') .
     	  "' class='collapsing pages list'>\n";
     if( function_exists('collapsPage') ) {
