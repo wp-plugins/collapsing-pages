@@ -35,8 +35,7 @@ $defaultStyles= array(
             text-decoration:none;
             margin:0;
             width:100%;
-            padding:0;
-padding-right:10em;
+            padding:0 10em 0 1em;
             }
 {ID}.collapsing.pages, {ID} li.collapsing.pages ul {
 margin-left:0;
@@ -50,7 +49,6 @@ padding-left:1em;
 padding-left:2em;
 }
 {ID} li a:hover {
-            background:#CCC;
             text-decoration:none;
           }
 {ID} span.collapsing.pages {
@@ -64,8 +62,9 @@ padding-left:2em;
 {ID} span.sym {
 float:right;
 }
-{ID} li.collapsing.pages a.self {background:#CCC;
-                       font-weight:bold}
+{ID} li.collapsing.pages a.self {
+ font-weight:bold;
+}
 {ID}:before {content:'';} 
 {ID} li.collapsing.pages {
 list-style-type:none;

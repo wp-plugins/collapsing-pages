@@ -159,7 +159,9 @@ the query style, just like for other wordpress functions such as
     'showPosts' => false,
     'animate' => 0,
     'useCookies' => true,
-    'postTitleLength' => 0
+    'postTitleLength' => 0,
+    'showTopLevel' => true,
+    'currentPageOnly' => false,
     'debug' => false,
   );
 `
@@ -209,6 +211,13 @@ the query style, just like for other wordpress functions such as
       explicitly set to auto-expand). Possible values:
          * true (default)
          * false
+* showTopLevel
+    * True -  show top level pages (default)
+    * False - only display sub-pages and below
+* currentPageOnly
+    * True -  show only parent and sub pages of the current page
+    * False - show all pages (subject to the include or exclude parameters
+      set) (default)
 * debug
     * When set to true, extra debugging information will be displayed in the
       underlying code of your page (but not visible from the browser). Use
@@ -245,6 +254,7 @@ behavior in wordpress anyways)
 * improved style management, including the ability to specify style per widget
 * Switched from unicode symbols to html entities
 * Not showing tags for title if empty
+* Fixed bug with title attribute of pages
 
 = 0.6.1 (2010.06.21) =
 * Removed extraneous debugging info (subpagecount=)

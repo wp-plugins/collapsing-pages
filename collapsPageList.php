@@ -99,7 +99,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         $page2PostTitle=apply_filters('the_title',$page2->post_title);
         if ($linkToPage) {
           if ( empty($page2->page_description) ) {
-            $link2 .= 'title="' . $page2PostTitle. '"';
+            $link2 .= 'title="' . attribute_escape(strip_tags($page2PostTitle)). '"';
           } else {
             $link2 .= 'title="' .
                 wp_specialchars(apply_filters('page_description',
@@ -268,7 +268,7 @@ function list_pages($args) {
       $pagePostTitle=apply_filters('the_title',$page->post_title);
 			if ($linkToPage) {
 				if ( empty($page->page_description) ) {
-					$link .= 'title="' . $pagePostTitle. '"';
+					$link .= 'title="' . attribute_escape(strip_tags($pagePostTitle)). '"';
 				} else {
 					$link .= 'title="' .
               wp_specialchars(apply_filters('page_description',

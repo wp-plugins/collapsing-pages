@@ -32,7 +32,7 @@ $collapsPageVersion = '1.0';
 if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('jquery'));
   add_action('wp_head', wp_enqueue_script('collapsFunctions',
-  "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.6'));
+  "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.8'));
   add_action( 'wp_head', array('collapsPage','get_head'));
 } else {
   // call upgrade function if current version is lower than actual version
@@ -98,11 +98,17 @@ class collapsPage {
     $widget_options = get_option('widget_collapspage');
     include('collapsPageStyles.php');
     $css = '';
+    $oldStyle=true;
     foreach ($widget_options as $key=>$value) {
       $id = "widget-collapspage-$key-top";
-      $style = $defaultStyles[$value['style']];
-      $css .= str_replace('{ID}', '#' . $id, $style);
+      if (isset($value['style'])) {
+        $oldStyle=false;
+        $style = $defaultStyles[$value['style']];
+        $css .= str_replace('{ID}', '#' . $id, $style);
+      }
     }
+    if ($oldStyle)
+      $css=stripslashes(get_option('collapsPageStyle'));
     return($css);
   }
 }
