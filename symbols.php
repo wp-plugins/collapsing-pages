@@ -1,29 +1,22 @@
-  <?php
+<?php
   if ($expand==1) {
     $expandSym='+';
-    $collapseSym='&mdash;';
+    $collapseSym='—';
   } elseif ($expand==2) {
     $expandSym='[+]';
-    $collapseSym='[&mdash;]';
+    $collapseSym='[—]';
   } elseif ($expand==3) {
-    $expandSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/collapse.gif' alt='collapse' />";
+    $expandSym="<img src=\"". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-categories/" . 
+         "img/expand.gif\" alt=\"expand\" />";
+    $collapseSym="<img src=\"". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-categories/" . 
+         "img/collapse.gif\" alt=\"collapse\" />";
   } elseif ($expand==4) {
-    $expandSym=htmlentities($customExpand);
-    $collapseSym=htmlentities($customCollapse);
+    $expandSym=$customExpand;
+    $collapseSym=$customCollapse;
   } else {
-    $expandSym='&#9658;';
-    $collapseSym='&#9660;';
-  }
-  if ($expand==3) {
-    $expandSymJS='expandImg';
-    $collapseSymJS='collapseImg';
-  } else {
-    $expandSymJS=$expandSym;
-    $collapseSymJS=$collapseSym;
+    $expandSym='&#x25BA;';
+    $collapseSym='&#x25BC;';
   }
 ?>

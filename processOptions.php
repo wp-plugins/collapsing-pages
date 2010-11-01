@@ -18,7 +18,7 @@ if ( -1 == $number) {
   $currentPageOnly=1;
   $showTopLevel=1;
   $showPages='no';
-  $animate=0;
+  $accordion=0;
   $debug=0;
 } else {
   $title = attribute_escape($options[$number]['title']);
@@ -37,7 +37,7 @@ if ( -1 == $number) {
   $currentPageOnly = $options[$number]['currentPageOnly'];
   $showTopLevel = $options[$number]['showTopLevel'];
   $showPages = $options[$number]['showPages'];
-  $animate = $options[$number]['animate'];
+  $accordion = $options[$number]['accordion'];
   $debug = $options[$number]['debug'];
 }
 ?>

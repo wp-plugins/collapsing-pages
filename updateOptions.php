@@ -20,10 +20,10 @@
       $customExpand= $new_instance['customExpand'];
       $customCollapse= $new_instance['customCollapse'];
       $inExcludePage= $new_instance['inExcludePage'];
-      if( isset($new_instance['animate'])) {
-        $animate= 1 ;
+      if( isset($new_instance['accordion'])) {
+        $accordion= 1 ;
       } else {
-        $animate=0;
+        $accordion=0;
       }
       $debug=false;
       if (isset($new_instance['debug'])) {
@@ -73,7 +73,7 @@
       $instance = compact(
           'title','sort','sortOrder','defaultExpand', 'showTopLevel',
           'expand','inExcludePage','inExcludePages', 'depth', 'style',
-          'animate', 'debug', 'currentPageOnly', 'customExpand', 'customCollapse',
+          'accordion', 'debug', 'currentPageOnly', 'customExpand', 'customCollapse',
           'linkToPage', 'postTitleLength','expandWidget', 'useCookies');
 
 ?>

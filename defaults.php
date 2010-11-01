@@ -10,7 +10,7 @@
     'linkToPage' => true,
     'inExcludePages' => '',
     'showPosts' => false,
-    'animate' => 0,
+    'accordion' => 0,
     'postTitleLength' => 0,
     'currentPageOnly' => 0,
     'showTopLevel' => 1,

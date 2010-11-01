@@ -27,7 +27,7 @@ $defaultStyles= array(
 {ID} li.collapsing.pages .sym {
    cursor:pointer;
    font-size:1.2em;
-   font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+   font-family:Arial, Helvetica;
     padding-right:5px;}",
 
 'block' => "{ID} li a {
@@ -77,7 +77,7 @@ list-style-type:none;
   /*
    cursor:pointer;
    font-size:1.2em;
-   font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+   font-family:Arial, Helvetica;
     float:left;
     padding-right:5px;
     */
@@ -110,7 +110,7 @@ list-style-type:none;
 {ID} li.collapsing.pages .sym {
    cursor:pointer;
    font-size:1.2em;
-   font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+   font-family:Arial, Helvetica;
     padding-right:5px;}
 ",
 
@@ -131,7 +131,7 @@ list-style-type:none;
 {ID} li.collapsing.pages .sym {
    cursor:pointer;
    font-size:1.2em;
-   font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+   font-family:Arial, Helvetica;
     padding-right:5px;"
     );
 ?>

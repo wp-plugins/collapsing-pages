@@ -31,8 +31,6 @@ global $collapsPageVersion;
 $collapsPageVersion = '1.0';
 if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('jquery'));
-  add_action('wp_head', wp_enqueue_script('collapsFunctions',
-  "$url/wp-content/plugins/collapsing-pages/collapsFunctions.js",'', '1.8'));
   add_action( 'wp_head', array('collapsPage','get_head'));
 } else {
   // call upgrade function if current version is lower than actual version
@@ -116,8 +114,25 @@ class collapsPage {
 
 function collapsPage($args='') {
   if (!is_admin()) {
+    extract($args);
+    include('symbols.php');
     include_once( 'collapsPageList.php' );
     list_pages($args);
+		$url = get_settings('siteurl');
+		echo "<li style='display:none'><script type=\"text/javascript\">\n";
+		echo "// <![CDATA[\n";
+		echo '
+/* These variables are part of the Collapsing Pages Plugin
+* version: 1.0
+* revision: $Id$
+* Copyright 2007-2010 Robert Felty (robfelty.com)
+*/'. "\n";
+    echo "var expandSym=\"$expandSym\";";
+    echo "var collapseSym=\"$collapseSym\";";
+    include_once('collapsFunctions.js');
+    echo "addExpandCollapse('widget-collapspage-$number-top'," . 
+        "'$expandSym', '$collapseSym', " . $accordion . ")";
+		echo ";\n// ]]>\n</script></li>\n";
   }
 }
 include('collapsPageWidget.php');

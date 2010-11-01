@@ -82,11 +82,6 @@
    $postTitleLength; ?>"></input> <label
    for="postTitleLength"><?php _e('characters') ?></label>
    </p>
-   <p>
-   <input type="checkbox" name="<?php echo $this->get_field_name('animate'); ?>" <?php if ($animate==1) echo
-   'checked'; ?> id="<?php echo $this->get_field_id('animate'); ?>"></input> <label
-   for="animate"><?php _e('Animate collapsing and expanding', 'collapsing-pages');?></label>
-  </p>
   <p><label for='<?php echo $this->get_field_id("style")?>'><?php _e('Style',
   'collapsing-pages')?></label>
   <select id='<?php echo $this->get_field_id("style")?>'
@@ -114,6 +109,9 @@ $this->get_field_id('useCookies'); ?>"><?php _e('Remember expanding and collapsi
 $number ?>"></input> <label for="collapsPageexpandWidget"><?php _e('Make whole
 widget collapsible', 'collapsing-pages');?></label>
     </p>
+   <p>
+     <input type="checkbox" id="<?php echo $this->get_field_id('accordion'); ?>" name="<?php echo $this->get_field_name('accordion'); ?>"
+<?php if ($accordion)  echo 'checked'; ?> id="<?php echo $this->get_field_id('accordion'); ?>"></input><label for="<?php echo $this->get_field_id('accordion'); ?>"><?php _e('Accordion style', 'collapsing-pages')?> <a class='help' title='<?php _e('When expanding one parent page, close all others', 'collapsing-pages')?>'>?</a></label>   </p>
     <p>
      <input type="checkbox" name="<?php echo $this->get_field_name('debug'); ?>"
 <?php if ($debug)  echo 'checked'; ?> id="collapsPage-debug-<?php echo

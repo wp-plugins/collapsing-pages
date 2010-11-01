@@ -250,11 +250,13 @@ behavior in wordpress anyways)
   (thanks to tkibler for pointing it out)
 * Added option to only display pages of the current subpage
 * Added option to show top-level page (previously it was always shown)
+* Added accordion style option
 * Cleaned up widget settings
 * improved style management, including the ability to specify style per widget
 * Switched from unicode symbols to html entities
 * Not showing tags for title if empty
 * Fixed bug with title attribute of pages
+* Totally rewrote javascript
 
 = 0.6.1 (2010.06.21) =
 * Removed extraneous debugging info (subpagecount=)

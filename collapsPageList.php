@@ -82,12 +82,9 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
             $show = 'expand';
           }
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount, $curDepth,$expanded);
-          $theUl .= "\n     <ul id='$theID' style='display:$expanded;'>\n";
+          $theUl .= "\n     <div id='$theID' style='display:$expanded;'><ul>\n";
 					$subPageLinks.="<li class='collapsing pages $parent $show'>" .
-							"<span class='collapsing pages $show' " .
-							"onclick='expandCollapse(" .
-							"event, \"$expandSymJS\", \"$collapseSymJS\", $animate, \"collapsing pages\");".
-							"return false'>";
+							"<span class='collapsing pages $show' ";
 					$subPageLinks.="<span class='sym'>".$symbol;
 					if ($linkToPage) {
 						$subPageLinks.="</span></span>";
@@ -131,7 +128,10 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
       }
     }
     if ($subPageCount>0 ) {
-      $subPageLinks.= "      </ul><!-- subpagecount = $subPageCount ending subpage -->\n";
+      $subPageLinks.= "      </ul>\n";
+    }
+    if ($showTopLevel ) {
+      $subPageLinks.= "      </div>\n";
     }
       $subPageLinks.= "      </li><!-- subpagecount = $subPageCount ending subpage -->\n";
   }
@@ -315,11 +315,9 @@ function list_pages($args) {
         } else {
           $collapseTitle = 'title="' . __('Click to expand'). '" ';
         }
-        $theLi = "<li class='collapsing pages $parent $show'><span $collapseTitle " .
-            "class='collapsing pages $show' " .
-            "onclick='expandCollapse(event, \"$expandSymJS\", \"$collapseSymJS\", $animate, ".
-            "\"collapsing pages\"); return false'><span class='sym'>" .
-            "$symbol</span>";
+        $theLi = "<li class='collapsing pages $parent $show'>" . 
+            "<span $collapseTitle class='collapsing pages $show'>" . 
+            "<span class='sym'>$symbol</span>";
         if ($linkToPage) {
           $theLi.="</span>";
         }
@@ -331,8 +329,8 @@ function list_pages($args) {
         $collapse_page_text = $theLi;
         $collapse_page_text .= $link;
         if ($subPageCount>0 ) {
-          $collapse_page_text .= "\n     <ul id='$theID' " .
-              "style='display:$expanded;'>\n";
+          $collapse_page_text .= "\n     <div id='$theID' " .
+              "style='display:$expanded;'><ul>\n";
         }
       }
       $collapse_page_text .= $subPageLinks;
@@ -344,22 +342,4 @@ function list_pages($args) {
     }
   }
 }
-		$url = get_settings('siteurl');
-		echo "<li style='display:none'><script type=\"text/javascript\">\n";
-		echo "// <![CDATA[\n";
-		echo '
-/* These variables are part of the Collapsing Pages Plugin
-* version: 0.6.1
-* revision: $Id$
-* Copyright 2007-2009 Robert Felty (robfelty.com)
-*/'. "\n";
-    $expandSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-pages/" . 
-         "img/collapse.gif' alt='collapse' />";
-    echo "var expandSym=\"$expandSym\";";
-    echo "var collapseSym=\"$collapseSym\";";
-		echo ";\n// ]]>\n</script></li>\n";
 ?>
