@@ -127,13 +127,13 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
         // close <ul> and <li> before starting a new page
       }
     }
-    if ($subPageCount>0 ) {
-      $subPageLinks.= "      </ul>\n";
-    }
     if ($showTopLevel ) {
+      if ($subPageCount>0 ) {
+        $subPageLinks.= "      </ul>\n";
+      }
       $subPageLinks.= "      </div>\n";
-    }
       $subPageLinks.= "      </li><!-- subpagecount = $subPageCount ending subpage -->\n";
+    }
   }
   return array($subPageLinks,$subPageCount,$subPagePosts);
 }
