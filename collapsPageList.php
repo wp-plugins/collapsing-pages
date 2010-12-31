@@ -145,7 +145,12 @@ function list_pages($args) {
   include('defaults.php');
   $options=wp_parse_args($args, $defaults);
   extract($options);
-  $thisPage = $wp_query->post->ID;
+  if (is_home()) {
+    $thisPage = get_option('page_for_posts');
+  } else {
+    $thisPage = $wp_query->post->ID;
+  }
+
 
   include('symbols.php');
 
