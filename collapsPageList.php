@@ -84,7 +84,7 @@ function getSubPage($page, $pages, $parents,$subPageCount, $curDepth, $expanded)
           list ($subPageLink2, $subPageCount,$subPagePosts)= getSubPage($page2, $pages, $parents,$subPageCount, $curDepth,$expanded);
           $theUl .= "\n     <div id='$theID' style='display:$expanded;'><ul>\n";
 					$subPageLinks.="<li class='collapsing pages $parent $show'>" .
-							"<span class='collapsing pages $show' ";
+							"<span class='collapsing pages $show>' ";
 					$subPageLinks.="<span class='sym'>".$symbol;
 					if ($linkToPage) {
 						$subPageLinks.="</span></span>";
