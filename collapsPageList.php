@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Pages version: 0.6.1
+Collapsing Pages version: 1.0
 Copyright 2007 Robert Felty
 
 This file is part of Collapsing Pages
@@ -180,8 +180,8 @@ function list_pages($args) {
 	if ( empty($inExclusionsPage) ) {
 		$inExcludePageQuery = "AND post_name NOT IN ('')";
   } else {
-    $inExcludePageQuery ="AND post_name $in ($inExclusionsPage)
-    AND ID $in ($inExclusionsPage)";
+    //$inExcludePageQuery ="AND post_name $in ($inExclusionsPage)
+    //AND ID $in ($inExclusionsPage)";
   }
 	if ( !empty($exclusions) ) {
 		$exclusions .= ')';

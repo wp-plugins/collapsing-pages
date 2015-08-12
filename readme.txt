@@ -4,8 +4,8 @@ Donate link: http://blog.robfelty.com/plugins
 Plugin URI: http://blog.robfelty.com/plugins
 Tags: pages, sidebar, widget, menu, navigation
 Requires at least: 2.8
-Tested up to: 3.9.1
-Stable tag: 0.6.1
+Tested up to: 4.3
+Stable tag: 1.0
 
 This plugin uses Javascript to dynamically expand or collapsable the set of
 pages for each parent page.
@@ -19,15 +19,21 @@ parent page will be expanded.
 It is largely based off of my Collapsing Pages and Collapsing Archives
 plugins. 
 
-= What's new?=
+== What's new? ==
 
-* 0.6.1 (2010.06.21)
-    * Removed extraneous debugging info (subpagecount=)
-
-* 0.6 (2010.06.18)
-    * Fixed html validation bug when linkToPage is false (thanks to
-      levente.csabai)
-    * fixed html parsing error in widget (thanks to vbonline)'
+* 1.0 (2015.08.12)
+    * Compatible with Wordpress 4.3
+    * Fixed bug where expanding symbol showed up at lowest depth specified instead
+      (thanks to tkibler for pointing it out)
+    * Added option to only display pages of the current subpage
+    * Added option to show top-level page (previously it was always shown)
+    * Added accordion style option
+    * Cleaned up widget settings
+    * improved style management, including the ability to specify style per widget
+    * Switched from unicode symbols to html entities
+    * Not showing tags for title if empty
+    * Fixed bug with title attribute of pages
+    * Totally rewrote javascript
 
 
 == Installation ==
@@ -245,7 +251,8 @@ behavior in wordpress anyways)
 
 == CHANGELOG ==
 
-= 1.0 (2010.xx.) =
+= 1.0 (2015.08.12) =
+* Compatible with Wordpress 4.3
 * Fixed bug where expanding symbol showed up at lowest depth specified instead
   (thanks to tkibler for pointing it out)
 * Added option to only display pages of the current subpage

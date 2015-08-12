@@ -27,6 +27,7 @@ This file is part of Collapsing Pages
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */ 
 
+
 global $collapsPageVersion;
 $collapsPageVersion = '1.0';
 if (!is_admin()) {
@@ -40,7 +41,6 @@ if (!is_admin()) {
 }
 add_action('init', array('collapsPage','init_textdomain'));
 add_action('activate_collapsing-pages/collapsPage.php', array('collapsPage','init'));
-add_action('admin_menu', array('collapsPage','setup'));
 
 class collapsPage {
 	function init_textdomain() {
@@ -74,16 +74,6 @@ class collapsPage {
 		}
 	}
 
-	function setup() {
-		if( function_exists('add_options_page') &&
-        current_user_can('manage_options')) {
-			add_options_page(__('Collapsing Pages', 'collapsing-pages'),__('Collapsing
-      Pages', 'collapsing-pages'),1,basename(__FILE__),array('collapsPage','ui'));
-		}
-	}
-	function ui() {
-		include_once( 'collapsPageUI.php' );
-	}
 
 	function get_head() {
     echo "<style type='text/css'>\n";

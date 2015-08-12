@@ -1,6 +1,6 @@
 <?php 
 class collapsPageWidget extends WP_Widget {
-  function collapsPageWidget() {
+  function __construct() {
     $widget_ops = array('classname' => 'widget_collapspage', 'description' =>
     'Collapsible page listing' );
 		$control_ops = array (
